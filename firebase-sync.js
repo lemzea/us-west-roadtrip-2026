@@ -37,9 +37,13 @@ if (T && bar && !window.claude) {
       secrets.forEach(el => {
         const v = data[el.dataset.secret];
         if (typeof v === "string" && v) { el.textContent = v; el.classList.add("shown"); }
-        else { el.textContent = "(미등록)"; }
+        else { el.textContent = snap.exists() ? "(필드 없음: " + el.dataset.secret + ")" : "(private/bookings 문서 없음)"; }
       });
-    } catch (e) { hideSecrets(); }
+    } catch (e) {
+      const code = (e && e.code) || "unknown";
+      secrets.forEach(el => { el.textContent = code === "permission-denied" ? "(권한 없음 — 규칙 확인)" : "(불러오기 실패: " + code + ")"; el.classList.remove("shown"); });
+      console.warn("[trip] bookings read failed:", code, e && e.message);
+    }
   };
 
   const denied = (email) => {
@@ -85,7 +89,11 @@ if (T && bar && !window.claude) {
       setMemo: (day, text) => setDoc(doc(fs, "memos", day), { text, by: user.email, at: Date.now() })
     });
     T.setStatus("체크·메모는 공유돼서 같이 보는 사람에게 실시간으로 보여요.", true);
-    const onErr = (e) => { if (e && e.code === "permission-denied") denied(user.email); };
+    const onErr = (e) => {
+      console.warn("[trip] sync error:", e && e.code, e && e.message);
+      if (e && e.code === "permission-denied") denied(user.email);
+      else T.setStatus("공유 저장소 연결 실패 (" + ((e && e.code) || "unknown") + "). 이 기기에만 저장돼요.", false);
+    };
     unsubs.push(onSnapshot(collection(fs, "checks"), (snap) => {
       snap.docs.forEach(d => T.applyCheck(d.id, d.data().done));
     }, onErr));
