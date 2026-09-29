@@ -1,0 +1,43 @@
+rules_version = '2';
+
+// 두 사람 구글 계정만 체크·메모를 읽고 쓸 수 있음.
+// Firebase 콘솔 → Firestore Database → 규칙 탭에 붙여넣고 "게시".
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function allowed() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          'MY_EMAIL@gmail.com',       // ← 내 구글 이메일로 바꾸기
+          'SPOUSE_EMAIL@gmail.com'   // ← 아내 구글 이메일로 바꾸기
+        ];
+    }
+
+    match /checks/{id} {
+      allow read: if allowed();
+      allow write: if allowed()
+        && request.resource.data.keys().hasOnly(['done', 'by', 'at'])
+        && request.resource.data.done is bool;
+    }
+
+    match /memos/{day} {
+      allow read: if allowed();
+      allow write: if allowed()
+        && request.resource.data.keys().hasOnly(['text', 'by', 'at'])
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 5000;
+    }
+
+    // 예약번호 등: 읽기만 (값은 Firebase 콘솔에서 직접 입력)
+    match /private/{id} {
+      allow read: if allowed();
+      allow write: if false;
+    }
+
+    // 그 밖의 경로는 전부 막음
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

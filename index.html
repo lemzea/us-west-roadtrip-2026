@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미국 서부 캐년 로드트립</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: 하루 단위 카드가 세로로 쌓이는 현장용 일정표. 상단 고정 날짜 바, 요약표, 확인 목록, 일자별 타임라인 */
+:root{
+  --bg:#f4f6f3; --surface:#ffffff; --ink:#1d2a26; --muted:#5d6b66; --line:#dde3df;
+  --juniper:#2f5d50; --juniper-soft:#e3ece8; --amber:#b86a12; --amber-soft:#fbefdf;
+  --warn:#a33a2a; --warn-soft:#f9e6e2; --ok:#2f6b3a;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121816; --surface:#1a2320; --ink:#e4ebe8; --muted:#9aa8a3; --line:#2c3833;
+  --juniper:#7fbfa9; --juniper-soft:#1f302a; --amber:#e3a45a; --amber-soft:#33281a;
+  --warn:#f08c7a; --warn-soft:#3a2320; --ok:#8fcf9a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121816; --surface:#1a2320; --ink:#e4ebe8; --muted:#9aa8a3; --line:#2c3833;
+  --juniper:#7fbfa9; --juniper-soft:#1f302a; --amber:#e3a45a; --amber-soft:#33281a;
+  --warn:#f08c7a; --warn-soft:#3a2320; --ok:#8fcf9a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:20px 64px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.3}
+h1{font-size:1.7rem;font-weight:700;letter-spacing:-0.01em}
+h2{font-size:1.15rem;font-weight:700}
+.sub{color:var(--muted);margin:6px 0 0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+a{color:var(--juniper)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* 날짜 바 */
+.datebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px}
+.datebar nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.datebar nav::-webkit-scrollbar{display:none}
+.datebar a{flex:0 0 auto;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:.8rem;white-space:nowrap}
+.datebar a b{font-family:var(--f-mono);font-weight:600;margin-right:4px}
+.datebar a.seg1{border-color:var(--juniper)}
+.datebar a.seg2{border-color:var(--amber)}
+
+/* 구간 범례 */
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.82rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* 확인 목록 */
+.checks{background:var(--warn-soft);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.checks h2{color:var(--warn)}
+.checks ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.checks li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}
+.checks input{width:18px;height:18px;margin-top:3px;accent-color:var(--juniper)}
+.checks label{min-width:0}
+.checks li.done label{color:var(--muted);text-decoration:line-through}
+.checks .day{font-family:var(--f-mono);font-weight:600;font-size:.8rem;margin-right:4px}
+
+/* 요약표 */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:980px;font-size:.84rem}
+th,td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:600;background:var(--juniper-soft);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
+
+/* 일자 카드 */
+.day{scroll-margin-top:64px}
+.daycard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.dayhead{padding:16px 16px 12px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.dayhead .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.dayhead .date{font-family:var(--f-mono);font-size:1.35rem;font-weight:600}
+.dayhead .route{font-weight:600;font-size:1rem;min-width:0}
+.seg{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--juniper-soft);color:var(--juniper)}
+.seg.s2{background:var(--amber-soft);color:var(--amber)}
+.seg.s3{background:var(--line);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.78rem;border-radius:6px;padding:3px 8px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+.chip b{font-family:var(--f-mono);font-weight:600;margin-left:4px}
+.chip.key{background:var(--amber-soft);border-color:transparent;color:var(--amber)}
+.chip.key b{color:var(--ink)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 16px;font-size:.84rem;color:var(--muted)}
+.meta div{min-width:0}
+.meta b{color:var(--ink);font-weight:600}
+
+.tl{list-style:none;margin:0;padding:8px 0}
+.tl li{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:9px 16px}
+.tl li+li{border-top:1px dashed var(--line)}
+.tl .t{font-family:var(--f-mono);font-weight:600;font-size:.86rem;padding-top:1px;color:var(--juniper)}
+.tl .t.key{color:var(--amber)}
+.tl .c{min-width:0}
+.tl .p{font-weight:600}
+.tl .n{color:var(--muted);font-size:.86rem;margin-top:2px}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.tag.opt{background:var(--line);color:var(--muted)}
+.tag.walk{background:var(--juniper-soft);color:var(--juniper)}
+.tag.fee{background:var(--amber-soft);color:var(--amber)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.warnline{color:var(--warn);font-size:.86rem;margin-top:3px}
+.dayfoot{padding:12px 16px 14px;border-top:1px solid var(--line);font-size:.84rem;display:flex;flex-direction:column;gap:4px}
+.dayfoot .cost b{font-family:var(--f-mono)}
+.note{font-size:.8rem;color:var(--muted)}
+.memo{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.memo label{font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.memo textarea{font:inherit;font-size:.86rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:56px;resize:vertical;width:100%}
+.memo .st{font-size:.72rem;color:var(--muted);min-height:1em}
+#syncstate.live{color:var(--ok);font-weight:600}
+.secret{font-family:var(--f-mono);font-weight:600;color:var(--muted);border-bottom:1px dotted var(--muted)}
+.secret.shown{color:var(--ink);border-bottom:0}
+.authbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.84rem}
+.authbar button{font:inherit;font-size:.84rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.authbar button.primary{background:var(--juniper);border-color:var(--juniper);color:var(--surface)}
+.foot{font-size:.8rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+@media (max-width:480px){
+  .tl li{grid-template-columns:72px 1fr;gap:10px}
+  h1{font-size:1.45rem}
+}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">2026.10.02 금 — 10.13 화 · 2인 · 11박</div>
+    <h1>미국 서부 캐년 로드트립</h1>
+    <p class="sub">SFO 입국 → 요세미티 → 데스밸리 → 자이언 → 앤텔로프·홀스슈 → 그랜드캐니언 → 세도나 → 샌디에이고 → LA, LAX 출국</p>
+  </header>
+
+  <div class="datebar"><nav id="datenav" aria-label="날짜로 이동"></nav></div>
+
+  <div class="legend" aria-label="구간 범례">
+    <span><i class="dot" style="background:var(--juniper)"></i>1구간 El Monte RV (SF → 라스베가스)</span>
+    <span><i class="dot" style="background:var(--amber)"></i>2구간 Indie Campers 밴 (헨더슨 → 아파치정션)</span>
+    <span><i class="dot" style="background:var(--muted)"></i>3구간 렌터카·도시</span>
+  </div>
+
+  <section class="checks" aria-labelledby="chk-h">
+    <h2 id="chk-h">출발 전 확인할 것</h2>
+    <p class="note" style="margin:0">KMZ 일정을 표로 옮기면서 걸린 부분이에요. <span id="syncstate">체크 표시는 이 기기에만 저장돼요.</span></p>
+    <div id="authbar" class="authbar" hidden></div>
+    <ul id="checklist"></ul>
+  </section>
+
+  <section aria-labelledby="sum-h" style="display:flex;flex-direction:column;gap:10px">
+    <h2 id="sum-h">한눈에 보기</h2>
+    <div class="tablebox"><table>
+      <thead><tr><th>날짜</th><th>요일</th><th>From → To</th><th>거리·시간</th><th>관광</th><th>숙소</th><th>사이즈</th><th>예약</th><th>취소기한</th></tr></thead>
+      <tbody id="sumbody"></tbody>
+    </table></div>
+    <p class="note" style="margin:0">거리·운전시간은 지도 기준 추정치예요. 정차·휴식 시간은 빠져 있어요.</p>
+  </section>
+
+  <section id="days" style="display:flex;flex-direction:column;gap:20px" aria-label="일자별 상세"></section>
+
+  <footer class="foot">
+    <div>시간대: 캘리포니아·네바다 PDT(UTC−7) · 유타 MDT(UTC−6) · 애리조나 MST(UTC−7, 서머타임 없음 — 10월엔 PDT와 같은 시각) · 나바호 자치구는 MDT.</div>
+    <div>일출·일몰은 각 장소 좌표로 계산한 값(±2분). 조수는 NOAA San Diego(9410170) 예보.</div>
+    <div>추정이라고 적힌 값은 확인되지 않은 수치예요. 운영시간·요금은 방문 전 한 번 더 확인하세요.</div>
+  </footer>
+</div>
+
+<script>
+const CHECKS = [
+  {id:"c1", d:"10/5", t:"<b>자브리스키 포인트 주차장 차박 불가</b> — 데스밸리는 지정 캠핑장 밖 주차장·도로변 숙박을 막고 있어요. KMZ에 같이 찍힌 무료 캠핑장(Pads, 공원 동쪽 밖)으로 가는 걸로 표에 넣었어요."},
+  {id:"c2", d:"10/5", t:"<b>아티스트 드라이브는 25ft 넘는 차 진입 금지</b>, 남→북 일방통행이에요. 1구간 RV 길이(23~37ft 미지정)를 픽업 때 확인하고, 넘으면 입구 맞은편 Artist's Palette만 보는 대안으로."},
+  {id:"c3", d:"10/6", t:"<b>라스베가스 덤프 지점 좌표</b>가 확인했던 Maverik(5450 E Tropical Pkwy, 무료)과 달라요. 표에는 Maverik으로 넣었어요."},
+  {id:"c4", d:"10/6", t:"<b>앤젤스 랜딩 전날 추첨</b>은 10/6 산악시간 15:00(= 네바다 14:00)까지 신청. 아침 반납 전에 해두기."},
+  {id:"c5", d:"10/8", t:"<b>Canyon X 투어 시각</b>은 애리조나 시간 기준이라는 후기가 있지만, 나바호 땅이라 헷갈릴 수 있어요. 당일 아침 전화 확인 (+1 928-660-8890). 30분 전 도착."},
+  {id:"c6", d:"10/10", t:"<b>레드뷰트 기상 04:45 권장</b> — KMZ엔 05:00인데, 일출 06:31이고 정상까지 약 1시간이라 05:00 기상이면 일출 직전 도착이 빠듯해요."},
+  {id:"c7", d:"10/10", t:"<b>코튼우드 Galpin 덤프를 들르면 15:00 반납에 늦어요</b> (약 40분 우회 + 16시 마감). 반납지 바로 앞 Desert RV Parts & Service(9736 E Apache Trail, $10)나 Apache Sands(7602 E Apache Trail, $10)로 바꾸는 걸 추천. 토요일 영업 여부는 전화 확인."},
+  {id:"c8", d:"10/10", t:"<b>샌디에이고 시내 차박</b>은 시 조례(21시~06시 차량 거주 금지, 주거지 150m 이내 상시 금지)에 걸릴 수 있어요. KMZ 차박 지점 대신 숙소 1박을 권장."},
+  {id:"c9", d:"10/10", t:"<b>아파치정션 → 샌디에이고 렌터카</b>(편도) 미확정. 픽업 지점·시간이 반납 15:00 이후와 맞는지."},
+  {id:"c10", d:"10/11–12", t:"<b>LA 숙소(10/11), LAX 근처 숙소(10/12), 10/13 LAX 출발 시각</b> 미정."},
+  {id:"c11", d:"10/2", t:"호텔: KMZ는 <b>Hotel Vertigo</b>. 예약 확인서 이름·날짜 확인."}
+];
+
+const DAYS = [
+ {id:"d1002", seg:3, date:"10/02", wd:"금", route:"ICN → SFO → 샌프란시스코 시내",
+  dist:"SFO→호텔 약 22km · BART 약 30분", sights:"REI SF 쇼핑", stay:"Hotel Vertigo (940 Sutter St)", size:"—", rsv:"호텔 예약", cancel:"확인서 참고",
+  chips:[["ICN 출발","19:15 (KST)",1],["SFO 도착","14:15",1],["일몰","18:50"],["시간대","PDT"]],
+  tl:[
+   ["14:15","SFO 도착","입국심사 일반 줄 (30~60분 예상). 귀국편·호텔·RV 예약을 휴대폰에 띄워두기.",1],
+   ["15:30","BART → Powell St","SFO역에서 BART 탑승, 도보로 호텔까지."],
+   ["16:30","Hotel Vertigo 체크인",""],
+   ["17:00","REI San Francisco (840 Brannan St)","아웃도어 쇼핑. 영업 종료 시각 확인.","opt"],
+   ["저녁","저녁 식사 후 일찍 취침","시차 적응. 다음 날 08:30 El Monte 전화."]
+  ],
+  cost:"BART 2인 (편도)", warn:[]},
+
+ {id:"d1003", seg:1, date:"10/03", wd:"토", route:"샌프란시스코 → 더블린(RV 픽업) → 모데스토 → Vista Point",
+  dist:"BART 약 50분 + RV 약 155km · 2시간 15분", sights:"중고마켓·REI 더블린(대기 시간)", stay:"Vista Point 노지 (Don Pedro 저수지, 무료)", size:"RV 23~37ft (미지정)", rsv:"El Monte <span class="secret" data-secret="elmonte">로그인하면 보임</span> · 기결제 $149 · 보증금 $1,500", cancel:"미완수 시 $1,500 페널티",
+  chips:[["기상","07:30",1],["전화","08:30~09:30",1],["출발","09:00",1],["일몰","18:40"],["시간대","PDT"]],
+  tl:[
+   ["08:30","El Monte 전화 (+1 888-337-2214)","픽업 시간 확정. 실제 픽업은 보통 13시 이후.",1],
+   ["09:00","BART Powell St → Dublin/Pleasanton","체크아웃 후 짐 들고 이동."],
+   ["10:00~","Savers · REI 더블린","픽업 대기 시간에. 둘 다 픽업 지점 근처.","opt"],
+   ["13:00 전후","El Monte 픽업 (6301 Scarlett Ct, Dublin)","보증금 $1,500 신용카드. 차 길이 확인(아티스트 드라이브 25ft), 청수 가득, 프로판·탱크 상태, 외관 사진, 추가 운전자 등록(면허+국제면허+여권).",1],
+   ["14:30","출발 → 모데스토",""],
+   ["15:30","Walmart 모데스토","장보기 (식료품·물·술)."],
+   ["16:30","출발 → Vista Point",""],
+   ["17:45","Vista Point 노지 도착","일몰 18:40."]
+  ],
+  cost:"현장 −$97 정산 (예약 확인서 기준)", warn:[]},
+
+ {id:"d1004", seg:1, date:"10/04", wd:"일", route:"Vista Point → 요세미티 밸리 → 티오가 로드 → 롱밸리",
+  dist:"약 290km · 운전 약 4시간", sights:"터널뷰 · 브라이달베일 · 엘캐피탄 · 요세미티 폭포 · 쿡스 메도우 · 미러레이크(선택) · 옴스테드 · 테나야", stay:"롱밸리 온천 노지 (무료) / 대안 Wild Willy's 주차장", size:"RV", rsv:"2026년 요세미티 입장 예약제 없음", cancel:"—",
+  chips:[["기상","06:00",1],["출발","06:45",1],["일출","06:57"],["밸리 출발","14:30",1],["일몰","18:33"],["시간대","PDT"]],
+  tl:[
+   ["07:45","Big Oak Flat 입구","연간패스 제시."],
+   ["08:30","터널 뷰","아침 역광 전이라 사진 좋음."],
+   ["09:00","브라이달베일 폭포","주차장에서 왕복 약 20분.","walk"],
+   ["09:45","엘캐피탄 메도우","갓길 주차."],
+   ["10:15","요세미티 폭포 전망","주차 후 도보 15분 또는 셔틀.","walk"],
+   ["11:30","센티널 브리지 · 쿡스 메도우 루프","하프돔 반영. 루프 약 1.6km.","walk"],
+   ["12:30","점심 (RV)",""],
+   ["13:00","미러레이크","셔틀로 트레일헤드 → 왕복 약 3km. 차에 음식 두지 말고 베어박스에. 하면 밸리 출발이 15:30으로 늦어져 롱밸리 도착이 해진 뒤예요.","opt"],
+   ["14:30","밸리 출발 → Crane Flat","",1],
+   ["15:00","Crane Flat 주유","티오가 로드 구간엔 리바이닝까지 주유소 없음."],
+   ["16:00","옴스테드 포인트",""],
+   ["16:15","테나야 호",""],
+   ["17:30","리바이닝 (티오가 패스 통과)",""],
+   ["18:15","롱밸리 온천 노지 도착","일몰 18:33. 온천."]
+  ],
+  cost:"입장 연간패스", warn:["티오가 로드는 첫눈이 오면 닫혀요. 전날 NPS 도로 상황 확인."]},
+
+ {id:"d1005", seg:1, date:"10/05", wd:"월", route:"롱밸리 → 빅파인 → 데스밸리 → Pads",
+  dist:"약 460km · 운전 약 6시간", sights:"메스키트 사구 · 배드워터 · 아티스트 드라이브 · 단테스 뷰 · 자브리스키 일몰", stay:"Pads 무료 캠핑장 (공원 동쪽 밖, 시설·인터넷 없음)", size:"RV", rsv:"—", cancel:"—",
+  chips:[["기상","06:15",1],["출발","07:00",1],["일출","06:54"],["일몰","18:24",1],["시간대","PDT"]],
+  tl:[
+   ["07:00","롱밸리 출발","근처 무료 덤프(매머드 쪽)는 필요할 때만.",1],
+   ["08:15","빅파인 주유","KMZ '저렴한 주유소'. 데스밸리 안 주유소는 비쌈.","fee"],
+   ["10:45","메스키트 플랫 사구","한낮 전 짧게. 물 챙기기.","walk"],
+   ["12:15","Furnace Creek 무료 덤프·급수","오수 배출 + 식수 보충 (물 40°C). 방문자센터에서 점심·에어컨."],
+   ["13:15","배드워터 분지","해수면 −86m 소금 평원 걷기.","walk"],
+   ["14:30","아티스트 드라이브 (남→북 일방)","25ft 초과 차량 진입 금지. 넘으면 생략.","warn"],
+   ["15:45","단테스 뷰","마지막 구간은 대형 차량 비권장, 아래 주차 후 이동.","opt"],
+   ["17:45","자브리스키 포인트","일몰 18:24.",1],
+   ["18:45","Pads 무료 캠핑장 도착","자브리스키에서 약 30분. 자브리스키 주차장 차박은 불가."]
+  ],
+  cost:"주유 (빅파인)", warn:["자브리스키 주차장에서 자면 안 돼요. Pads로."]},
+
+ {id:"d1006", seg:2, date:"10/06", wd:"화", route:"Pads → 라스베가스(RV 반납) → 헨더슨(밴 픽업) → 허리케인",
+  dist:"RV 약 190km · 2시간 20분 / 밴 약 275km · 3시간", sights:"버진리버 캐년(지나가며)", stay:"Hurricane Cliffs BLM 노지 (무료, 인터넷 됨)", size:"RV → Winnebago 59PX 밴", rsv:"Indie <span class="secret" data-secret="indie">로그인하면 보임</span> (imoova <span class="secret" data-secret="indie_order">로그인하면 보임</span>) · 프리미엄 플랜 · 보증금 $573", cancel:"—",
+  chips:[["기상","06:00",1],["출발","06:45",1],["El Monte 반납","10:00",1],["Indie 픽업","12:00",1],["추첨 마감","14:00 PDT",1],["일몰","19:08 MDT"],["시간대","PDT → MDT"]],
+  tl:[
+   ["06:45","Pads 출발","파럼프 경유.",1],
+   ["07:00","앤젤스 랜딩 전날 추첨 신청","마감 15:00 MDT (= 14:00 PDT). 오전에 미리.",1],
+   ["08:45","Maverik (5450 E Tropical Pkwy) 덤프·주유","무료 덤프, 식수는 없음. 연료는 픽업 때 수준으로."],
+   ["09:40","El Monte 반납 (3800 Boulder Hwy)","내부 정리, 탱크 비운 상태로.",1],
+   ["10:30","우버 → 헨더슨","약 20~25분."],
+   ["12:00","Indie Campers 픽업 (648 Joey Ln, Henderson)","청수 가득 확인(Power Fill → Dry Camping 복귀), 발전기 옵션, 외관 사진, 추가 운전자 등록.",1],
+   ["13:30","Walmart (라스베가스 북서쪽)","장보기 (술 포함)."],
+   ["14:30","I-15 북쪽으로 출발","버진리버 캐년 구간은 지나가며 보기."],
+   ["15:00","유타 진입 → 시계 +1시간 (MDT)",""],
+   ["18:30 MDT","Hurricane Cliffs 노지 도착","일몰 19:08 MDT. 16시쯤 추첨 결과 메일 확인."]
+  ],
+  cost:"우버 약 $25~35 (추정)", warn:[]},
+
+ {id:"d1007", seg:2, date:"10/07", wd:"수", route:"허리케인 → 자이언 → 홀스슈밴드 → 페이지",
+  dist:"약 245km · 운전 약 3시간 30분 (터널 대기 제외)", sights:"앤젤스 랜딩 · 리버사이드 워크 · 내로우스 · 홀스슈밴드 일몰", stay:"89번 도로변 공터 노지 (무료)", size:"밴", rsv:"앤젤스 랜딩 퍼밋 (추첨 결과)", cancel:"—",
+  chips:[["기상","05:15 MDT",1],["출발","05:45 MDT",1],["첫 셔틀","07:00 전후"],["자이언 출발","15:30 MDT",1],["일몰","18:00 MST",1],["시간대","MDT → MST"]],
+  tl:[
+   ["05:45 MDT","허리케인 출발","",1],
+   ["06:30","자이언 방문자센터 주차","일찍 차요."],
+   ["07:00","셔틀 → Grotto (6번)","첫차 시각 현장 확인."],
+   ["07:15","앤젤스 랜딩","왕복 약 8.7km · 상승 약 450m · 4시간 안팎. 체인 구간은 퍼밋 필요.","walk"],
+   ["11:30","셔틀 → Temple of Sinawava (9번)",""],
+   ["11:45","리버사이드 워크 → 내로우스","물 속 걷기. 10월 물 차가움, 유량 높으면 폐쇄. 장비는 스프링데일에서 대여 가능.","walk"],
+   ["14:30","셔틀 → 방문자센터",""],
+   ["15:30 MDT","자이언 출발 (동쪽 터널)","대형 차량 터널 에스코트 $15.",1],
+   ["16:30","애리조나 진입 → 시계 −1시간 (MST)",""],
+   ["17:15 MST","홀스슈밴드 주차","$10 (연간패스 불가, 시 운영). 일몰 이후 신규 입장 불가. 전망대까지 편도 약 1km.","fee"],
+   ["18:00","홀스슈밴드 일몰","",1],
+   ["18:30","페이지 Maverik 덤프 (선택)","카세트·오수가 절반 넘었으면 들르기.","opt"],
+   ["18:45","노지 도착",""]
+  ],
+  cost:"터널 $15 · 홀스슈 주차 $10", warn:[]},
+
+ {id:"d1008", seg:2, date:"10/08", wd:"목", route:"페이지 → Canyon X → 페이지 → 그랜드캐니언 사우스림",
+  dist:"약 260km · 운전 약 3시간 15분", sights:"앤텔로프 캐년 X · 데저트뷰 · 나바호 · 리판 · 모런 · 그랜드뷰 · 매더 포인트 일몰", stay:"노지 park4night #104012 (투사얀 남쪽, 무료)", size:"밴", rsv:"Canyon X <span class="secret" data-secret="canyonx">로그인하면 보임</span> · $137.98 · waiver 2인 각자", cancel:"10/5 10:20까지",
+  chips:[["기상","07:30",1],["출발","09:15",1],["체크인","09:50",1],["투어","10:20",1],["페이지 출발","13:00",1],["일몰","18:01",1],["시간대","MST"]],
+  tl:[
+   ["09:15","노지 출발","Canyon X까지 약 25분 (AZ-98 마일포스트 308).",1],
+   ["09:50","Canyon X 체크인","30분 전 도착. 현금 준비. 투어 시각이 애리조나 시간인지 아침에 전화 확인.",1],
+   ["10:20","Canyon X 투어","약 1시간 30분 (차량 이동 포함).",1],
+   ["12:15","페이지 Maverik (701 Tunnel Rd)","무료 덤프. 식수는 22번 주유기(직원 확인). 주유 + 영수증 보관."],
+   ["13:00","페이지 출발 → 데저트뷰","점심은 차에서.",1],
+   ["15:15","데저트뷰 워치타워","동쪽 입구, 연간패스."],
+   ["16:00","나바호 포인트",""],
+   ["16:20","리판 포인트",""],
+   ["16:50","모런 포인트",""],
+   ["17:10","그랜드뷰 포인트",""],
+   ["17:40","방문자센터 주차 → 매더 포인트 도보","",1],
+   ["18:01","매더 포인트 일몰","",1],
+   ["18:45","노지 도착","방문자센터에서 약 20분."]
+  ],
+  cost:"Canyon X 기결제 · 주유", warn:["림 전망대 5곳을 다 들르면 일몰이 빠듯해요. 늦어지면 모런·그랜드뷰 중 하나를 빼세요."]},
+
+ {id:"d1009", seg:2, date:"10/09", wd:"금", route:"사우스림 림 트레일 (Yavapai → Hermits Rest) → 레드뷰트",
+  dist:"도보 약 17km · 차 약 45km", sights:"Yavapai · Trail of Time · 빌리지(Verkamp's·Hopi House) · 림 트레일 전망대 · Hopi 일몰", stay:"레드뷰트 노지 park4night #580038 (FR 340, 임도 20km/h)", size:"밴", rsv:"—", cancel:"—",
+  chips:[["기상","06:30",1],["출발","07:15",1],["도보 시작","08:15",1],["Hermits Rest","16:45"],["일몰","18:00",1],["시간대","MST"]],
+  tl:[
+   ["07:40","Mather Campground 무료 덤프","식수 보충."],
+   ["08:00","방문자센터 주차 (종일)","",1],
+   ["08:15","Yavapai Point · 지질박물관","도보 시작. 박물관 개관 시각 확인.","walk"],
+   ["09:00","Trail of Time","트레일 시작 인증샷.","walk"],
+   ["10:00","빌리지 역사지구","Verkamp's, Hopi House.","walk"],
+   ["10:45","Bright Angel Trailhead","물 보충·화장실. 이후 Hermits Rest까지 화장실 드묾.","walk"],
+   ["11:15","Trailview Overlook → Maricopa → Powell","","walk"],
+   ["12:30","Hopi Point","","walk"],
+   ["13:15","Mohave Point","","walk"],
+   ["13:45","Mohave와 Abyss 사이 테이블에서 도시락","돗자리 준비."],
+   ["14:30","The Abyss → Monument Creek Vista","","walk"],
+   ["16:00","Pima Point","","walk"],
+   ["16:45","Hermits Rest (종점)","스낵바·화장실.","walk"],
+   ["17:15","빨강 셔틀 (동쪽행) → Hopi Point","동쪽행은 Pima·Mohave·Hopi만 정차."],
+   ["18:00","Hopi Point 일몰","",1],
+   ["18:20","빨강 셔틀 → Village Route Transfer → 파랑 셔틀 → 방문자센터",""],
+   ["19:00","레드뷰트 노지로 출발","비포장 임도 야간 주행, 천천히."],
+   ["19:45","노지 도착",""]
+  ],
+  cost:"없음 (셔틀 무료)", warn:[]},
+
+ {id:"d1010", seg:2, date:"10/10", wd:"토", route:"레드뷰트 일출 → 세도나 → 아파치정션(반납) → 샌디에이고",
+  dist:"밴 약 390km · 4시간 15분 / 렌터카 약 590km · 5시간 45분", sights:"레드뷰트 정상 일출 · 벨록–코트하우스 뷰트 루프", stay:"샌디에이고 (KMZ: 무료 주차 차박 → 숙소 권장)", size:"밴 → 렌터카", rsv:"렌터카 (미정)", cancel:"—",
+  chips:[["기상","04:45",1],["산행 시작","05:20",1],["일출","06:31",1],["캠프 출발","08:30",1],["벨록 출발","12:15",1],["Indie 반납","15:00",1],["시간대","MST → PDT (같은 시각)"]],
+  tl:[
+   ["04:45","기상","KMZ 05:00보다 15분 당김. 헤드랜턴.",1],
+   ["05:10","차로 트레일헤드 (FR 320 → 340 → 340A)","약 10분.",1],
+   ["05:20","레드뷰트 트레일 산행","왕복 약 2시간 30분.","walk"],
+   ["06:31","정상 일출","여명은 06:04부터.",1],
+   ["08:00","노지 복귀 · 아침 · 정리",""],
+   ["08:30","출발 → 플래그스태프 → I-17 → 179번","",1],
+   ["10:45","Bell Rock Vista 주차","연간패스로 대체 (Red Rock Pass 불필요). 토요일은 9시쯤 만차 — 차면 Courthouse Vista나 Little Horse 트레일헤드."],
+   ["10:50","벨록–코트하우스 뷰트 루프","약 6.4km · 1시간 30분.","walk"],
+   ["12:15","세도나 출발 → I-17 남쪽","",1],
+   ["14:15","덤프: Desert RV Parts & Service (9736 E Apache Trail)","$10, 반납지 약 1km 전. 토요일 영업 전화 확인. 대안 Apache Sands (7602 E Apache Trail, $10).","fee"],
+   ["14:30","주유 (픽업 때 연료량) · 영수증","$200 환급: reservations@indiecampers.com"],
+   ["14:45","Indie 반납 (10310 E Apache Trail)","반납 전 카세트·오수 비우기, 청소, 냉장고 비우고 끄기.",1],
+   ["15:30","렌터카 픽업 → 샌디에이고","미정. 약 5시간 45분.",1],
+   ["21:30","샌디에이고 도착","숙소 권장 (Mission Valley 쪽)."]
+  ],
+  cost:"덤프 $10 · 주유 (환급 $200까지) · 렌터카", warn:["코튼우드 Galpin 덤프(KMZ)는 16시 마감 + 우회 40분이라 반납 시간에 맞추기 어려워요."]},
+
+ {id:"d1011", seg:3, date:"10/11", wd:"일", route:"샌디에이고 하루 → LA",
+  dist:"시내 약 80km + LA까지 약 200km · 2시간", sights:"토리파인스 · 라호야 코브 · (발보아 파크) · 카브리요 · 선셋 클리프", stay:"LA (미정)", size:"렌터카", rsv:"—", cancel:"—",
+  chips:[["기상","06:30",1],["출발","07:15",1],["만조","09:47"],["간조","16:29",1],["일몰","18:20",1],["시간대","PDT"]],
+  tl:[
+   ["07:30","토리파인스 북쪽 무료 주차","보호구역 입구까지 도로로 약 20분 걷기. 오전 만조라 절벽 아래 해변으로는 걷지 말기.","walk"],
+   ["08:00","토리파인스 트레일","Razor Point → Beach Trail 전망 구간 → Guy Fleming 루프. 보호구역 안 음식 금지.","walk"],
+   ["10:45","라호야 코브 · Children's Pool","길가 무료 주차(2~3시간). 바다사자는 45m 거리. 파도 2ft 이하면 스노클링, 장비·웨트슈트 대여. 물놀이는 La Jolla Shores가 편함."],
+   ["13:30","점심 (라호야)",""],
+   ["14:00","발보아 파크","Level 3 주차장 3시간 무료.","opt"],
+   ["15:00","카브리요 국립기념물","연간패스로 무료 ($20). 등대·전망 먼저.",1],
+   ["15:45","카브리요 조수웅덩이","간조 16:29, 16:30 마감. 공원은 17:00까지 퇴장.","walk"],
+   ["17:00","선셋 클리프","절벽 산책로. 길가 무료 주차.","walk"],
+   ["18:20","일몰","",1],
+   ["19:30","저녁 후 LA로 출발","약 2시간."]
+  ],
+  cost:"주차 $0 (라호야 길가 실패 시 유료) · 스노클 대여·투어 별도", warn:["샌디에이고 10월 수온 약 18°C."]},
+
+ {id:"d1012", seg:3, date:"10/12", wd:"월", route:"LA 하루",
+  dist:"—", sights:"미정", stay:"LAX 근처 (미정)", size:"렌터카", rsv:"—", cancel:"—",
+  chips:[["간조","17:07"],["일몰","18:22"],["시간대","PDT"]],
+  tl:[["—","LA 일정 미정","해안 코스를 넣으면 오후 늦게(간조 17:07)가 좋아요. 다음 날 아침 비행기라 숙소는 LAX 근처로."]],
+  cost:"—", warn:[]},
+
+ {id:"d1013", seg:3, date:"10/13", wd:"화", route:"LAX 출국",
+  dist:"—", sights:"—", stay:"기내", size:"렌터카 반납", rsv:"귀국 항공권", cancel:"—",
+  chips:[["LAX 출발","오전 (시각 확인)",1],["시간대","PDT"]],
+  tl:[["출발 3시간 전","LAX 도착","렌터카 반납 + 셔틀 시간 30분 더 잡기.",1]],
+  cost:"—", warn:[]}
+];
+
+const segCls = s => s===1?"":s===2?" s2":" s3";
+const segName = s => s===1?"1구간 RV":s===2?"2구간 밴":"3구간";
+const esc = s => s;
+
+// 날짜 바
+document.getElementById("datenav").innerHTML = DAYS.map(d =>
+  `<a href="#${d.id}" class="seg${d.seg}"><b>${d.date}</b>${d.wd}</a>`).join("");
+
+// 요약표
+document.getElementById("sumbody").innerHTML = DAYS.map(d => `<tr>
+  <td class="d"><a href="#${d.id}">${d.date}</a></td><td>${d.wd}</td><td>${d.route}</td><td>${d.dist}</td>
+  <td>${d.sights}</td><td>${d.stay}</td><td>${d.size}</td><td>${d.rsv}</td><td>${d.cancel}</td></tr>`).join("");
+
+// 확인 목록
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem("uswest-checks") || "{}"); } catch(e) {}
+const cl = document.getElementById("checklist");
+cl.innerHTML = CHECKS.map(c => `<li class="${saved[c.id]?'done':''}">
+  <input type="checkbox" id="${c.id}" ${saved[c.id]?'checked':''}>
+  <label for="${c.id}"><span class="day">${c.d}</span>${c.t}</label></li>`).join("");
+// 공유 저장소 어댑터: claude.ai(db) 또는 GitHub Pages(Firebase)가 연결하면 채워짐
+let remote = null;   // {setCheck(id, done), setMemo(day, text)}
+let readOnly = false;
+function applyCheck(id, done){
+  const box = document.getElementById(id); if (!box) return;
+  box.checked = !!done; box.closest("li").classList.toggle("done", !!done);
+}
+cl.addEventListener("change", async e => {
+  if (e.target.type !== "checkbox") return;
+  const id = e.target.id, done = e.target.checked;
+  applyCheck(id, done);
+  if (remote && !readOnly) {
+    try { await remote.setCheck(id, done); }
+    catch(err){ if (err && (err.code === "invalid_argument" || err.code === "permission-denied")) setReadOnly(); }
+  } else {
+    saved[id] = done;
+    try { localStorage.setItem("uswest-checks", JSON.stringify(saved)); } catch(err) {}
+  }
+});
+
+// 일자 카드
+const tagFor = f => f==="opt"?'<span class="tag opt">선택</span>':f==="walk"?'<span class="tag walk">도보</span>':f==="fee"?'<span class="tag fee">비용</span>':f==="warn"?'<span class="tag warn">주의</span>':"";
+document.getElementById("days").innerHTML = DAYS.map(d => `
+<article class="day" id="${d.id}"><div class="daycard">
+  <div class="dayhead">
+    <div class="top"><span class="date">${d.date} ${d.wd}</span><span class="seg${segCls(d.seg)}">${segName(d.seg)}</span></div>
+    <h3 class="route">${d.route}</h3>
+    <div class="chips">${d.chips.map(c=>`<span class="chip${c[2]?' key':''}">${c[0]}<b>${c[1]}</b></span>`).join("")}</div>
+    <div class="meta">
+      <div>이동 <b>${d.dist}</b></div>
+      <div>숙소 <b>${d.stay}</b></div>
+      ${d.rsv!=="—"?`<div>예약 <b>${d.rsv}</b></div>`:""}
+      ${d.cancel!=="—"?`<div>취소·조건 <b>${d.cancel}</b></div>`:""}
+    </div>
+  </div>
+  <ol class="tl">${d.tl.map(r=>{
+    const flag = r[3]; const key = flag===1;
+    return `<li><div class="t${key?' key':''}">${r[0]}</div><div class="c"><div class="p">${r[1]}${key?'':tagFor(flag)}</div>${r[2]?`<div class="n">${r[2]}</div>`:""}</div></li>`;}).join("")}</ol>
+  <div class="dayfoot">
+    <div class="cost">비용 · ${d.cost}</div>
+    ${d.warn.map(w=>`<div class="warnline">${w}</div>`).join("")}
+    <div class="memo"><label for="memo-${d.id}">메모</label>
+      <textarea id="memo-${d.id}" data-day="${d.id}" placeholder="이날 메모 (식당, 주유 기록, 바뀐 시간 등)"></textarea>
+      <div class="st" id="st-${d.id}"></div></div>
+  </div>
+</div></article>`).join("");
+
+// 메모: 공유 저장소가 있으면 거기에, 없으면 이 기기에
+let memosLocal = {};
+try { memosLocal = JSON.parse(localStorage.getItem("uswest-memos") || "{}"); } catch(e) {}
+const timers = {};
+document.querySelectorAll(".memo textarea").forEach(t => {
+  t.value = memosLocal[t.dataset.day] || "";
+  t.addEventListener("input", () => {
+    const day = t.dataset.day, st = document.getElementById("st-" + day);
+    st.textContent = "저장 중…";
+    clearTimeout(timers[day]);
+    timers[day] = setTimeout(async () => {
+      if (remote && !readOnly) {
+        try { await remote.setMemo(day, t.value); st.textContent = "저장됨 · 같이 보는 사람에게도 보여요"; }
+        catch(err){ if (err && (err.code === "invalid_argument" || err.code === "permission-denied")) setReadOnly(); st.textContent = "저장 안 됨"; }
+      } else {
+        memosLocal[day] = t.value;
+        try { localStorage.setItem("uswest-memos", JSON.stringify(memosLocal)); st.textContent = "이 기기에 저장됨"; }
+        catch(err){ st.textContent = "저장 안 됨"; }
+      }
+    }, 800);
+  });
+});
+
+function setReadOnly(){
+  readOnly = true;
+  document.querySelectorAll("#checklist input, .memo textarea").forEach(el => el.disabled = true);
+  const s = document.getElementById("syncstate");
+  s.textContent = "보기 전용이에요. 편집 권한이 있어야 체크·메모를 바꿀 수 있어요."; s.classList.remove("live");
+}
+
+function setStatus(text, live){
+  const s = document.getElementById("syncstate");
+  s.textContent = text; s.classList.toggle("live", !!live);
+}
+function applyMemo(day, text){
+  const t = document.getElementById("memo-" + day);
+  if (t && document.activeElement !== t && typeof text === "string") t.value = text;
+}
+function useRemote(r){
+  remote = r; readOnly = false;
+  document.querySelectorAll("#checklist input, .memo textarea").forEach(el => el.disabled = false);
+  // 이 기기 저장값 대신 공유 값을 보여줌
+  CHECKS.forEach(c => applyCheck(c.id, false));
+  document.querySelectorAll(".memo textarea").forEach(t => { if (document.activeElement !== t) t.value = ""; });
+}
+function dropRemote(){
+  remote = null; readOnly = false;
+  document.querySelectorAll("#checklist input, .memo textarea").forEach(el => el.disabled = false);
+  CHECKS.forEach(c => applyCheck(c.id, !!saved[c.id]));
+  document.querySelectorAll(".memo textarea").forEach(t => t.value = memosLocal[t.dataset.day] || "");
+}
+window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRemote};
+
+// claude.ai 링크로 열었을 때: 페이지 공유 저장소
+(async () => {
+  if (!window.claude || typeof window.claude.use !== "function") return;
+  let db = null;
+  try { db = await window.claude.use("db"); } catch(e) { db = null; }
+  if (!db) return;
+  useRemote({
+    setCheck: (id, done) => db.doc("checks/" + id).set({done}),
+    setMemo: (day, text) => db.doc("memos/" + day).set({text})
+  });
+  setStatus("체크·메모는 공유돼서 같이 보는 사람에게 실시간으로 보여요.", true);
+  try {
+    const user = await window.claude.use("user");
+    const w = user && typeof user.can === "function" ? await user.can("data.write") : null;
+    if (w === false) setReadOnly();
+  } catch(e) {}
+  db.collection("checks").onSnapshot(snap => {
+    snap.docs.forEach(d => { const v = d.data(); if (v) applyCheck(d.id, v.done); });
+  }, () => {});
+  db.collection("memos").onSnapshot(snap => {
+    snap.docs.forEach(d => { const v = d.data(); if (v) applyMemo(d.id, v.text); });
+  }, () => {});
+})();
+</script>
+
+<script type="module" src="firebase-sync.js"></script>
+</body>
+</html>
