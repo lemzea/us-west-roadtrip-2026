@@ -104,6 +104,14 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
 .dayfoot{padding:12px 16px 14px;border-top:1px solid var(--line);font-size:.84rem;display:flex;flex-direction:column;gap:4px}
 .dayfoot .cost b{font-family:var(--f-mono)}
 .note{font-size:.8rem;color:var(--muted)}
+.places{padding:10px 16px 12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.places-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px;font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.places-h a.route{font-size:.8rem;letter-spacing:0;color:var(--juniper);font-weight:600}
+.plist{display:flex;flex-wrap:wrap;gap:6px}
+.plist a{font-size:.8rem;text-decoration:none;color:var(--ink);background:var(--juniper-soft);border-radius:6px;padding:4px 9px;white-space:nowrap}
+.plist a small{color:var(--juniper);font-size:.68rem;font-weight:600}
+.plist a:hover{outline:1px solid var(--juniper)}
+
 .memo{display:flex;flex-direction:column;gap:4px;margin-top:6px}
 .memo label{font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:600}
 .memo textarea{font:inherit;font-size:.86rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:56px;resize:vertical;width:100%}
@@ -122,6 +130,15 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
 @media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
 </style>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<style>
+.tripmap{height:420px;border-radius:12px;border:1px solid var(--line);overflow:hidden;z-index:0}
+.mapfilter{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.mapfilter button{flex:0 0 auto;font:inherit;font-size:.78rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
+.mapfilter button[aria-pressed="true"]{background:var(--juniper);border-color:var(--juniper);color:var(--surface)}
+.leaflet-popup-content{font-family:var(--f-body);font-size:.84rem}
+@media (max-width:480px){.tripmap{height:340px}}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -155,6 +172,13 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     <p class="note" style="margin:0">거리·운전시간은 지도 기준 추정치예요. 정차·휴식 시간은 빠져 있어요.</p>
   </section>
 
+
+  <section aria-labelledby="map-h" style="display:flex;flex-direction:column;gap:10px">
+    <h2 id="map-h">지도</h2>
+    <div id="mapfilter" class="mapfilter" aria-label="날짜별로 보기"></div>
+    <div id="tripmap" class="tripmap" role="region" aria-label="여행 장소 지도"></div>
+    <p class="note" style="margin:0">점을 누르면 이름과 길찾기 링크가 나와요. KMZ에서 가져온 장소예요.</p>
+  </section>
   <section id="days" style="display:flex;flex-direction:column;gap:20px" aria-label="일자별 상세"></section>
 
   <footer class="foot">
@@ -374,6 +398,8 @@ const DAYS = [
   cost:"—", warn:["렌터카 반납 조건에 맞게 전날 저녁 주유해 두기."]}
 ];
 
+const PLACES = {"d1002":[{"n":"SFO","lat":37.619115,"lng":-122.381627},{"n":"Hotel Vertigo","lat":37.788604,"lng":-122.415953},{"n":"REI San Francisco","lat":37.772493,"lng":-122.404576}],"d1003":[{"n":"El Monte 픽업 (Dublin)","lat":37.703464,"lng":-121.90595},{"n":"Savers (Dublin)","lat":37.70439,"lng":-121.932729},{"n":"REI Dublin","lat":37.706783,"lng":-121.927883},{"n":"Walmart 모데스토","lat":37.673132,"lng":-121.037053},{"n":"Vista Point 노지","lat":37.831986,"lng":-120.348894}],"d1004":[{"n":"Big Oak Flat 입구","lat":37.800117,"lng":-119.875464},{"n":"터널 뷰","lat":37.715547,"lng":-119.676906},{"n":"브라이달베일 주차","lat":37.716772,"lng":-119.651385},{"n":"엘캐피탄 메도우","lat":37.723051,"lng":-119.635664},{"n":"요세미티 폭포 주차","lat":37.744465,"lng":-119.584896},{"n":"센티널 브리지 주차","lat":37.744092,"lng":-119.589661},{"n":"미러레이크 주차 (선택)","lat":37.738004,"lng":-119.570484},{"n":"Crane Flat 주유소","q":"Crane Flat Gas Station, Yosemite"},{"n":"옴스테드 포인트","lat":37.8107,"lng":-119.485535},{"n":"테나야 호","lat":37.831851,"lng":-119.460007},{"n":"롱밸리 온천 노지","lat":37.660381,"lng":-118.788764},{"n":"Wild Willy's 주차 (대안)","lat":37.658966,"lng":-118.771089}],"d1005":[{"n":"빅파인 주유","lat":37.168916,"lng":-118.289248},{"n":"메스키트 사구 주차","lat":36.605968,"lng":-117.115904},{"n":"Furnace Creek 덤프·급수","lat":36.460842,"lng":-116.865171},{"n":"배드워터","lat":36.229972,"lng":-116.767777},{"n":"아티스트 드라이브","lat":36.381737,"lng":-116.85101},{"n":"단테스 뷰","lat":36.220579,"lng":-116.726598},{"n":"자브리스키 포인트","lat":36.42088,"lng":-116.809727},{"n":"Pads 무료 캠핑장","lat":36.338746,"lng":-116.599536}],"d1006":[{"n":"Maverik 덤프·주유","lat":36.27,"lng":-115.053889},{"n":"El Monte 반납","lat":36.137023,"lng":-115.092707},{"n":"Indie Campers 픽업","q":"648 Joey Ln, Henderson, NV"},{"n":"Walmart (라스베가스 북서)","lat":36.214776,"lng":-115.245079},{"n":"Hurricane Cliffs 노지","lat":37.215705,"lng":-113.250514}],"d1007":[{"n":"자이언 방문자센터","lat":37.200092,"lng":-112.986985},{"n":"홀스슈밴드","lat":36.876343,"lng":-111.502802},{"n":"페이지 Maverik 덤프 (선택)","lat":36.908298,"lng":-111.483031},{"n":"페이지 노지","lat":36.93522,"lng":-111.4778}],"d1008":[{"n":"Canyon X","lat":36.81991,"lng":-111.308757},{"n":"페이지 Maverik 덤프·주유","lat":36.908298,"lng":-111.483031},{"n":"데저트뷰 주차","lat":36.040929,"lng":-111.827284},{"n":"나바호 포인트","lat":36.038101,"lng":-111.837803},{"n":"리판 포인트","lat":36.033042,"lng":-111.853214},{"n":"모런 포인트","lat":36.005138,"lng":-111.924274},{"n":"그랜드뷰 포인트","lat":35.998467,"lng":-111.987756},{"n":"방문자센터 주차","lat":36.060556,"lng":-112.108627},{"n":"매더 포인트","lat":36.061715,"lng":-112.107722,"m":"walking"},{"n":"투사얀 남쪽 노지","lat":35.922305,"lng":-112.112742}],"d1009":[{"n":"Mather CG 덤프","lat":36.051038,"lng":-112.121826},{"n":"방문자센터 주차","lat":36.059172,"lng":-112.109255},{"n":"Yavapai Point","lat":36.066371,"lng":-112.117443,"m":"walking"},{"n":"Hopi House","lat":36.057756,"lng":-112.136756,"m":"walking"},{"n":"Bright Angel TH","lat":36.057409,"lng":-112.143603,"m":"walking"},{"n":"Hopi Point","lat":36.074396,"lng":-112.154969,"m":"walking"},{"n":"The Abyss","lat":36.05812,"lng":-112.169125,"m":"walking"},{"n":"Pima Point","lat":36.07163,"lng":-112.200045,"m":"walking"},{"n":"Hermits Rest","lat":36.062074,"lng":-112.211186,"m":"walking"},{"n":"레드뷰트 노지","lat":35.808444,"lng":-112.106472}],"d1010":[{"n":"레드뷰트 트레일헤드","lat":35.8169,"lng":-112.10078},{"n":"Bell Rock Vista 주차","lat":34.824156,"lng":-111.775963},{"n":"Desert RV Parts & Service (덤프)","q":"9736 E Apache Trail, Mesa, AZ"},{"n":"Indie 반납 (Apache Junction)","lat":33.415918,"lng":-111.608454}],"d1011":[{"n":"토리파인스 무료 주차","lat":32.93077,"lng":-117.260059},{"n":"라호야 코브","q":"La Jolla Cove, San Diego"},{"n":"발보아 파크 (선택)","q":"Balboa Park, San Diego"},{"n":"카브리요 국립기념물","q":"Cabrillo National Monument"},{"n":"선셋 클리프","q":"Sunset Cliffs Natural Park, San Diego"}],"d1013":[{"n":"LAX","q":"Los Angeles International Airport"}]};
+
 const segCls = s => s===1?"":s===2?" s2":" s3";
 const segName = s => s===1?"1구간 RV":s===2?"2구간 밴":"3구간";
 const esc = s => s;
@@ -414,6 +440,23 @@ cl.addEventListener("change", async e => {
   }
 });
 
+
+const navUrl = p => "https://www.google.com/maps/dir/?api=1&destination=" +
+  (p.q ? encodeURIComponent(p.q) : p.lat + "," + p.lng) + (p.m ? "&travelmode=" + p.m : "");
+const dayRouteUrl = list => {
+  const pts = list.filter(p => !p.m).map(p => p.q ? p.q : p.lat + "," + p.lng).slice(0, 10);
+  if (pts.length < 2) return "";
+  const enc = encodeURIComponent;
+  return "https://www.google.com/maps/dir/?api=1&origin=" + enc(pts[0]) + "&destination=" + enc(pts[pts.length-1]) +
+    (pts.length > 2 ? "&waypoints=" + pts.slice(1, -1).map(enc).join("%7C") : "") + "&travelmode=driving";
+};
+const placesHtml = id => {
+  const list = PLACES[id]; if (!list || !list.length) return "";
+  const route = dayRouteUrl(list);
+  return `<div class="places"><div class="places-h"><span>길찾기 (Google 지도)</span>${route?`<a class="route" href="${route}" target="_blank" rel="noopener">하루 운전 경로 보기</a>`:""}</div>
+    <div class="plist">${list.map(p=>`<a href="${navUrl(p)}" target="_blank" rel="noopener">${p.n}${p.m==="walking"?' <small>도보</small>':''}</a>`).join("")}</div></div>`;
+};
+
 // 일자 카드
 const tagFor = f => f==="opt"?'<span class="tag opt">선택</span>':f==="walk"?'<span class="tag walk">도보</span>':f==="fee"?'<span class="tag fee">비용</span>':f==="warn"?'<span class="tag warn">주의</span>':"";
 document.getElementById("days").innerHTML = DAYS.map(d => `
@@ -432,6 +475,7 @@ document.getElementById("days").innerHTML = DAYS.map(d => `
   <ol class="tl">${d.tl.map(r=>{
     const flag = r[3]; const key = flag===1;
     return `<li><div class="t${key?' key':''}">${r[0]}</div><div class="c"><div class="p">${r[1]}${key?'':tagFor(flag)}</div>${r[2]?`<div class="n">${r[2]}</div>`:""}</div></li>`;}).join("")}</ol>
+  ${placesHtml(d.id)}
   <div class="dayfoot">
     <div class="cost">비용 · ${d.cost}</div>
     ${d.warn.map(w=>`<div class="warnline">${w}</div>`).join("")}
@@ -492,7 +536,7 @@ function dropRemote(){
   CHECKS.forEach(c => applyCheck(c.id, !!saved[c.id]));
   document.querySelectorAll(".memo textarea").forEach(t => t.value = memosLocal[t.dataset.day] || "");
 }
-window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRemote};
+window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRemote, places: PLACES, days: DAYS.map(d => ({id: d.id, date: d.date, wd: d.wd, seg: d.seg})), navUrl};
 
 // claude.ai 링크로 열었을 때: 페이지 공유 저장소
 (async () => {
@@ -519,6 +563,8 @@ window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRem
 })();
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="map.js"></script>
 <script type="module" src="firebase-sync.js"></script>
 </body>
 </html>
