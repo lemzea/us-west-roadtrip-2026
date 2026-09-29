@@ -140,8 +140,8 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
   </div>
 
   <section class="checks" aria-labelledby="chk-h">
-    <h2 id="chk-h">출발 전 확인할 것</h2>
-    <p class="note" style="margin:0">KMZ 일정을 표로 옮기면서 걸린 부분이에요. <span id="syncstate">체크 표시는 이 기기에만 저장돼요.</span></p>
+    <h2 id="chk-h">놓치면 안 되는 두 가지</h2>
+    <p class="note" style="margin:0"><span id="syncstate">체크 표시는 이 기기에만 저장돼요.</span></p>
     <div id="authbar" class="authbar" hidden></div>
     <ul id="checklist"></ul>
   </section>
@@ -166,17 +166,8 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
 
 <script>
 const CHECKS = [
-  {id:"c1", d:"10/5", t:"<b>자브리스키 포인트 주차장 차박 불가</b> — 데스밸리는 지정 캠핑장 밖 주차장·도로변 숙박을 막고 있어요. KMZ에 같이 찍힌 무료 캠핑장(Pads, 공원 동쪽 밖)으로 가는 걸로 표에 넣었어요."},
-  {id:"c2", d:"10/5", t:"<b>아티스트 드라이브는 25ft 넘는 차 진입 금지</b>, 남→북 일방통행이에요. 1구간 RV 길이(23~37ft 미지정)를 픽업 때 확인하고, 넘으면 입구 맞은편 Artist's Palette만 보는 대안으로."},
-  {id:"c3", d:"10/6", t:"<b>라스베가스 덤프 지점 좌표</b>가 확인했던 Maverik(5450 E Tropical Pkwy, 무료)과 달라요. 표에는 Maverik으로 넣었어요."},
-  {id:"c4", d:"10/6", t:"<b>앤젤스 랜딩 전날 추첨</b>은 10/6 산악시간 15:00(= 네바다 14:00)까지 신청. 아침 반납 전에 해두기."},
-  {id:"c5", d:"10/8", t:"<b>Canyon X 투어 시각</b>은 애리조나 시간 기준이라는 후기가 있지만, 나바호 땅이라 헷갈릴 수 있어요. 당일 아침 전화 확인 (+1 928-660-8890). 30분 전 도착."},
-  {id:"c6", d:"10/10", t:"<b>레드뷰트 기상 04:45 권장</b> — KMZ엔 05:00인데, 일출 06:31이고 정상까지 약 1시간이라 05:00 기상이면 일출 직전 도착이 빠듯해요."},
-  {id:"c7", d:"10/10", t:"<b>코튼우드 Galpin 덤프를 들르면 15:00 반납에 늦어요</b> (약 40분 우회 + 16시 마감). 반납지 바로 앞 Desert RV Parts & Service(9736 E Apache Trail, $10)나 Apache Sands(7602 E Apache Trail, $10)로 바꾸는 걸 추천. 토요일 영업 여부는 전화 확인."},
-  {id:"c8", d:"10/10", t:"<b>샌디에이고 시내 차박</b>은 시 조례(21시~06시 차량 거주 금지, 주거지 150m 이내 상시 금지)에 걸릴 수 있어요. KMZ 차박 지점 대신 숙소 1박을 권장."},
-  {id:"c9", d:"10/10", t:"<b>아파치정션 → 샌디에이고 렌터카</b>(편도) 미확정. 픽업 지점·시간이 반납 15:00 이후와 맞는지."},
-  {id:"c10", d:"10/11–12", t:"<b>LA 숙소(10/11), LAX 근처 숙소(10/12), 10/13 LAX 출발 시각</b> 미정."},
-  {id:"c11", d:"10/2", t:"호텔: KMZ는 <b>Hotel Vertigo</b>. 예약 확인서 이름·날짜 확인."}
+  {id:"c4", d:"10/6", t:"<b>앤젤스 랜딩 전날 추첨 신청</b> — 10/6 <b>15:00 MDT(= 네바다 14:00)</b> 마감. 아침 El Monte 반납 전에 recreation.gov에서 신청하고, 16시쯤 결과 메일 확인. 떨어지면 10/7 오전은 내로우스·리버사이드 워크 위주로."},
+  {id:"c5", d:"10/8", t:"<b>Canyon X 투어 10:20</b> — 09:50까지 체크인(AZ-98 마일포스트 308). 애리조나 시간 기준이라는 후기가 있지만 나바호 땅이라 당일 아침 전화 확인 <span class='mono'>+1 928-660-8890</span>. waiver 2인 각자 서명, 무료 취소는 10/5 10:20까지."}
 ];
 
 const DAYS = [
@@ -190,7 +181,7 @@ const DAYS = [
    ["17:00","REI San Francisco (840 Brannan St)","아웃도어 쇼핑. 영업 종료 시각 확인.","opt"],
    ["저녁","저녁 식사 후 일찍 취침","시차 적응. 다음 날 08:30 El Monte 전화."]
   ],
-  cost:"BART 2인 (편도)", warn:[]},
+  cost:"BART 2인 (편도)", warn:["호텔: KMZ는 Hotel Vertigo. 예약 확인서 이름·날짜 확인."]},
 
  {id:"d1003", seg:1, date:"10/03", wd:"토", route:"샌프란시스코 → 더블린(RV 픽업) → 모데스토 → Vista Point",
   dist:"BART 약 50분 + RV 약 155km · 2시간 15분", sights:"중고마켓·REI 더블린(대기 시간)", stay:"Vista Point 노지 (Don Pedro 저수지, 무료)", size:"RV 23~37ft (미지정)", rsv:"El Monte <span class='secret' data-secret='elmonte'>로그인하면 보임</span> · 기결제 $149 · 보증금 $1,500", cancel:"미완수 시 $1,500 페널티",
@@ -205,7 +196,7 @@ const DAYS = [
    ["16:30","출발 → Vista Point",""],
    ["17:45","Vista Point 노지 도착","일몰 18:40."]
   ],
-  cost:"현장 −$97 정산 (예약 확인서 기준)", warn:[]},
+  cost:"현장 −$97 정산 (예약 확인서 기준)", warn:["픽업 때 RV 길이 확인 — 25ft 넘으면 10/5 아티스트 드라이브 진입 불가."]},
 
  {id:"d1004", seg:1, date:"10/04", wd:"일", route:"Vista Point → 요세미티 밸리 → 티오가 로드 → 롱밸리",
   dist:"약 290km · 운전 약 4시간", sights:"터널뷰 · 브라이달베일 · 엘캐피탄 · 요세미티 폭포 · 쿡스 메도우 · 미러레이크(선택) · 옴스테드 · 테나야", stay:"롱밸리 온천 노지 (무료) / 대안 Wild Willy's 주차장", size:"RV", rsv:"2026년 요세미티 입장 예약제 없음", cancel:"—",
@@ -242,7 +233,7 @@ const DAYS = [
    ["17:45","자브리스키 포인트","일몰 18:24.",1],
    ["18:45","Pads 무료 캠핑장 도착","자브리스키에서 약 30분. 자브리스키 주차장 차박은 불가."]
   ],
-  cost:"주유 (빅파인)", warn:["자브리스키 주차장에서 자면 안 돼요. Pads로."]},
+  cost:"주유 (빅파인)", warn:["자브리스키 주차장 차박 불가 — 데스밸리는 지정 캠핑장 밖 주차장·도로변 숙박을 막아요. Pads 무료 캠핑장으로.", "아티스트 드라이브는 25ft 넘는 차 진입 금지, 남→북 일방통행. 넘으면 입구 맞은편 Artist's Palette만."]},
 
  {id:"d1006", seg:2, date:"10/06", wd:"화", route:"Pads → 라스베가스(RV 반납) → 헨더슨(밴 픽업) → 허리케인",
   dist:"RV 약 190km · 2시간 20분 / 밴 약 275km · 3시간", sights:"버진리버 캐년(지나가며)", stay:"Hurricane Cliffs BLM 노지 (무료, 인터넷 됨)", size:"RV → Winnebago 59PX 밴", rsv:"Indie <span class='secret' data-secret='indie'>로그인하면 보임</span> (imoova <span class='secret' data-secret='indie_order'>로그인하면 보임</span>) · 프리미엄 플랜 · 보증금 $573", cancel:"—",
@@ -259,7 +250,7 @@ const DAYS = [
    ["15:00","유타 진입 → 시계 +1시간 (MDT)",""],
    ["18:30 MDT","Hurricane Cliffs 노지 도착","일몰 19:08 MDT. 16시쯤 추첨 결과 메일 확인."]
   ],
-  cost:"우버 약 $25~35 (추정)", warn:[]},
+  cost:"우버 약 $25~35 (추정)", warn:["라스베가스 덤프는 확인된 Maverik(5450 E Tropical Pkwy, 무료)으로. KMZ 좌표(36.195, −115.143)는 다른 곳이에요.", "앤젤스 랜딩 추첨 마감 15:00 MDT (= 14:00 PDT). 맨 위 참고."]},
 
  {id:"d1007", seg:2, date:"10/07", wd:"수", route:"허리케인 → 자이언 → 홀스슈밴드 → 페이지",
   dist:"약 245km · 운전 약 3시간 30분 (터널 대기 제외)", sights:"앤젤스 랜딩 · 리버사이드 워크 · 내로우스 · 홀스슈밴드 일몰", stay:"89번 도로변 공터 노지 (무료)", size:"밴", rsv:"앤젤스 랜딩 퍼밋 (추첨 결과)", cancel:"—",
@@ -299,7 +290,7 @@ const DAYS = [
    ["18:01","매더 포인트 일몰","",1],
    ["18:45","노지 도착","방문자센터에서 약 20분."]
   ],
-  cost:"Canyon X 기결제 · 주유", warn:["림 전망대 5곳을 다 들르면 일몰이 빠듯해요. 늦어지면 모런·그랜드뷰 중 하나를 빼세요."]},
+  cost:"Canyon X 기결제 · 주유", warn:["Canyon X 투어 시각은 당일 아침 전화 확인. 맨 위 참고.", "림 전망대 5곳을 다 들르면 일몰이 빠듯해요. 늦어지면 모런·그랜드뷰 중 하나를 빼세요."]},
 
  {id:"d1009", seg:2, date:"10/09", wd:"금", route:"사우스림 림 트레일 (Yavapai → Hermits Rest) → 레드뷰트",
   dist:"도보 약 17km · 차 약 45km", sights:"Yavapai · Trail of Time · 빌리지(Verkamp's·Hopi House) · 림 트레일 전망대 · Hopi 일몰", stay:"레드뷰트 노지 park4night #580038 (FR 340, 임도 20km/h)", size:"밴", rsv:"—", cancel:"—",
@@ -345,7 +336,7 @@ const DAYS = [
    ["15:30","렌터카 픽업 → 샌디에이고","미정. 약 5시간 45분.",1],
    ["21:30","샌디에이고 도착","숙소 권장 (Mission Valley 쪽)."]
   ],
-  cost:"덤프 $10 · 주유 (환급 $200까지) · 렌터카", warn:["코튼우드 Galpin 덤프(KMZ)는 16시 마감 + 우회 40분이라 반납 시간에 맞추기 어려워요."]},
+  cost:"덤프 $10 · 주유 (환급 $200까지) · 렌터카", warn:["레드뷰트 기상 04:45 권장 — KMZ 05:00이면 일출(06:31) 직전 정상 도착이 빠듯해요.", "코튼우드 Galpin 덤프(KMZ)는 16시 마감 + 우회 40분이라 15:00 반납에 늦어요. Desert RV Parts & Service(9736 E Apache Trail, $10) 또는 Apache Sands(7602 E Apache Trail, $10) — 토요일 영업 전화 확인.", "아파치정션 → 샌디에이고 편도 렌터카 미확정. 픽업 지점·시간이 15:00 반납 이후와 맞는지 확인.", "샌디에이고 시내 차박은 시 조례(21시~06시 차량 거주 금지, 주거지 150m 이내 상시 금지)에 걸릴 수 있어요. 숙소 1박 권장."]},
 
  {id:"d1011", seg:3, date:"10/11", wd:"일", route:"샌디에이고 하루 → LA",
   dist:"시내 약 80km + LA까지 약 200km · 2시간", sights:"토리파인스 · 라호야 코브 · (발보아 파크) · 카브리요 · 선셋 클리프", stay:"LA (미정)", size:"렌터카", rsv:"—", cancel:"—",
@@ -362,19 +353,19 @@ const DAYS = [
    ["18:20","일몰","",1],
    ["19:30","저녁 후 LA로 출발","약 2시간."]
   ],
-  cost:"주차 $0 (라호야 길가 실패 시 유료) · 스노클 대여·투어 별도", warn:["샌디에이고 10월 수온 약 18°C."]},
+  cost:"주차 $0 (라호야 길가 실패 시 유료) · 스노클 대여·투어 별도", warn:["LA 숙소 미정.", "샌디에이고 10월 수온 약 18°C."]},
 
  {id:"d1012", seg:3, date:"10/12", wd:"월", route:"LA 하루",
   dist:"—", sights:"미정", stay:"LAX 근처 (미정)", size:"렌터카", rsv:"—", cancel:"—",
   chips:[["간조","17:07"],["일몰","18:22"],["시간대","PDT"]],
   tl:[["—","LA 일정 미정","해안 코스를 넣으면 오후 늦게(간조 17:07)가 좋아요. 다음 날 아침 비행기라 숙소는 LAX 근처로."]],
-  cost:"—", warn:[]},
+  cost:"—", warn:["LAX 근처 숙소 미정."]},
 
  {id:"d1013", seg:3, date:"10/13", wd:"화", route:"LAX 출국",
   dist:"—", sights:"—", stay:"기내", size:"렌터카 반납", rsv:"귀국 항공권", cancel:"—",
   chips:[["LAX 출발","오전 (시각 확인)",1],["시간대","PDT"]],
   tl:[["출발 3시간 전","LAX 도착","렌터카 반납 + 셔틀 시간 30분 더 잡기.",1]],
-  cost:"—", warn:[]}
+  cost:"—", warn:["LAX 출발 시각 확인 (오전 편)."]}
 ];
 
 const segCls = s => s===1?"":s===2?" s2":" s3";
