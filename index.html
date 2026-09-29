@@ -71,6 +71,10 @@ table.meals td b{color:var(--ink);font-weight:600}
 .shop li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:.86rem}
 .shop input{width:17px;height:17px;margin-top:3px;accent-color:var(--juniper)}
 .shop li.done label{color:var(--muted);text-decoration:line-through}
+.shopin{display:block;margin-top:8px}
+.shopin details{background:var(--amber-soft);border-color:transparent}
+.shopjump{font-size:.84rem;color:var(--muted);align-self:center}
+.shopjump a{font-weight:600}
 .checks .day{font-family:var(--f-mono);font-weight:600;font-size:.8rem;margin-right:4px}
 
 /* 요약표 */
@@ -194,7 +198,7 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
       <tbody id="mealbody"></tbody>
     </table></div>
     <div id="shop" class="shop"></div>
-    <p class="note" style="margin:0">장보기 체크는 위 확인 목록처럼 로그인하면 둘이 같이 보여요. 간식: 트레일 걷는 날(10/7 자이언, 10/9 림 트레일)은 육포·트레일믹스·바나나를 배낭에.</p>
+    <p class="note" style="margin:0">장보기 목록 ①~③은 장보는 날 일정 카드의 장보기 줄 아래에 펼쳐 볼 수 있게 넣었어요. 체크는 로그인하면 둘이 같이 보여요. 간식: 트레일 걷는 날(10/7 자이언, 10/9 림 트레일)은 육포·트레일믹스·바나나를 배낭에.</p>
   </section>
 
 
@@ -243,7 +247,7 @@ const DAYS = [
    ["10:00~","Savers · REI 더블린","픽업 대기 시간에. 둘 다 픽업 지점 근처.","opt"],
    ["13:00 전후","El Monte 픽업 (6301 Scarlett Ct, Dublin, CA 94568)","보증금 $1,500 신용카드. 차 길이 확인(아티스트 드라이브 25ft), 청수 가득, 프로판·탱크 상태, 외관 사진, 추가 운전자 등록(면허+국제면허+여권). 주방 키트(냄비·팬·식기) 포함인지 확인 — 없으면 월마트에서 최소한만. 냉장고는 바로 켜기.",1],
    ["14:30","출발 → 모데스토",""],
-   ["15:30","Walmart 모데스토 — 장보기 ①","위 '식단 · 장보기' 목록. 식료품·물·얼음·술."],
+   ["15:30","Walmart 모데스토 — 장보기 ①","아래 목록을 펼쳐서 체크하며 장보기. 치킨은 맨 마지막에 (16:25쯤)."],
    ["16:30","출발 → Vista Point",""],
    ["17:45","Vista Point 노지 도착","일몰 18:40."]
   ],
@@ -485,7 +489,7 @@ const SHOP = [
   ["식품",["햇반 6","블록국 10","라면 10","참치캔 4","곱창김","이삭 소스"]],
   ["도구",["젓가락 2벌","주방 가위 (위탁 수하물)","보냉백 · 아이스팩 2","지퍼백 · 위생백","돗자리 (10/9 도시락)","인스턴트 커피 스틱 (선택)"]]
  ]},
- {id:"g1", title:"① 10/3 Walmart 모데스토", when:"10/3 15:30 · 10/3 저녁 ~ 10/6 아침 + 오래 쓰는 것 (빵 · 치즈 · 토르티야 · 베이컨 · 마요)", groups:[
+ {id:"g1", day:"d1003", at:"15:30", title:"① 10/3 Walmart 모데스토", when:"10/3 15:30 · 10/3 저녁 ~ 10/6 아침 + 오래 쓰는 것 (빵 · 치즈 · 토르티야 · 베이컨 · 마요)", groups:[
   ["주방 도구 (El Monte 키트가 없을 때만)",["코팅 프라이팬","뚜껑 있는 냄비 2~3qt (햇반 중탕 · 라면)","뒤집개 · 집게","종이접시 · 종이그릇 · 일회용 포크 · 나이프","수세미 · 주방세제"]],
   ["저녁",["로티서리 치킨 1 (10/3 + 10/5 점심) — 맨 마지막에 집기","델리 사이드 1 — 맥앤치즈 또는 매시트포테이토 (치킨 옆 따뜻한 코너, 10/3)","립아이 2장 (10/4)","카르네 아사다 양념육 제일 작은 팩 (10/5, 남으면 10/6 아침)","Idahoan 매시트포테이토 파우치 2 (10/4 · 10/8, 실온)","토르티야 작은 팩 (타코 + 10/10 랩)","살사 작은 병 (실온, 남으면 10/6 아침)"]],
   ["아침",["SPAM Singles 6개 (10/4 · 10/6 · 10/8, 실온)","실온 보관용 완전 조리 베이컨 (Hormel Black Label) 2팩 — 1팩 10/5~10/6, 1팩 10/8~10/9","달걀 12개 (10/4 패티 4 · 10/5 아침 4 · 10/6 아침 4)"]],
@@ -493,11 +497,11 @@ const SHOP = [
   ["양념 · 소모품",["버터 (작은 것) · 식용유 (작은 것)","소금 · 후추","마요 (작은 것, 참치마요 · 샌드위치)","키친타월 · 호일 · 쓰레기봉투","얼음 1봉 (첫날 냉장고용)","술 (캘리포니아 월마트는 맥주 · 와인 · 소주 다 팜)"]],
   ["간식 · 물",["육포 (Jack Link's)","트레일믹스 · 프로틴바","바나나 · 사과 · 베이비 당근 (10/10까지 다 먹기)","물 갤런"]]
  ]},
- {id:"g2", title:"② 10/6 H Mart 라스베가스", when:"10/6 13:30 · 2620 S Decatur Blvd · 매일 08:00~22:00 · 10/6 저녁 + 햇반 보충 + 푸드코트 점심", groups:[
+ {id:"g2", day:"d1006", at:"13:30", title:"② 10/6 H Mart 라스베가스", when:"10/6 13:30 · 2620 S Decatur Blvd · 매일 08:00~22:00 · 10/6 저녁 + 햇반 보충 + 푸드코트 점심", groups:[
   ["장보기",["삼겹살 약 450~600g (10/6)","햇반 12개 (10/6~10/10에 10개 + 예비 2)","상추","쌈장 (작은 통)","김치 (작은 통, 10/6 · 10/8 · 10/9)"]],
   ["기타",["술 — 유타(10/6 밤)는 마트에서 5% 이하 맥주만 팔아서 네바다에서 사기 (H Mart에 없으면 주유소 · 편의점)","블록국이 입국 때 폐기됐으면: 즉석 된장국 · 미역국 보충","점심은 푸드코트"]]
  ]},
- {id:"g3", title:"③ 10/7 Walmart 페이지", when:"10/7 18:30 · 1017 W Haul Rd · 06:00~23:00 · 10/7 ~ 10/10 (10/10 반납 전 비워야 하니 3일치만)", groups:[
+ {id:"g3", day:"d1007", at:"18:30", title:"③ 10/7 Walmart 페이지", when:"10/7 18:30 · 1017 W Haul Rd · 06:00~23:00 · 10/7 ~ 10/10 (10/10 반납 전 비워야 하니 3일치만)", groups:[
   ["저녁",["다진 소고기 약 450g (10/7 파스타)","파스타면 1봉 (반만 씀, 가는 면 추천) · 병 파스타 소스 제일 작은 것","립아이 2장 (10/8)","Lloyd's 바비큐 풀드포크 450g 통 (10/9)"]],
   ["점심",["스모크 터키 1팩 (10/8 · 10/9 · 10/10)","햄 작은 팩 (10/9 · 10/10)","King's Hawaiian 롤 12개 (10/9 점심 6 · 저녁 6)","토마토 1 (상추는 H Mart에서 남은 것)","Texas Toast가 모자라면 작은 식빵"]],
   ["기타",["과일 (10/10까지 다 먹을 만큼)","얼음"]]
@@ -514,9 +518,13 @@ cl.innerHTML = CHECKS.map(c => `<li class="${saved[c.id]?'done':''}">
 cl.querySelectorAll("input").forEach(i => i.classList.add("chk"));
 // 식단표 · 장보기
 document.getElementById("mealbody").innerHTML = MEALS.map(m => `<tr><td class="d">${m[0]}</td><td>${m[1]}</td><td>${m[2]}</td><td>${m[3]}</td><td class="prep">${m[4]||""}</td></tr>`).join("");
-document.getElementById("shop").innerHTML = SHOP.map(g => `<details><summary>${g.title}<small>${g.when}</small></summary>${g.groups.map((gr, gi) =>
+// 장보기 목록: ⓪은 식단 섹션에, ①~③은 장보는 날 일정 카드의 해당 줄 아래에
+const shopHtml = (g, open) => `<details${open?' open':''}><summary>${g.title}<small>${g.when}</small></summary>${g.groups.map((gr, gi) =>
   `<h4>${gr[0]}</h4><ul>${gr[1].map((it, ii) => { const id = `${g.id}-${gi}-${ii}`;
-    return `<li class="${saved[id]?'done':''}"><input type="checkbox" class="chk" id="${id}" ${saved[id]?'checked':''}><label for="${id}">${it}</label></li>`; }).join("")}</ul>`).join("")}</details>`).join("");
+    return `<li class="${saved[id]?'done':''}"><input type="checkbox" class="chk" id="${id}" ${saved[id]?'checked':''}><label for="${id}">${it}</label></li>`; }).join("")}</ul>`).join("")}</details>`;
+document.getElementById("shop").innerHTML = SHOP.filter(g => !g.day).map(g => shopHtml(g)).join("") +
+  `<div class="shopjump">장보기 목록은 장보는 날 일정 카드에 있어요 · ${SHOP.filter(g => g.day).map(g => `<a href="#${g.day}">${g.title}</a>`).join(" · ")}</div>`;
+const shopAt = (day, t) => SHOP.filter(g => g.day === day && g.at === t);
 const allChecks = () => [...document.querySelectorAll("input.chk")];
 // 공유 저장소 어댑터: claude.ai(db) 또는 GitHub Pages(Firebase)가 연결하면 채워짐
 let remote = null;   // {setCheck(id, done), setMemo(day, text)}
@@ -579,7 +587,8 @@ document.getElementById("days").innerHTML = DAYS.map(d => `
     const flag = r[3]; const key = flag===1;
     const ps = placesAt(d.id, r[0]);
     const title = ps.length ? plink(ps[0], `${r[1]}<span class="pin" aria-hidden="true">↗</span>`, "plink") + ps.slice(1).map(p => plink(p, p.n + " ↗", "plink2")).join("") : r[1];
-    return `<li><div class="t${key?' key':''}">${r[0]}</div><div class="c"><div class="p">${title}${key?'':tagFor(flag)}</div>${r[2]?`<div class="n">${r[2]}</div>`:""}</div></li>`;}).join("")}</ol>
+    const shops = shopAt(d.id, r[0]).map(g => `<div class="shop shopin">${shopHtml(g)}</div>`).join("");
+    return `<li><div class="t${key?' key':''}">${r[0]}</div><div class="c"><div class="p">${title}${key?'':tagFor(flag)}</div>${r[2]?`<div class="n">${r[2]}</div>`:""}${shops}</div></li>`;}).join("")}</ol>
   ${othersHtml(d)}
   <div class="dayfoot">
     <div class="cost">비용 · ${d.cost}</div>
