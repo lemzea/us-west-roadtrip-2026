@@ -6,7 +6,9 @@
 - `index.html` — 일자별 상세 일정표 (기상·출발·일출·일몰 시각, 덤프·주유, 비용, 출발 전 확인 목록, 날짜별 메모)
 - `firebase-sync.js` — GitHub Pages에서 구글 로그인 후 체크·메모를 Firestore로 공유
 - `firestore.rules` — 허용된 두 계정만 읽고 쓰게 하는 Firestore 보안 규칙
-- `data/us-west-trip-26.10.02-26.10.13.kmz` — 경로·장소 (Google Earth / My Maps에서 가져오기)
+- `data/trip.kml`, `data/map.json` — Google My Maps에서 1시간마다 자동 동기화되는 장소 (`.github/workflows/sync-mymaps.yml`)
+- `map.js` — 페이지의 지도 (map.json 표시)
+- `data/us-west-trip-26.10.02-26.10.13.kmz` — 이전 KMZ (참고용)
 
 ## 구간
 | 구간 | 기간 | 차량 |
