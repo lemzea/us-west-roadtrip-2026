@@ -58,6 +58,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .checks input{width:18px;height:18px;margin-top:3px;accent-color:var(--juniper)}
 .checks label{min-width:0}
 .checks li.done label{color:var(--muted);text-decoration:line-through}
+table.meals{min-width:760px}
+table.meals td{font-size:.82rem;color:var(--muted)}
+table.meals td b{color:var(--ink);font-weight:600}
+.shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.shop details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.shop summary{cursor:pointer;font-weight:600}
+.shop summary small{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+.shop h4{margin:10px 0 4px;font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.shop ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.shop li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:.86rem}
+.shop input{width:17px;height:17px;margin-top:3px;accent-color:var(--juniper)}
+.shop li.done label{color:var(--muted);text-decoration:line-through}
 .checks .day{font-family:var(--f-mono);font-weight:600;font-size:.8rem;margin-right:4px}
 
 /* 요약표 */
@@ -173,6 +185,17 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     <p class="note" style="margin:0">거리·운전시간은 지도 기준 추정치예요. 정차·휴식 시간은 빠져 있어요.</p>
   </section>
 
+  <section aria-labelledby="meal-h" style="display:flex;flex-direction:column;gap:10px">
+    <h2 id="meal-h">식단 · 장보기</h2>
+    <p class="note" style="margin:0">아침은 햇반 + 블록국 + 김 + 단백질 하나로 단순하게, 점심은 고기 많은 샌드위치를 날마다 다르게, 저녁은 고기. 라면은 야식·간식이나 피곤한 날 보충용. 밴 냉장고는 12V 컴프레서식이라 외부전원 없이도 차갑지만 약 85L라 <b>작은 포장</b>으로.</p>
+    <div class="tablebox"><table class="meals">
+      <thead><tr><th>날짜</th><th>아침</th><th>점심</th><th>저녁</th></tr></thead>
+      <tbody id="mealbody"></tbody>
+    </table></div>
+    <div id="shop" class="shop"></div>
+    <p class="note" style="margin:0">장보기 체크는 위 확인 목록처럼 로그인하면 둘이 같이 보여요. 간식: 트레일 걷는 날(10/7 자이언, 10/9 림 트레일)은 육포·트레일믹스·바나나를 배낭에.</p>
+  </section>
+
 
   <section aria-labelledby="map-h" style="display:flex;flex-direction:column;gap:10px">
     <h2 id="map-h">지도</h2>
@@ -219,7 +242,7 @@ const DAYS = [
    ["10:00~","Savers · REI 더블린","픽업 대기 시간에. 둘 다 픽업 지점 근처.","opt"],
    ["13:00 전후","El Monte 픽업 (6301 Scarlett Ct, Dublin, CA 94568)","보증금 $1,500 신용카드. 차 길이 확인(아티스트 드라이브 25ft), 청수 가득, 프로판·탱크 상태, 외관 사진, 추가 운전자 등록(면허+국제면허+여권).",1],
    ["14:30","출발 → 모데스토",""],
-   ["15:30","Walmart 모데스토","장보기 (식료품·물·술)."],
+   ["15:30","Walmart 모데스토 — 장보기 ①","위 '식단 · 장보기' 목록. 식료품·물·얼음·술."],
    ["16:30","출발 → Vista Point",""],
    ["17:45","Vista Point 노지 도착","일몰 18:40."]
   ],
@@ -273,10 +296,10 @@ const DAYS = [
    ["09:40","El Monte 반납 (3800 Boulder Hwy, Las Vegas, NV 89121)","반납 가능 시간 08:00~10:30 (넘기면 지연 요금). 내부 정리, 탱크 비운 상태로. 지점 직통 +1 702-269-8000 (바우처 표기 +1 702-453-1109), 대표 +1 888-337-2214.",1],
    ["10:30","우버 → 헨더슨","약 20~25분."],
    ["12:00","Indie Campers 픽업 (648 Joey Ln, Henderson, NV 89011)","고객센터 +1 855-785-5096. 청수 가득 확인(Power Fill → Dry Camping 복귀), 발전기 옵션, 외관 사진, 추가 운전자 등록.",1],
-   ["13:30","Walmart (라스베가스 북서쪽)","장보기 (술 포함)."],
-   ["14:30","I-15 북쪽으로 출발","버진리버 캐년 구간은 지나가며 보기."],
-   ["15:00","유타 진입 → 시계 +1시간 (MDT)",""],
-   ["18:30 MDT","Hurricane Cliffs 노지 도착","일몰 19:08 MDT. 16시쯤 추첨 결과 메일 확인."]
+   ["13:30","H Mart 라스베가스 (2620 S Decatur Blvd) — 장보기 ② + 푸드코트 점심","매일 08:00~22:00. 양념 LA갈비·삼겹살·양념 소불고기·김치. 푸드코트(순대국·순두부·짬뽕·BBQ치킨·김밥 등)에서 점심. 술은 여기서 안 되면 주유소·마트에서."],
+   ["15:00","I-15 북쪽으로 출발","버진리버 캐년 구간은 지나가며 보기."],
+   ["15:30","유타 진입 → 시계 +1시간 (MDT)",""],
+   ["19:00 MDT","Hurricane Cliffs 노지 도착","일몰 19:08 MDT. 16시쯤 추첨 결과 메일 확인."]
   ],
   cost:"우버 약 $25~35 (추정)", warn:["El Monte 라스베가스 반납은 10:30까지 (공식 안내 08:00~10:30). 늦으면 지연 요금.","라스베가스 덤프는 확인된 Maverik(5450 E Tropical Pkwy, 무료)으로. KMZ 좌표(36.195, −115.143)는 다른 곳이에요.", "앤젤스 랜딩 추첨 마감 15:00 MDT (= 14:00 PDT). 맨 위 참고."]},
 
@@ -295,8 +318,9 @@ const DAYS = [
    ["16:30","애리조나 진입 → 시계 −1시간 (MST)",""],
    ["17:15 MST","홀스슈밴드 주차","$10 (연간패스 불가, 시 운영). 일몰 이후 신규 입장 불가. 전망대까지 편도 약 1km.","fee"],
    ["18:00","홀스슈밴드 일몰","",1],
-   ["18:30","페이지 Maverik 덤프 (선택)","카세트·오수가 절반 넘었으면 들르기.","opt"],
-   ["18:45","노지 도착",""]
+   ["18:30","Walmart 페이지 (1017 W Haul Rd) — 장보기 ③","06:00~23:00. 10/8~10/10 3일치만 (10/10 반납 전 냉장고 비우기)."],
+   ["19:00","페이지 Maverik 덤프 (선택)","카세트·오수가 절반 넘었으면 들르기.","opt"],
+   ["19:15","노지 도착","저녁: 삼겹살 쌈."]
   ],
   cost:"터널 $15 · 홀스슈 주차 $10", warn:[]},
 
@@ -420,7 +444,7 @@ const DAYS = [
   cost:"—", warn:["렌터카 반납 조건에 맞게 전날 저녁 주유해 두기."]}
 ];
 
-const PLACES = {"d1002":[{"n":"SFO","lat":37.619115,"lng":-122.381627,"at":"14:15"},{"n":"Hotel Vertigo","lat":37.788604,"lng":-122.415953,"at":"16:30"},{"n":"REI San Francisco","lat":37.772493,"lng":-122.404576,"at":"17:00"}],"d1003":[{"n":"El Monte 픽업 (Dublin)","lat":37.703464,"lng":-121.90595,"at":"13:00 전후"},{"n":"Savers (Dublin)","lat":37.70439,"lng":-121.932729,"at":"10:00~"},{"n":"REI Dublin","lat":37.706783,"lng":-121.927883,"at":"10:00~"},{"n":"Walmart 모데스토","lat":37.673132,"lng":-121.037053,"at":"15:30"},{"n":"Vista Point 노지","lat":37.831986,"lng":-120.348894,"at":"17:45"}],"d1004":[{"n":"Big Oak Flat 입구","lat":37.800117,"lng":-119.875464,"at":"07:45"},{"n":"터널 뷰","lat":37.715547,"lng":-119.676906,"at":"08:30"},{"n":"브라이달베일 주차","lat":37.716772,"lng":-119.651385,"at":"09:00"},{"n":"엘캐피탄 메도우","lat":37.723051,"lng":-119.635664,"at":"09:45"},{"n":"요세미티 폭포 주차","lat":37.744465,"lng":-119.584896,"at":"10:15"},{"n":"센티널 브리지 주차","lat":37.744092,"lng":-119.589661,"at":"11:30"},{"n":"미러레이크 주차 (선택)","lat":37.738004,"lng":-119.570484,"at":"13:00"},{"n":"Crane Flat 주유소","q":"Crane Flat Gas Station, Yosemite","at":"15:00"},{"n":"옴스테드 포인트","lat":37.8107,"lng":-119.485535,"at":"16:00"},{"n":"테나야 호","lat":37.831851,"lng":-119.460007,"at":"16:15"},{"n":"롱밸리 온천 노지","lat":37.660381,"lng":-118.788764,"at":"18:15"},{"n":"Wild Willy's 주차 (대안)","lat":37.658966,"lng":-118.771089,"at":"18:15"}],"d1005":[{"n":"빅파인 주유","lat":37.168916,"lng":-118.289248,"at":"08:15"},{"n":"메스키트 사구 주차","lat":36.605968,"lng":-117.115904,"at":"10:45"},{"n":"Furnace Creek 덤프·급수","lat":36.460842,"lng":-116.865171,"at":"12:15"},{"n":"배드워터","lat":36.229972,"lng":-116.767777,"at":"13:15"},{"n":"아티스트 드라이브","lat":36.381737,"lng":-116.85101,"at":"14:30"},{"n":"단테스 뷰","lat":36.220579,"lng":-116.726598,"at":"15:45"},{"n":"자브리스키 포인트","lat":36.42088,"lng":-116.809727,"at":"17:45"},{"n":"Pads 무료 캠핑장","lat":36.338746,"lng":-116.599536,"at":"18:45"}],"d1006":[{"n":"Maverik 덤프·주유","lat":36.27,"lng":-115.053889,"at":"08:45"},{"n":"El Monte 반납","lat":36.137023,"lng":-115.092707,"at":"09:40"},{"n":"Indie Campers 픽업 (Henderson)","lat":36.065653,"lng":-115.018995,"at":"12:00"},{"n":"Walmart (라스베가스 북서)","lat":36.214776,"lng":-115.245079,"at":"13:30"},{"n":"Hurricane Cliffs 노지","lat":37.215705,"lng":-113.250514,"at":"18:30 MDT"}],"d1007":[{"n":"자이언 방문자센터","lat":37.200092,"lng":-112.986985,"at":"06:30"},{"n":"홀스슈밴드","lat":36.876343,"lng":-111.502802,"at":["17:15 MST","18:00"]},{"n":"페이지 Maverik 덤프 (선택)","lat":36.908298,"lng":-111.483031,"at":"18:30"},{"n":"페이지 노지","lat":36.93522,"lng":-111.4778,"at":"18:45"}],"d1008":[{"n":"Wahweap Overlook (일출·선택)","q":"Wahweap Overlook, Page, AZ","at":"05:50"},{"n":"Canyon X","lat":36.81991,"lng":-111.308757,"at":["09:35","09:05"]},{"n":"페이지 Maverik 덤프·주유","lat":36.908298,"lng":-111.483031,"at":"12:10"},{"n":"데저트뷰 주차","lat":36.040929,"lng":-111.827284,"at":"15:15"},{"n":"나바호 포인트","lat":36.038101,"lng":-111.837803,"at":"16:00"},{"n":"리판 포인트","lat":36.033042,"lng":-111.853214,"at":"16:20"},{"n":"모런 포인트","lat":36.005138,"lng":-111.924274,"at":"16:50"},{"n":"그랜드뷰 포인트","lat":35.998467,"lng":-111.987756,"at":"17:10"},{"n":"방문자센터 주차","lat":36.060556,"lng":-112.108627,"at":"17:40"},{"n":"매더 포인트","lat":36.061715,"lng":-112.107722,"m":"walking","at":"18:01"},{"n":"투사얀 남쪽 노지","lat":35.922305,"lng":-112.112742,"at":"18:45"}],"d1009":[{"n":"매더 포인트 (일출·선택)","lat":36.061715,"lng":-112.107722,"m":"walking","at":"05:30"},{"n":"Mather CG 덤프","lat":36.051038,"lng":-112.121826,"at":"07:40"},{"n":"방문자센터 주차","lat":36.059172,"lng":-112.109255,"at":"08:00"},{"n":"Yavapai Point","lat":36.066371,"lng":-112.117443,"m":"walking","at":"08:15"},{"n":"Hopi House","lat":36.057756,"lng":-112.136756,"m":"walking","at":"10:00"},{"n":"Bright Angel TH","lat":36.057409,"lng":-112.143603,"m":"walking","at":"10:45"},{"n":"Hopi Point","lat":36.074396,"lng":-112.154969,"m":"walking","at":["12:30","18:00"]},{"n":"The Abyss","lat":36.05812,"lng":-112.169125,"m":"walking","at":"14:30"},{"n":"Pima Point","lat":36.07163,"lng":-112.200045,"m":"walking","at":"16:00"},{"n":"Hermits Rest","lat":36.062074,"lng":-112.211186,"m":"walking","at":"16:45"},{"n":"레드뷰트 노지","lat":35.808444,"lng":-112.106472,"at":["19:00","19:45"]}],"d1010":[{"n":"Bell Rock Vista 주차","lat":34.824156,"lng":-111.775963,"at":["08:15","06:00"]},{"n":"홀리크로스 성당 (선택)","q":"Chapel of the Holy Cross, 780 Chapel Rd, Sedona, AZ","at":"10:40"},{"n":"Galpin 무료 덤프 (Cottonwood)","lat":34.727778,"lng":-112.017399,"at":"12:25"},{"n":"Trails End RV Park (백업 덤프)","q":"Trails End RV Park, 983 W Finnie Flat Rd, Camp Verde, AZ","at":"12:25"},{"n":"Indie 반납 (Phoenix)","lat":33.450354,"lng":-112.017159,"at":["14:45","12:45"]},{"n":"유마 (숙소 미정)","q":"Yuma, AZ","at":["18:30","15:30"]}],"d1011":[{"n":"토리파인스 무료 주차","lat":32.93077,"lng":-117.260059,"at":["09:30","06:30"]},{"n":"라호야 Children's Pool","q":"Children's Pool, La Jolla, CA","at":"11:15"},{"n":"라호야 코브","q":"La Jolla Cove, San Diego","at":["11:45","12:45"]},{"n":"The Taco Stand (라호야)","q":"The Taco Stand, 621 Pearl St, La Jolla, CA","at":"13:15"},{"n":"코로나도 (Hotel del)","q":"Hotel del Coronado, Coronado, CA","at":["14:30","14:00"]},{"n":"선셋 클리프","q":"Sunset Cliffs Natural Park, San Diego","at":["16:45","18:20"]},{"n":"Phil's BBQ Rancho Bernardo","q":"Phil's BBQ, 17051 W Bernardo Dr, San Diego, CA","at":["19:05","18:35"]},{"n":"Phil's BBQ Point Loma (대안)","q":"Phil's BBQ, 3750 Sports Arena Blvd, San Diego, CA","at":"19:05"},{"n":"Temecula (숙소 미정)","q":"Temecula, CA","at":["20:40","20:00"]}],"d1012":[{"n":"Ontario Mills","q":"Ontario Mills, 1 Mills Cir, Ontario, CA","at":["10:00","08:45"]},{"n":"할리우드 (Ovation Hollywood 주차)","q":"Ovation Hollywood, 6801 Hollywood Blvd, Los Angeles, CA","at":["14:10","13:00"]},{"n":"Griffith 천문대","q":"Griffith Observatory, Los Angeles, CA","at":"15:15"},{"n":"베니스 비치","q":"Venice Beach Boardwalk, Los Angeles, CA","at":"17:15"},{"n":"산타모니카 피어","q":"Santa Monica Pier, Santa Monica, CA","at":["17:15","18:23","16:15"]},{"n":"Third Street Promenade","q":"Third Street Promenade, Santa Monica, CA","at":"19:00"}],"d1013":[{"n":"LAX","q":"Los Angeles International Airport","at":"07:50"}]};
+const PLACES = {"d1002":[{"n":"SFO","lat":37.619115,"lng":-122.381627,"at":"14:15"},{"n":"Hotel Vertigo","lat":37.788604,"lng":-122.415953,"at":"16:30"},{"n":"REI San Francisco","lat":37.772493,"lng":-122.404576,"at":"17:00"}],"d1003":[{"n":"El Monte 픽업 (Dublin)","lat":37.703464,"lng":-121.90595,"at":"13:00 전후"},{"n":"Savers (Dublin)","lat":37.70439,"lng":-121.932729,"at":"10:00~"},{"n":"REI Dublin","lat":37.706783,"lng":-121.927883,"at":"10:00~"},{"n":"Walmart 모데스토","lat":37.673132,"lng":-121.037053,"at":"15:30"},{"n":"Vista Point 노지","lat":37.831986,"lng":-120.348894,"at":"17:45"}],"d1004":[{"n":"Big Oak Flat 입구","lat":37.800117,"lng":-119.875464,"at":"07:45"},{"n":"터널 뷰","lat":37.715547,"lng":-119.676906,"at":"08:30"},{"n":"브라이달베일 주차","lat":37.716772,"lng":-119.651385,"at":"09:00"},{"n":"엘캐피탄 메도우","lat":37.723051,"lng":-119.635664,"at":"09:45"},{"n":"요세미티 폭포 주차","lat":37.744465,"lng":-119.584896,"at":"10:15"},{"n":"센티널 브리지 주차","lat":37.744092,"lng":-119.589661,"at":"11:30"},{"n":"미러레이크 주차 (선택)","lat":37.738004,"lng":-119.570484,"at":"13:00"},{"n":"Crane Flat 주유소","q":"Crane Flat Gas Station, Yosemite","at":"15:00"},{"n":"옴스테드 포인트","lat":37.8107,"lng":-119.485535,"at":"16:00"},{"n":"테나야 호","lat":37.831851,"lng":-119.460007,"at":"16:15"},{"n":"롱밸리 온천 노지","lat":37.660381,"lng":-118.788764,"at":"18:15"},{"n":"Wild Willy's 주차 (대안)","lat":37.658966,"lng":-118.771089,"at":"18:15"}],"d1005":[{"n":"빅파인 주유","lat":37.168916,"lng":-118.289248,"at":"08:15"},{"n":"메스키트 사구 주차","lat":36.605968,"lng":-117.115904,"at":"10:45"},{"n":"Furnace Creek 덤프·급수","lat":36.460842,"lng":-116.865171,"at":"12:15"},{"n":"배드워터","lat":36.229972,"lng":-116.767777,"at":"13:15"},{"n":"아티스트 드라이브","lat":36.381737,"lng":-116.85101,"at":"14:30"},{"n":"단테스 뷰","lat":36.220579,"lng":-116.726598,"at":"15:45"},{"n":"자브리스키 포인트","lat":36.42088,"lng":-116.809727,"at":"17:45"},{"n":"Pads 무료 캠핑장","lat":36.338746,"lng":-116.599536,"at":"18:45"}],"d1006":[{"n":"Maverik 덤프·주유","lat":36.27,"lng":-115.053889,"at":"08:45"},{"n":"El Monte 반납","lat":36.137023,"lng":-115.092707,"at":"09:40"},{"n":"Indie Campers 픽업 (Henderson)","lat":36.065653,"lng":-115.018995,"at":"12:00"},{"n":"H Mart 라스베가스","q":"H Mart, 2620 S Decatur Blvd, Las Vegas, NV","at":"13:30"},{"n":"Hurricane Cliffs 노지","lat":37.215705,"lng":-113.250514,"at":["19:00 MDT","15:00"]}],"d1007":[{"n":"자이언 방문자센터","lat":37.200092,"lng":-112.986985,"at":"06:30"},{"n":"홀스슈밴드","lat":36.876343,"lng":-111.502802,"at":["17:15 MST","18:00"]},{"n":"Walmart 페이지","q":"Walmart Supercenter, 1017 W Haul Rd, Page, AZ","at":"18:30"},{"n":"페이지 Maverik 덤프 (선택)","lat":36.908298,"lng":-111.483031,"at":"19:00"},{"n":"페이지 노지","lat":36.93522,"lng":-111.4778,"at":"19:15"}],"d1008":[{"n":"Wahweap Overlook (일출·선택)","q":"Wahweap Overlook, Page, AZ","at":"05:50"},{"n":"Canyon X","lat":36.81991,"lng":-111.308757,"at":["09:35","09:05"]},{"n":"페이지 Maverik 덤프·주유","lat":36.908298,"lng":-111.483031,"at":"12:10"},{"n":"데저트뷰 주차","lat":36.040929,"lng":-111.827284,"at":"15:15"},{"n":"나바호 포인트","lat":36.038101,"lng":-111.837803,"at":"16:00"},{"n":"리판 포인트","lat":36.033042,"lng":-111.853214,"at":"16:20"},{"n":"모런 포인트","lat":36.005138,"lng":-111.924274,"at":"16:50"},{"n":"그랜드뷰 포인트","lat":35.998467,"lng":-111.987756,"at":"17:10"},{"n":"방문자센터 주차","lat":36.060556,"lng":-112.108627,"at":"17:40"},{"n":"매더 포인트","lat":36.061715,"lng":-112.107722,"m":"walking","at":"18:01"},{"n":"투사얀 남쪽 노지","lat":35.922305,"lng":-112.112742,"at":"18:45"}],"d1009":[{"n":"매더 포인트 (일출·선택)","lat":36.061715,"lng":-112.107722,"m":"walking","at":"05:30"},{"n":"Mather CG 덤프","lat":36.051038,"lng":-112.121826,"at":"07:40"},{"n":"방문자센터 주차","lat":36.059172,"lng":-112.109255,"at":"08:00"},{"n":"Yavapai Point","lat":36.066371,"lng":-112.117443,"m":"walking","at":"08:15"},{"n":"Hopi House","lat":36.057756,"lng":-112.136756,"m":"walking","at":"10:00"},{"n":"Bright Angel TH","lat":36.057409,"lng":-112.143603,"m":"walking","at":"10:45"},{"n":"Hopi Point","lat":36.074396,"lng":-112.154969,"m":"walking","at":["12:30","18:00"]},{"n":"The Abyss","lat":36.05812,"lng":-112.169125,"m":"walking","at":"14:30"},{"n":"Pima Point","lat":36.07163,"lng":-112.200045,"m":"walking","at":"16:00"},{"n":"Hermits Rest","lat":36.062074,"lng":-112.211186,"m":"walking","at":"16:45"},{"n":"레드뷰트 노지","lat":35.808444,"lng":-112.106472,"at":["19:00","19:45"]}],"d1010":[{"n":"Bell Rock Vista 주차","lat":34.824156,"lng":-111.775963,"at":["08:15","06:00"]},{"n":"홀리크로스 성당 (선택)","q":"Chapel of the Holy Cross, 780 Chapel Rd, Sedona, AZ","at":"10:40"},{"n":"Galpin 무료 덤프 (Cottonwood)","lat":34.727778,"lng":-112.017399,"at":"12:25"},{"n":"Trails End RV Park (백업 덤프)","q":"Trails End RV Park, 983 W Finnie Flat Rd, Camp Verde, AZ","at":"12:25"},{"n":"Indie 반납 (Phoenix)","lat":33.450354,"lng":-112.017159,"at":["14:45","12:45"]},{"n":"유마 (숙소 미정)","q":"Yuma, AZ","at":["18:30","15:30"]}],"d1011":[{"n":"토리파인스 무료 주차","lat":32.93077,"lng":-117.260059,"at":["09:30","06:30"]},{"n":"라호야 Children's Pool","q":"Children's Pool, La Jolla, CA","at":"11:15"},{"n":"라호야 코브","q":"La Jolla Cove, San Diego","at":["11:45","12:45"]},{"n":"The Taco Stand (라호야)","q":"The Taco Stand, 621 Pearl St, La Jolla, CA","at":"13:15"},{"n":"코로나도 (Hotel del)","q":"Hotel del Coronado, Coronado, CA","at":["14:30","14:00"]},{"n":"선셋 클리프","q":"Sunset Cliffs Natural Park, San Diego","at":["16:45","18:20"]},{"n":"Phil's BBQ Rancho Bernardo","q":"Phil's BBQ, 17051 W Bernardo Dr, San Diego, CA","at":["19:05","18:35"]},{"n":"Phil's BBQ Point Loma (대안)","q":"Phil's BBQ, 3750 Sports Arena Blvd, San Diego, CA","at":"19:05"},{"n":"Temecula (숙소 미정)","q":"Temecula, CA","at":["20:40","20:00"]}],"d1012":[{"n":"Ontario Mills","q":"Ontario Mills, 1 Mills Cir, Ontario, CA","at":["10:00","08:45"]},{"n":"할리우드 (Ovation Hollywood 주차)","q":"Ovation Hollywood, 6801 Hollywood Blvd, Los Angeles, CA","at":["14:10","13:00"]},{"n":"Griffith 천문대","q":"Griffith Observatory, Los Angeles, CA","at":"15:15"},{"n":"베니스 비치","q":"Venice Beach Boardwalk, Los Angeles, CA","at":"17:15"},{"n":"산타모니카 피어","q":"Santa Monica Pier, Santa Monica, CA","at":["17:15","18:23","16:15"]},{"n":"Third Street Promenade","q":"Third Street Promenade, Santa Monica, CA","at":"19:00"}],"d1013":[{"n":"LAX","q":"Los Angeles International Airport","at":"07:50"}]};
 
 const segCls = s => s===1?"":s===2?" s2":" s3";
 const segName = s => s===1?"1구간 RV":s===2?"2구간 밴":"3구간";
@@ -435,6 +459,42 @@ document.getElementById("sumbody").innerHTML = DAYS.map(d => `<tr>
   <td class="d"><a href="#${d.id}">${d.date}</a></td><td>${d.wd}</td><td>${d.route}</td><td>${d.dist}</td>
   <td>${d.sights}</td><td>${d.stay}</td><td>${d.size}</td><td>${d.rsv}</td><td>${d.cancel}</td></tr>`).join("");
 
+// 식단: [날짜, 아침, 점심, 저녁] — 굵게는 <b>
+const MEALS = [
+ ["10/02 금","기내","기내","SF 외식"],
+ ["10/03 토","SF 외식","더블린 외식 (픽업 대기 중)","<b>카르네 아사다 타코</b> — 양념된 carne asada 팬에 5~8분 + 토르티야·살사·아보카도·라임"],
+ ["10/04 일","햇반 · 블록국 · 김 · 스팸","<b>이삭토스트식</b> — 햄 2장 + 양배추 달걀 패티 + American 치즈 + 이삭 소스 (아침에 만들어 호일)","<b>립아이 스테이크</b> + 햇반 · 옥수수 (롱밸리, 온천 후 라면 야식)"],
+ ["10/05 월","햇반 · 블록국 · 김 · 베이컨 · 달걀","<b>로스트비프 &amp; 페퍼잭</b> 사워도우 + 머스터드 (Furnace Creek 방문자센터에서)","<b>브랏 소시지 핫도그</b> + 볶은 양파 (더운 날이라 간단히)"],
+ ["10/06 화","햇반 · 블록국 · 김 · 칵테일 소시지 (차 바꾸기 전 냉장고 털기)","<b>H Mart 푸드코트</b> — 순대국·순두부·짬뽕·BBQ치킨·김밥","<b>양념 LA갈비</b> + 상추 · 김치 · 햇반"],
+ ["10/07 수","<b>참치마요 주먹밥</b> — 전날 밤 만들어 차에서 (05:15 기상)","<b>이탈리안 서브</b> — 살라미·페퍼로니·햄 + 프로볼로네 + 피클 (마요 없이 배낭에서 오래 버팀)","<b>삼겹살 쌈</b> — 상추·깻잎·쌈장·김치 (창문 열고 환풍기)"],
+ ["10/08 목","햇반 · 블록국 · 김 · 스팸 · 달걀","<b>클럽 샌드위치</b> — 스모크 터키 + 베이컨 + 체다 + 토마토·상추, Texas Toast (차에서)","<b>양념 소불고기</b> — 두 배로 볶아 절반은 다음 날 점심용"],
+ ["10/09 금","햇반 · 블록국 · 김 · 베이컨","<b>불고기 치즈 슬라이더</b> — 전날 불고기 + 체다, King's Hawaiian 롤 (림 트레일 도시락, 아이스팩)","<b>립아이 스테이크</b> (늦게 도착, 10분 요리) + 라면 · 내일 아침 주먹밥 만들기"],
+ ["10/10 토","<b>참치마요 주먹밥</b> — 차에서 (05:15 기상)","<b>남은 재료 샌드위치</b> — 햄·치즈·고기 털기 (전날 밤 만들어 차에서)","유마 외식"],
+ ["10/11 일","유마 (호텔 · 간단히)","The Taco Stand (라호야)","Phil's BBQ (Rancho Bernardo)"],
+ ["10/12 월","Temecula (호텔 · 간단히)","Ontario Mills (몰 안)","Third Street Promenade (산타모니카)"]
+];
+// 장보기 목록: 체크하면 둘이 같이 봄
+const SHOP = [
+ {id:"g1", title:"① 10/3 Walmart 모데스토", when:"10/3 15:30 · 10/3 저녁 ~ 10/6 아침 + 오래가는 것", groups:[
+  ["고기",["카르네 아사다 양념육 약 700g (10/3)","립아이 2장 (10/4)","브랏 소시지 1팩 (10/5)","살라미 · 페퍼로니 1팩씩 (10/7 점심, 오래감)"]],
+  ["아침",["SPAM Singles 또는 캔 2","완전 조리 베이컨 (Hormel Fully Cooked) 1","달걀 12개","Lit'l Smokies (칵테일 소시지) 1","조미김 묶음"]],
+  ["점심",["Texas Toast 식빵 1","사워도우 1","서브 롤 (hoagie) 1팩","허니햄","로스트비프","American 치즈 (Kraft Singles)","Tillamook 페퍼잭","프로볼로네","코울슬로 믹스 (채 썬 양배추)","로메인 상추 · 토마토","피클 (냉장 Claussen)"]],
+  ["타코",["토르티야","살사","아보카도 2","라임 · 양파"]],
+  ["양념 · 소모품",["버터","식용유 (작은 것)","소금 · 후추","머스터드 · 마요 (작은 것)","호일 · 지퍼백 · 키친타월 · 쓰레기봉투","얼음 · 아이스팩"]],
+  ["간식 · 물",["육포 (Jack Link's)","트레일믹스 · 프로틴바","바나나 · 사과","물 갤런"]]
+ ]},
+ {id:"g2", title:"② 10/6 H Mart 라스베가스", when:"10/6 13:30 · 2620 S Decatur Blvd · 매일 08:00~22:00 · 10/6 저녁 ~ 10/8 저녁", groups:[
+  ["고기",["양념 LA갈비 약 700g (10/6)","삼겹살 얇게 약 450g (10/7)","양념 소불고기 약 900g (10/8 저녁 + 10/9 점심)"]],
+  ["곁들이",["상추 · 깻잎","쌈장","김치 (작은 통)","오래가는 반찬 1~2 (멸치볶음 등)","햇반 · 블록국 부족분"]],
+  ["점심",["푸드코트에서 먹기"]]
+ ]},
+ {id:"g3", title:"③ 10/7 Walmart 페이지", when:"10/7 18:30 · 1017 W Haul Rd · 06:00~23:00 · 10/8 ~ 10/10 (10/10 반납 전 비워야 하니 3일치만)", groups:[
+  ["고기",["립아이 2장 (10/9)","스모크 터키 (10/8 점심)"]],
+  ["점심",["King's Hawaiian 롤 (10/9)","Tillamook 샤프 체다","Texas Toast 식빵 1 (10/10)","토마토 · 상추 보충"]],
+  ["기타",["달걀 · 과일 보충","얼음"]]
+ ]}
+];
+
 // 확인 목록
 let saved = {};
 try { saved = JSON.parse(localStorage.getItem("uswest-checks") || "{}"); } catch(e) {}
@@ -442,6 +502,13 @@ const cl = document.getElementById("checklist");
 cl.innerHTML = CHECKS.map(c => `<li class="${saved[c.id]?'done':''}">
   <input type="checkbox" id="${c.id}" ${saved[c.id]?'checked':''}>
   <label for="${c.id}"><span class="day">${c.d}</span>${c.t}</label></li>`).join("");
+cl.querySelectorAll("input").forEach(i => i.classList.add("chk"));
+// 식단표 · 장보기
+document.getElementById("mealbody").innerHTML = MEALS.map(m => `<tr><td class="d">${m[0]}</td><td>${m[1]}</td><td>${m[2]}</td><td>${m[3]}</td></tr>`).join("");
+document.getElementById("shop").innerHTML = SHOP.map(g => `<details><summary>${g.title}<small>${g.when}</small></summary>${g.groups.map((gr, gi) =>
+  `<h4>${gr[0]}</h4><ul>${gr[1].map((it, ii) => { const id = `${g.id}-${gi}-${ii}`;
+    return `<li class="${saved[id]?'done':''}"><input type="checkbox" class="chk" id="${id}" ${saved[id]?'checked':''}><label for="${id}">${it}</label></li>`; }).join("")}</ul>`).join("")}</details>`).join("");
+const allChecks = () => [...document.querySelectorAll("input.chk")];
 // 공유 저장소 어댑터: claude.ai(db) 또는 GitHub Pages(Firebase)가 연결하면 채워짐
 let remote = null;   // {setCheck(id, done), setMemo(day, text)}
 let readOnly = false;
@@ -449,8 +516,8 @@ function applyCheck(id, done){
   const box = document.getElementById(id); if (!box) return;
   box.checked = !!done; box.closest("li").classList.toggle("done", !!done);
 }
-cl.addEventListener("change", async e => {
-  if (e.target.type !== "checkbox") return;
+document.addEventListener("change", async e => {
+  if (!e.target.classList || !e.target.classList.contains("chk")) return;
   const id = e.target.id, done = e.target.checked;
   applyCheck(id, done);
   if (remote && !readOnly) {
@@ -539,7 +606,7 @@ document.querySelectorAll(".memo textarea").forEach(t => {
 
 function setReadOnly(){
   readOnly = true;
-  document.querySelectorAll("#checklist input, .memo textarea").forEach(el => el.disabled = true);
+  document.querySelectorAll("input.chk, .memo textarea").forEach(el => el.disabled = true);
   const s = document.getElementById("syncstate");
   s.textContent = "보기 전용이에요. 편집 권한이 있어야 체크·메모를 바꿀 수 있어요."; s.classList.remove("live");
 }
@@ -554,15 +621,15 @@ function applyMemo(day, text){
 }
 function useRemote(r){
   remote = r; readOnly = false;
-  document.querySelectorAll("#checklist input, .memo textarea").forEach(el => el.disabled = false);
+  document.querySelectorAll("input.chk, .memo textarea").forEach(el => el.disabled = false);
   // 이 기기 저장값 대신 공유 값을 보여줌
-  CHECKS.forEach(c => applyCheck(c.id, false));
+  allChecks().forEach(i => applyCheck(i.id, false));
   document.querySelectorAll(".memo textarea").forEach(t => { if (document.activeElement !== t) t.value = ""; });
 }
 function dropRemote(){
   remote = null; readOnly = false;
-  document.querySelectorAll("#checklist input, .memo textarea").forEach(el => el.disabled = false);
-  CHECKS.forEach(c => applyCheck(c.id, !!saved[c.id]));
+  document.querySelectorAll("input.chk, .memo textarea").forEach(el => el.disabled = false);
+  allChecks().forEach(i => applyCheck(i.id, !!saved[i.id]));
   document.querySelectorAll(".memo textarea").forEach(t => t.value = memosLocal[t.dataset.day] || "");
 }
 window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRemote, places: PLACES, days: DAYS.map(d => ({id: d.id, date: d.date, wd: d.wd, seg: d.seg})), navUrl};
