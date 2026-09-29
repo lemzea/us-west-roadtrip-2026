@@ -14,7 +14,7 @@
 | 구간 | 기간 | 차량 |
 |---|---|---|
 | 1 | 10/3 더블린 → 10/6 라스베가스 | El Monte RV (imoova) |
-| 2 | 10/6 헨더슨 → 10/10 아파치정션 | Indie Campers Winnebago 59PX (imoova) |
+| 2 | 10/6 헨더슨 → 10/10 피닉스 (반납지 확인 중) | Indie Campers Winnebago 59PX (imoova) |
 | 3 | 10/10 → 10/13 LAX | 렌터카 (미정) |
 
 ## 공유 저장 설정 (Firebase)
