@@ -219,6 +219,11 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
 
 <script>
 const CHECKS = [
+  {id:"c9", d:"10/3", t:"<b>El Monte 08:30 전화 → 픽업 시간 확정</b> — +1 888-337-2214 (더블린 직통 +1 925-803-0331). 픽업 때 차 길이(25ft 넘으면 아티스트 드라이브 불가) · 주방 키트 포함 여부 · 추가 운전자 등록."},
+  {id:"c10", d:"10/6", t:"<b>El Monte 라스베가스 반납 10:30까지</b> — 3800 Boulder Hwy. 08:00~10:30만 받아요. 탱크 비우고(Maverik 08:45) 픽업 때 연료량으로."},
+  {id:"c11", d:"10/8", t:"<b>나바호 구역엔 술 없이</b> — Canyon X 주변 · 페이지 → 데저트뷰(US-89 · AZ-64)는 술 소지 금지. 10/8 아침 전에 다 마시거나 없애고, 그날 밤 분량은 투사얀 General Store에서."},
+  {id:"c12", d:"10/10", t:"<b>Indie 반납 15:00까지 + 주유 영수증</b> — 세도나 11:15 출발 마감. 반납 직전 픽업 때 연료량으로 주유하고 영수증 보관 → reservations@indiecampers.com 으로 $200 환급 신청. 카세트 · 오수 비우고 냉장고 비우고 끄기."},
+  {id:"c13", d:"10/13", t:"<b>LAX 10:50 출발 — 06:45 숙소 출발</b> — 전날 저녁 렌터카 주유(반납 조건 확인), 07:10 반납, 셔틀 15~20분, 07:50 터미널. 온라인 체크인 전날 밤에."},
   {id:"c8", d:"10/6", t:"<b>Indie 픽업 때 반납지 확정</b> — 렌탈 계약서에 적힌 반납 주소(State 48 RV 아파치정션 vs Indie 피닉스 지점)와 15:00 반납, 토요일 인수 담당자, 키 반납 방법을 직원에게 확인하고 계약서 사진 찍기. 아파치정션이면 그날 저녁 State 48 RV(866-858-2173, 평일 08:00~17:00)에 토요일 인수 재확인. 피닉스면 10/10 시간표를 되돌리기(반납 14:45 · 유마 18:30)."},
   {id:"c6", d:"10/2", t:"<b>Talkatone 설치·가입</b> — 무료 미국 번호(데이터 통화·문자). 가입에 미국 IP가 필요해서 <b>SFO 도착 후 호텔 와이파이에서</b> 가입. 업체(El Monte·Indie·State 48)에 전화하거나 미국 번호가 필요할 때 사용. 긴급전화(911)는 로밍 폰으로."},
   {id:"c4", d:"10/6", t:"<b>앤젤스 랜딩 전날 추첨 신청</b> — 10/6 <b>15:00 MDT(= 네바다 14:00)</b> 마감. 아침 El Monte 반납 전에 recreation.gov에서 신청하고, 16시쯤 결과 메일 확인. 떨어지면 10/7 오전은 내로우스·리버사이드 워크 위주로."},
@@ -523,6 +528,8 @@ const SHOP = [
 let saved = {};
 try { saved = JSON.parse(localStorage.getItem("uswest-checks") || "{}"); } catch(e) {}
 const cl = document.getElementById("checklist");
+const dkey = d => { const m = d.match(/(\d+)\/(\d+)/); return m ? +m[1]*100 + +m[2] : 0; };
+CHECKS.sort((a, b) => dkey(a.d) - dkey(b.d));
 cl.innerHTML = CHECKS.map(c => `<li class="${saved[c.id]?'done':''}">
   <input type="checkbox" id="${c.id}" ${saved[c.id]?'checked':''}>
   <label for="${c.id}"><span class="day">${c.d}</span>${c.t}</label></li>`).join("");
