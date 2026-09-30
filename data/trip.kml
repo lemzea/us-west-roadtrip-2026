@@ -4379,6 +4379,15 @@
     <Folder>
       <name>3구간 (피닉스 ~ LA) - 26.10.10 ~ 26.10.13</name>
       <Placemark>
+        <name>Rodeway Inn Yuma Downtown</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.6249325,32.7206127,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>샌디에고 무료 주차 (차박 가능)</name>
         <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
@@ -4447,6 +4456,15 @@
         <Point>
           <coordinates>
             -117.2158625,32.7548759,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Quality Inn Temecula Valley Wine Country</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -117.1649165,33.5234018,0
           </coordinates>
         </Point>
       </Placemark>
