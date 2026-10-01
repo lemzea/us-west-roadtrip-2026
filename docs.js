@@ -23,15 +23,18 @@
       alert("서류를 열지 못했어요: " + (err && err.message || err));
     }
   };
+  const note = (msg) => { const el = document.getElementById("dayctl-msg"); if (el) el.textContent = msg; };
   const lock = () => { key = null; window.TRIP_ATTACH_DOCS?.([]); };
   const unlock = async (keyStr) => {
-    if (!keyStr) { lock(); return; }
+    if (!keyStr) { lock(); note("서류·바우처: Firestore private/bookings 문서에 dockey 필드가 없어요 — 키를 넣으면 일정 안에 📄가 보여요."); return; }
     try {
       key = await crypto.subtle.importKey("raw", b64u(keyStr), "AES-GCM", false, ["decrypt"]);
       const items = JSON.parse(new TextDecoder().decode(await fetchDec("manifest.bin")));
       window.TRIP_ATTACH_DOCS?.(items.map(m => ({ at: m.at, label: m.t, href: m.link, open: () => openDoc(m) })));
+      note(`서류·바우처 ${items.length}개 — 일정 항목 아래 📄 버튼, 또는 위 '📄 서류'에서 모아보기.`);
     } catch (e) {
       console.warn("[trip] docs unlock failed:", e && e.message);
+      note("서류·바우처를 못 열었어요 (" + (e && e.message || e) + ") — dockey 값이 맞는지 확인.");
       lock();
     }
   };
