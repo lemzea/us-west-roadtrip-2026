@@ -57,6 +57,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
 
 /* 확인 목록 */
+.apps{background:var(--juniper-soft);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.apps h2{color:var(--juniper)}
+.appgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px 20px}
+.appgrid h4{margin:0 0 6px;font-size:.78rem;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.appgrid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.appgrid li{font-size:.86rem;padding-left:14px;position:relative}
+.appgrid li::before{content:"·";position:absolute;left:2px;color:var(--muted)}
 .checks{background:var(--warn-soft);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
 .checks h2{color:var(--warn)}
 .checks ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -207,6 +214,39 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     <span><i class="dot" style="background:var(--amber)"></i>2구간 Indie Campers 밴 (헨더슨 → 피닉스)</span>
     <span><i class="dot" style="background:var(--muted)"></i>3구간 렌터카·도시</span>
   </div>
+
+  <section class="apps" aria-labelledby="apps-h">
+    <h2 id="apps-h">앱 준비</h2>
+    <p class="note" style="margin:0">왼쪽은 <b>출국 전</b>에 설치·가입·카드 등록까지. 오른쪽은 <b>미국 앱스토어/미국 IP가 필요</b>해서 10/2 SFO 도착 후 호텔 와이파이에서 설치. (아이폰은 미국 Apple ID 없이도 대부분 설치되지만, 안 되면 호텔에서 Apple ID 국가를 잠시 미국으로 바꾸거나 웹으로 대체.)</p>
+    <div class="appgrid">
+      <div><h4>출국 전 (한국에서)</h4><ul>
+        <li><b>이 페이지</b> — 홈 화면에 추가 + Google 로그인 (체크·메모 공유, 📄 서류)</li>
+        <li><b>Google 지도</b> — <b>오프라인 지도 다운로드</b>: 요세미티 · 데스밸리 · 유타 남부(자이언~페이지) · 그랜드캐년 · 세도나. 노지·공원은 통신 없음</li>
+        <li><b>Google My Maps</b> — 핀 지도 (Google 지도 앱 → 저장됨 → 지도)</li>
+        <li><b>Clipper</b> — BART 10/3. 앱 설치 말고 <b>Apple Wallet / Google 월렛 → 교통카드 추가 → Clipper</b>로 바로 발급·충전 ($20)</li>
+        <li><b>Uber</b> + Lyft — 카드 등록. 10/6 대체 이동, 10/10 반납지 → AZA</li>
+        <li><b>WhatsApp</b> — Indie 고객지원(+1 855-785-5096)은 메시지만 받음</li>
+        <li><b>Indie Campers 앱</b> — 체크인·차량 위치·반납</li>
+        <li><b>에어프레미아 앱</b> — 온라인 체크인(10/1 저녁 · 10/12 저녁 좌석 지정)</li>
+        <li><b>트립닷컴 · 아고다</b> — 바우처 (📄 서류에도 있음)</li>
+        <li><b>AllTrails</b> — 앤젤스 랜딩 · 벨록 · 림 트레일 지도 오프라인 저장(무료 버전은 온라인에서 미리 열어두기)</li>
+        <li><b>park4night · iOverlander</b> — 노지·덤프 위치 (이미 핀 찍음, 백업용)</li>
+        <li><b>Google 번역</b> — 영어 오프라인 팩</li>
+        <li>Thrifty <b>Blue Chip</b> 회원 가입(웹) — 배우자 추가 운전자 무료 근거</li>
+      </ul></div>
+      <div><h4>미국 도착 후 (10/2 호텔에서)</h4><ul>
+        <li><b>Talkatone</b> — 무료 미국 번호 (가입에 미국 IP 필요). 업체 전화용</li>
+        <li><b>ParkMobile</b> — 노상 미터 결제·연장 (라호야 · LACMA 등). 카드 등록</li>
+        <li><b>SpotHero</b> — 할리우드 주차 선예약 (10/10 렌터카 번호판 받은 뒤 예약)</li>
+        <li><b>rideRTC</b> — 라스베이거스 버스 2시간권 $4 (10/6 El Monte → Indie)</li>
+        <li><b>NPS (National Park Service)</b> — 공원별 오프라인 지도·셔틀 시간표·경보. 요세미티·자이언·그랜드캐년 다운로드</li>
+        <li><b>Recreation.gov</b> — 앤젤스 랜딩 전날 추첨(10/6). 웹으로도 가능</li>
+        <li><b>GasBuddy</b> — 주변 주유소 가격 (데스밸리 전 빅파인, 반납 전 주유)</li>
+        <li><b>Walmart</b> — 매장 내 통로 번호 검색·재고 확인 (10/3 · 10/6 장보기 때 편함)</li>
+        <li><b>El Monte 온라인 체크인</b>은 끝났으니 앱 불필요 · Thrifty도 바우처만</li>
+      </ul></div>
+    </div>
+  </section>
 
   <section class="checks" aria-labelledby="chk-h">
     <h2 id="chk-h">놓치면 안 되는 것</h2>
