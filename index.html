@@ -38,7 +38,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 
 /* 날짜 바 */
 .datebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px}
-.datebar nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.datebar{display:flex;align-items:center;gap:8px}
+.datebar nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.docsbtn{flex:0 0 auto;font:inherit;font-size:.8rem;font-weight:600;border:1px solid var(--amber);background:var(--amber-soft);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer;white-space:nowrap}
+.doclist{width:100%;max-width:720px;display:flex;flex-direction:column;gap:6px;align-self:center}
+.doclist h4{margin:10px 0 2px;font-size:.78rem;letter-spacing:.04em;color:var(--muted)}
+.doclist a{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink);font-weight:600}
+.doclist a small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;margin-top:2px}
 .datebar nav::-webkit-scrollbar{display:none}
 .datebar a{flex:0 0 auto;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:.8rem;white-space:nowrap}
 .datebar a b{font-family:var(--f-mono);font-weight:600;margin-right:4px}
@@ -194,7 +200,7 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     <p class="sub">SFO 입국 → 요세미티 → 데스밸리 → 자이언 → 앤텔로프·홀스슈 → 그랜드캐니언 → 세도나 → 유마 → 샌디에이고 → Temecula → 아울렛 → LA, LAX 출국</p>
   </header>
 
-  <div class="datebar"><nav id="datenav" aria-label="날짜로 이동"></nav></div>
+  <div class="datebar"><nav id="datenav" aria-label="날짜로 이동"></nav><button type="button" id="docs-btn" class="docsbtn" hidden aria-label="서류·바우처 모아보기">📄 서류</button></div>
 
   <div class="legend" aria-label="구간 범례">
     <span><i class="dot" style="background:var(--juniper)"></i>1구간 El Monte RV (SF → 라스베가스)</span>
@@ -525,10 +531,10 @@ const MEALS = [
  ["10/03 토","SF 외식","더블린 외식 (픽업 대기 중)","<b>로티서리 치킨</b> (월마트 델리, 따뜻한 통닭) + <b>델리 사이드</b> (맥앤치즈 또는 감자 웨지)","픽업하자마자 냉장고 켜기 (가스·전기식은 식는 데 몇 시간 걸릴 수 있어 첫날은 얼음 한 봉지). 치킨은 월마트에서 맨 마지막(16:55쯤)에 집어서 도착하자마자 먹기 (2시간 넘으면 전자레인지로 데우기, 발전기 필요). 남은 살은 발라서 냉장 (10/5 점심). 아이스팩 2개는 오늘부터 냉동실에."],
  ["10/04 일","<b>냄비밥</b> · 블록국 · 곱창김 · 스팸 · 김치 · 커피","<b>이삭토스트식</b> — 12:30 요세미티 밸리에서 RV에 앉아 바로 굽기 (Texas Toast · 햄 · 양배추 달걀 패티 · American 치즈 · 이삭 소스)","<b>스테이크</b> (꽃등심) + <b>토마토 파스타</b> (Rao's 작은 병 + 면 반 봉지) · 온천 후 <b>라면</b> 야식","전날 밤(10/3) 쌀 1.5컵 헹궈 코펠에 물 1:1로 불려두기. 아침: 중불 → 끓으면 최약불 10분 → 뜸 10분(짐 싸는 동안). 블록국은 따로 물 끓여. 스팸은 팬에."],
  ["10/05 월","<b>냄비밥</b> · 블록국 · 곱창김 · 베이컨 · 달걀 후라이 · 김치 · 커피","<b>치킨 &amp; 페퍼잭</b> — Furnace Creek 주차장 RV에서 조립 (Texas Toast · 전날 치킨 · 이삭 소스)","<b>타코</b> — carne asada 팬에 5~8분 + 토르티야 + 살사 + 남은 양배추","데스밸리라 더운 날, 라면 없음. 베이컨 첫 팩 뜯음 (남으면 10/6 아침). <b>carne asada는 10/6 아침 분량(한 줌)을 일부러 남기기</b> — 참치마요 옆 반찬. 냉장고는 종일 켜두고 문은 적게."],
- ["10/06 화","<b>냄비밥</b> · 블록국 · 곱창김 · <b>참치마요</b> + <b>남은 carne asada 볶음</b>(팬 2분) · 김치 · 커피 — 덮밥처럼. 토르티야 남았으면 참치마요·아사다 말아 부리토로도","<b>In-N-Out</b> 또는 월마트 안 Subway — 장보기 전 간단히 (차 바꾸는 날이라 요리 없이)","<b>삼겹살</b> + 햇반 · 상추 · 쌈장 · 김치","차 바꾸는 날: 냉장 식품은 보냉백 + 얼린 아이스팩 + Maverik에서 산 얼음, 짐이 많으니 우버는 XL. 삼겹살 기름은 키친타월로 닦아 쓰레기로 (싱크대에 붓지 않기). 자기 전: 내일 점심 샌드위치 만들어 냉장, 보온병 준비."],
+ ["10/06 화","<b>냄비밥</b> · 블록국 · 곱창김 · <b>참치(마요 뿌려서)</b> + <b>남은 carne asada 볶음</b>(팬 2분) · 김치 · 커피 — 반찬 늘어놓고 먹기. 토르티야 남았으면 참치·아사다 말아 부리토로도","<b>In-N-Out</b> 또는 월마트 안 Subway — 장보기 전 간단히 (차 바꾸는 날이라 요리 없이)","<b>삼겹살</b> + 햇반 · 상추 · 쌈장 · 김치","차 바꾸는 날: 냉장 식품은 보냉백 + 얼린 아이스팩 + Maverik에서 산 얼음, 짐이 많으니 우버는 XL. 삼겹살 기름은 키친타월로 닦아 쓰레기로 (싱크대에 붓지 않기). 자기 전: 내일 점심 샌드위치 만들어 냉장, 보온병 준비."],
  ["10/07 수","<b>미국식 (차에서)</b> — 하와이안 롤 + 버터 · 딸기잼 · 베이컨 (찬 채로 or 팬 1분) · 페퍼로니 · 스트링치즈 · 바나나 · 보온병 커피","<b>햄 · 페퍼로니 샌드위치</b> (페퍼잭, 마요 없음) — 보냉백에 넣어 배낭으로, 11:15 Grotto에서","<b>양갈비 (램 로인 찹)</b> — 밖에서 굽기, 한 면 3~4분 + 버터 · 마늘 마무리 + <b>아스파라거스 · 버섯 버터 구이</b> + 쯔란 소금 · 상추 쌈 + 와인 · 힘든 날 끝의 근사한 저녁 · <b>라면</b> 야식","05:15 기상: 물만 끓여 커피 → 롤 · 베이컨 · 페퍼로니 · 치즈는 봉지째 들고 타서 차에서. 요리 없음. 저녁은 도착 즉시(18:50, 일몰 전) 밖에서 굽기 시작 — 양갈비는 냉장고에서 30분 전에 꺼내두기."],
  ["10/08 목","<b>미국식 (여유 있게)</b> — 스크램블 에그 (달걀 4) · <b>풀드포크 슬라이더</b> (Lloyd's 데워서 하와이안 롤 + 코울슬로) · 잼 · 커피","<b>클럽 샌드위치</b> (터키 · 베이컨 · American 치즈 · 토마토 · 상추, 빵 2장씩) — 여유 있는 아침에 만들어 차에서","<b>스테이크</b> + <b>토마토 파스타</b> (Rao's 24oz 절반 + 면 반 봉지) · 추운 밤 <b>라면</b> 야식","아침 여유 있음 (07:40 기상 → 09:05 출발). 남은 상추는 클럽 샌드위치에서 털기. 베이컨 셋째 팩(라스베가스) 뜯음. 아이스팩 다시 냉동. 자기 전: 내일 도시락 슬라이더 만들어 냉장."],
- ["10/09 금","<b>냄비밥</b> · 블록국 · 곱창김 · <b>쌈장마요 참치</b>(마요에 쌈장 조금) + <b>스팸 2쪽</b> 또는 베이컨 · 김치 · 커피","<b>풀드포크 슬라이더</b> (10/8 남은 Lloyd's 절반 + 하와이안 롤 + 코울슬로 · 차게 먹어도 됨) — 림 트레일 13:45 도시락, 보냉백","<b>미트소스 파스타</b> — 다진 소고기 볶고 Rao's 24oz 나머지 절반 + 면 반 봉지 (약 20분)","19:45 도착 → 물 올리는 동안 고기 볶기, 20분. 다진 소고기는 유통기한 확인 (10/6 구매, 못 미더우면 10/7 페이지 월마트에서). 남은 냉장 재료는 이날 저녁까지 털기."],
+ ["10/09 금","<b>냄비밥</b> · 블록국 · 곱창김 · <b>참치(마요 뿌려서)</b> + <b>스팸 2쪽</b> 또는 베이컨 · 김치 · 커피","<b>풀드포크 슬라이더</b> (10/8 남은 Lloyd's 절반 + 하와이안 롤 + 코울슬로 · 차게 먹어도 됨) — 림 트레일 13:45 도시락, 보냉백","<b>미트소스 파스타</b> — 다진 소고기 볶고 Rao's 24oz 나머지 절반 + 면 반 봉지 (약 20분)","19:45 도착 → 물 올리는 동안 고기 볶기, 20분. 다진 소고기는 유통기한 확인 (10/6 구매, 못 미더우면 10/7 페이지 월마트에서). 남은 냉장 재료는 이날 저녁까지 털기."],
  ["10/10 토","<b>미국식 (차에서)</b> — 하와이안 롤 + 잼 · 베이컨 · 남은 페퍼로니 · 치즈 · 커피","<b>라면</b> — 벨록 주차장에서 이른 점심 (10:30, 성당 안 갈 때). 성당에 가면 차에서 간식 → 반납 후 늦은 점심","유마 외식","라면 냄비는 먹고 바로 씻기. 반납 전 냉장고 비우고 끄기. 과일은 오늘 다 먹기 (10/11 캘리포니아 농산물 검사소). 렌터카로는 바 · 젤 같은 포장 간식만."],
  ["10/11 일","숙소 조식 없음 → 차에서 바 · 과일 · 커피, 또는 I-8 가는 길 주유소 (유마 서쪽 Fortuna Rd 출구 등)","The Taco Stand (라호야)","Phil's BBQ (Rancho Bernardo)",""],
  ["10/12 월","Quality Inn 무료 조식 (06:00~09:00, 07:30쯤)","Ontario Mills (몰 안)","Third Street Promenade (산타모니카)",""],
@@ -537,7 +543,7 @@ const MEALS = [
 // 장보기 목록: 체크하면 둘이 같이 봄. 미국 포장이 커서 '제일 작은 포장'으로
 const SHOP = [
  {id:"g0", title:"⓪ 한국에서 챙길 것", when:"출발 전 · 식품은 입국 때 전부 신고", groups:[
-  ["식품",["햇반 2 (비상용 — 밥은 미국 쌀로 지음)","블록국 10 (8 사용 + 예비 2 · 고기 없는 미역국 · 된장국 위주 — 입국 때 폐기 위험 줄이기)","라면 10","참치캔 4 (10/6 · 10/9 아침)","곱창김","김치 작은 통 (밀봉 · 지퍼백 이중 · 아이스팩과 함께, 도착 후 바로 냉장)","쌈장 튜브","마요네즈 튜브 150g 안팎 또는 작은 것 2개 (참치마요 2번 + 코울슬로 2번 — 월마트 최소 포장이 커서)","~고추장 작은 튜브 (참치 비빔 · 쌈장 대용 — 선택)","딸기잼 (작은 병)","커피 (스틱 or 드립백 14~16 — 아침 7일 × 2)","이삭 소스"]],
+  ["식품",["햇반 2 (비상용 — 밥은 미국 쌀로 지음)","블록국 10 (8 사용 + 예비 2 · 고기 없는 미역국 · 된장국 위주 — 입국 때 폐기 위험 줄이기)","라면 10","참치캔 4 (10/6 · 10/9 아침)","곱창김","김치 작은 통 (밀봉 · 지퍼백 이중 · 아이스팩과 함께, 도착 후 바로 냉장)","쌈장 튜브","마요네즈 튜브 150g 안팎 또는 작은 것 2개 (참치에 뿌리기 2번 + 코울슬로 2번 — 월마트 최소 포장이 커서)","~고추장 작은 튜브 (참치 비빔 · 쌈장 대용 — 선택)","딸기잼 (작은 병)","커피 (스틱 or 드립백 14~16 — 아침 7일 × 2)","이삭 소스"]],
   ["도구",["주방도구 일체 — 코펠 세트(밥·국) · 프라이팬 · 뒤집개 · 집게 · 그릇 · 컵 · 수세미 · 세제 작은 것 · 키친타월 1롤 (미국에서 안 삼)","젓가락 2벌","주방 가위 (위탁 수하물)","보냉백 · 아이스팩 2","지퍼백 · 위생백","~돗자리 (10/9 도시락)","보온병 (10/7 · 10/10 차에서 커피)","~머그컵 2 (RV 키트에 없을 수 있음)","캠핑 스토브 (집에 있는 이소가스용 — 가스 캔은 비행기 반입 불가, 모데스토 월마트에서 구매)","캠핑 테이블 (집에 있는 소형 — 고기 굽는 용도, 먹는 건 차 안에서)","~헤드랜턴 또는 폰 조명 (해 진 뒤 굽기)"]]
  ]},
  {id:"g1", day:"d1003", at:"16:00", title:"① 10/3 Walmart 모데스토", when:"10/3 16:00 · <b>10/3 저녁 ~ 10/6 아침(1구간 3일)만</b> + 두 구간 다 쓰는 기본(쌀 · 버터 · 소금후추 · 빵 · 치즈 · 달걀 · 이소가스 · 소모품). 2구간 음식은 10/6 월마트에서 — 10/6 차 바꿀 때 보냉백 하나로 옮길 만큼만. 매장 코너 순서: 델리 → 정육 → 채소 → 빵 → 양념 · 파스타 → 냉장(치즈 · 햄) → 스포츠(젤) → 술", groups:[
@@ -577,7 +583,7 @@ document.getElementById("mealbody").innerHTML = MEALS.map(m => `<tr><td class="d
 const RECIPES = [
  ["코펠 냄비밥 (한식 아침 공통 · 10/6 저녁)","Calrose 쌀 1.5컵(2인) · 물 · 블록국 2 · 곱창김 · 김치 · 커피",["<b>전날 밤</b>: 쌀 1.5컵을 2~3번 헹궈(물은 아껴서) 코펠에 담고 물을 쌀과 <b>1:1</b>(불린 뒤 기준, 쌀 위로 손가락 한 마디 덜 되게) 넣어 뚜껑 덮고 둔다. 10월 밤이면 상온 OK, 더우면 냉장고.","아침: 뚜껑 덮고 <b>중불</b>, 김이 나고 보글거리면(4~5분) 밴 스토브 <b>최약불</b>로 10분. 뚜껑 열지 않기. 얇은 코펠은 불을 최대한 작게 — 타는 냄새 나면 바로 끄기.","불 끄고 <b>10분 뜸</b> — 그 사이 짐 싸고 다른 화구로 블록국 물 끓이기. 바닥 누룽지는 정상.","밥 뜬 뒤 코펠에 바로 물 부어두면 설거지가 쉬움. 저녁에 지을 땐 2컵으로 해서 다음날 아침 분을 지퍼백에 냉장 → 팬에 물 한 숟갈·뚜껑·약불 3~4분으로 데우기."]],
  ["햇반 + 블록국 (비상용)","햇반 2 · 블록국 2 · 곱창김 · 김치 · 커피",["냄비에 물을 햇반이 반쯤 잠길 만큼 끓인다 (바닥에 닿지 않게 물을 넉넉히).","햇반은 뚜껑을 뜯지 말고 포장째 넣어 10분 (CJ 공식).","그 사이 컵에 블록국을 넣어두고, 햇반 꺼낸 뒤 그 끓는 물을 부어 1분.","남은 물로 커피. 스팸·베이컨·달걀은 옆 화구 팬에서 — 기름 대신 버터 한 조각(약불, 버터가 갈색 되기 전에 달걀 넣기)."]],
- ["참치마요 덮밥 (10/6 · 10/9 아침)","참치캔 1 · 마요 2큰술 · 김치 · 곁들임 고기(10/6 남은 carne asada / 10/9 스팸 2쪽 또는 베이컨)",["참치 기름을 반쯤 따라 버리고 마요와 섞는다 (후추 조금). 10/9는 마요에 <b>쌈장 반 숟갈</b>을 섞어 쌈장마요로 — 맛이 달라짐.","곁들임 고기를 팬에 2분 (10/6 아사다 볶음 / 10/9 스팸 or 베이컨).","밥 위에 참치마요 · 고기 · 김치를 올려 덮밥처럼, 곱창김으로 싸 먹는다. 블록국은 따로."]],
+ ["참치 + 반찬 한식 아침 (10/6 · 10/9)","참치캔 1 · 마요 · 김치 · 곱창김 · 곁들임 고기(10/6 남은 carne asada / 10/9 스팸 2쪽 또는 베이컨)",["참치 기름을 따라 버리고 접시에 담아 <b>마요만 지그재그로 뿌린다</b> (섞지 않음 · 후추 조금). 쌈장 찍어 먹어도 됨.","곁들임 고기를 팬에 2분 (10/6 아사다 볶음 / 10/9 스팸 or 베이컨).","밥 · 블록국 · 참치 · 고기 · 김치 · 김을 늘어놓고 반찬처럼 먹는다."]],
  ["미국식 아침 — 차에서 (10/7 · 10/10)","하와이안 롤 3개씩 · 딸기잼 · 버터 · 베이컨 · 페퍼로니 · 스트링치즈 · 바나나 · 커피",["일어나서 물만 끓여 보온병에 커피.","롤 · 잼 · 베이컨(실온 완전조리, 찬 채로 먹어도 됨) · 페퍼로니 · 스트링치즈 · 바나나를 봉지째 차에. 롤 반 갈라 베이컨·치즈 끼우면 샌드위치.","운전 시작하고 나서 먹는다. 요리 없음."]],
  ["미국식 아침 — 스크램블 + 풀드포크 슬라이더 (10/8)","달걀 4 · 버터 · Lloyd's 풀드포크 절반(약 225g) · 하와이안 롤 6 · 코울슬로 믹스 한 줌 + 마요 · 잼 · 커피",["풀드포크 절반을 팬에 넣고 약불 5분, 뒤적이며 데운다 (소스가 눌면 물 한 숟갈). 접시에 덜어둔다. 나머지 절반은 지퍼백에 다시 냉장(10/9 점심).","코울슬로 믹스 한 줌에 마요 1큰술 · 소금 한 꼬집 (있으면 살사 조금) 섞는다.","롤 4개를 반 갈라 팬에 30초 굽고, 풀드포크 → 코울슬로 순으로 올리면 슬라이더. 베이컨은 클럽 샌드위치용 4장만 데운다.","달걀 4개를 그릇에 풀고 소금 한 꼬집. 팬에 버터 넣고 약불, 달걀 부어 젓가락으로 천천히 저으며 반쯤 익으면 불 끄기 (덜 익은 듯할 때 끄는 게 요령).","롤은 반 갈라 팬에 30초, 버터 · 잼."]],
  ["이삭토스트식 (10/4 점심)","Texas Toast 4장 · 달걀 4 · 코울슬로 믹스 한 줌 · 허니햄 4장 · Kraft Singles 2장 · 이삭 소스 · 버터",["달걀 4개에 코울슬로 믹스 한 줌, 소금 한 꼬집 섞는다.","팬에 버터, 달걀물을 부어 네모나게 펴서 부친다 (2인분이면 두 번에 나눠서). 반으로 접어 빵 크기로.","팬을 닦고 빵 4장을 버터에 노릇하게 굽는다.","빵 → 달걀 패티 → 햄 2장 → 치즈 1장 → 이삭 소스 → 빵. 호일에 싸서 점심 때."]],
@@ -762,7 +768,9 @@ function dropRemote(){
     }
   };
   document.querySelectorAll(".doclink").forEach(a => a.addEventListener("click", e => { e.preventDefault(); open(a.dataset.doc, a.dataset.kind, a.dataset.title); }));
-  window.TRIP_DOCVIEW = { open };
+  const list = (label, node) => { title.textContent = label; openA.href = "#"; openA.style.visibility = "hidden"; body.innerHTML = ""; body.appendChild(node); dv.hidden = false; document.body.style.overflow = "hidden"; };
+  const _open = open;
+  window.TRIP_DOCVIEW = { open: (...a) => { openA.style.visibility = ""; return _open(...a); }, list };
 })();
 // 일자 카드 접기/펴기 — 지난 날은 자동으로 접힘 (현지 시간 기준), 수동 상태는 이 기기에 저장
 (() => {
@@ -792,6 +800,30 @@ function dropRemote(){
 // 서류 링크를 타임라인 행에 붙이기 — items: [{day, t, label, open:()=>void|href}]
 window.TRIP_ATTACH_DOCS = (items) => {
   document.querySelectorAll(".tl .docs").forEach(el => el.remove());
+  // 상단 📄 버튼 → 전체 목록 (날짜순)
+  const btn = document.getElementById("docs-btn");
+  if (btn) {
+    btn.hidden = !items.length;
+    const dayLabel = id => { const d = (window.TRIP?.days || []).find(x => x.id === id) || DAYS.find(x => x.id === id); return d ? `${d.date} ${d.wd}` : id; };
+    btn.onclick = () => {
+      const dv = window.TRIP_DOCVIEW; if (!dv) return;
+      const byDay = {};
+      items.forEach(it => { const at = it.at || []; if (!at.length) return; const [day, t] = at[0];
+        const more = at.length > 1 ? " · 또 " + at.slice(1).map(([d2, t2]) => dayLabel(d2).split(" ")[0] + " " + t2).join(", ") : "";
+        (byDay[day] = byDay[day] || []).push({ it, t: t + more }); });
+      const wrap = document.createElement("div"); wrap.className = "doclist";
+      Object.keys(byDay).sort().forEach(day => {
+        const h = document.createElement("h4"); h.textContent = dayLabel(day); wrap.appendChild(h);
+        byDay[day].sort((a, b) => String(a.t).localeCompare(String(b.t))).forEach(({ it, t }) => {
+          const a = document.createElement("a"); a.href = it.href || "#";
+          a.innerHTML = `📄 ${it.label}<small>${t}</small>`;
+          if (it.href) { a.target = "_blank"; a.rel = "noopener"; } else a.addEventListener("click", e => { e.preventDefault(); it.open(); });
+          wrap.appendChild(a);
+        });
+      });
+      dv.list("서류 · 바우처", wrap);
+    };
+  }
   items.forEach(it => (it.at || []).forEach(([day, t]) => {
     const li = document.querySelector(`.tl li[data-day="${day}"][data-t="${t}"]`); if (!li) { console.warn("[trip] doc row not found", day, t, it.label); return; }
     let box = li.querySelector(".docs"); if (!box) { box = document.createElement("div"); box.className = "docs"; li.querySelector(".c").appendChild(box); }
