@@ -83,6 +83,8 @@ table.meals td b{color:var(--ink);font-weight:600}
 .shop li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:.86rem}
 .shop input{width:17px;height:17px;margin-top:3px;accent-color:var(--juniper)}
 .shop li.done label{color:var(--muted);text-decoration:line-through}
+.shop li.opt label{color:var(--muted)}
+.shop li.opt .tag{vertical-align:1px;margin-right:2px}
 .shopin{display:block;margin-top:8px}
 .shopin details{background:var(--amber-soft);border-color:transparent}
 .shopjump{font-size:.84rem;color:var(--muted);align-self:center}
@@ -218,7 +220,7 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
 
   <section aria-labelledby="meal-h" style="display:flex;flex-direction:column;gap:10px">
     <h2 id="meal-h">식단 · 장보기</h2>
-    <p class="note" style="margin:0">아침은 한식(코펠 냄비밥 · 블록국 · 곱창김 · 김치 + 스팸 · 베이컨 · 달걀 · 참치 중 하나둘) 4번과 미국식(하와이안 롤 · 잼 · 달걀 · 베이컨 · 커피) 3번을 섞고, 한식 아침 전날 밤엔 쌀 1.5컵을 코펠에 불려두고 자고, 점심은 고기 많은 샌드위치를 날마다 다르게, 저녁은 로티서리 치킨 · 스테이크 · 타코 · 삼겹살 · 양갈비 · 파스타를 돌려요. 고기 굽기는 노지 밖 스토브(집에서 가져감)에서, 먹는 건 차 안에서. 가져갈 수량은 식단에서 역산했어요 (2인 × 끼니): 햇반 10, 블록국 10, 참치 4, 라면 10, 곱창김, 김치, 쌈장, 딸기잼, 커피, 이삭 소스. 스테이크는 파스타와 먹어요. 스테이크는 립아이(= 꽃등심). 밴 냉장고는 12V 컴프레서식이라 외부전원 없이도 차갑지만 약 85L라 <b>제일 작은 포장</b>으로.</p>
+    <p class="note" style="margin:0">아침은 한식(코펠 냄비밥 · 블록국 · 곱창김 · 김치 + 스팸 · 베이컨 · 달걀 · 참치 중 하나둘) 4번과 미국식(하와이안 롤 · 잼 · 달걀 · 베이컨 · 커피) 3번을 섞고, 한식 아침 전날 밤엔 쌀 1.5컵을 코펠에 불려두고 자고, 장보기 목록에서 <b>선택</b> 표시는 곁들임·데코라 바쁘면 건너뛰어도 식사가 안 흔들리는 것(각 코너 끝에 모아둠), 점심은 고기 많은 샌드위치를 날마다 다르게, 저녁은 로티서리 치킨 · 스테이크 · 타코 · 삼겹살 · 양갈비 · 파스타를 돌려요. 고기 굽기는 노지 밖 스토브(집에서 가져감)에서, 먹는 건 차 안에서. 가져갈 수량은 식단에서 역산했어요 (2인 × 끼니): 햇반 10, 블록국 10, 참치 4, 라면 10, 곱창김, 김치, 쌈장, 딸기잼, 커피, 이삭 소스. 스테이크는 파스타와 먹어요. 스테이크는 립아이(= 꽃등심). 밴 냉장고는 12V 컴프레서식이라 외부전원 없이도 차갑지만 약 85L라 <b>제일 작은 포장</b>으로.</p>
     <div class="tablebox"><table class="meals">
       <thead><tr><th>날짜</th><th>아침</th><th>점심</th><th>저녁</th><th>준비 · 메모</th></tr></thead>
       <tbody id="mealbody"></tbody>
@@ -536,25 +538,25 @@ const MEALS = [
 const SHOP = [
  {id:"g0", title:"⓪ 한국에서 챙길 것", when:"출발 전 · 식품은 입국 때 전부 신고", groups:[
   ["식품",["햇반 2 (비상용 — 밥은 미국 쌀로 지음)","블록국 10 (8 사용 + 예비 2 · 고기 없는 미역국 · 된장국 위주 — 입국 때 폐기 위험 줄이기)","라면 10","참치캔 4 (10/6 · 10/9 아침)","곱창김","김치 작은 통 (밀봉 · 지퍼백 이중 · 아이스팩과 함께, 도착 후 바로 냉장)","쌈장 튜브","마요네즈 작은 튜브 85~100g (참치마요 2번, 총 4큰술 — 월마트 최소 포장이 커서)","딸기잼 (작은 병)","커피 (스틱 or 드립백 14~16 — 아침 7일 × 2)","이삭 소스"]],
-  ["도구",["젓가락 2벌","주방 가위 (위탁 수하물)","보냉백 · 아이스팩 2","지퍼백 · 위생백","돗자리 (10/9 도시락)","보온병 (10/7 · 10/10 차에서 커피)","머그컵 2 (RV 키트에 없을 수 있음)","캠핑 스토브 (집에 있는 이소가스용 — 가스 캔은 비행기 반입 불가, 모데스토 월마트에서 구매)","캠핑 테이블 (집에 있는 소형 — 고기 굽는 용도, 먹는 건 차 안에서)","헤드랜턴 또는 폰 조명 (해 진 뒤 굽기)"]]
+  ["도구",["젓가락 2벌","주방 가위 (위탁 수하물)","보냉백 · 아이스팩 2","지퍼백 · 위생백","~돗자리 (10/9 도시락)","보온병 (10/7 · 10/10 차에서 커피)","~머그컵 2 (RV 키트에 없을 수 있음)","캠핑 스토브 (집에 있는 이소가스용 — 가스 캔은 비행기 반입 불가, 모데스토 월마트에서 구매)","캠핑 테이블 (집에 있는 소형 — 고기 굽는 용도, 먹는 건 차 안에서)","~헤드랜턴 또는 폰 조명 (해 진 뒤 굽기)"]]
  ]},
  {id:"g1", day:"d1003", at:"16:00", title:"① 10/3 Walmart 모데스토", when:"10/3 16:00 · 10/3 저녁 ~ 10/6 아침 + 오래 쓰는 것 (빵 · 치즈 · 햄 · 페퍼로니 · 베이컨 · 달걀 · 파스타면) · 매장 코너 순서: 델리 → 정육 → 채소 → 빵 → 양념 · 파스타 → 냉장(치즈 · 햄) → 스포츠(젤) → 술", groups:[
   ["주방 도구 (El Monte 키트가 없을 때만 · Home 코너)",["코팅 프라이팬 10~12인치 (Mainstays 또는 T-fal)","뚜껑 있는 냄비 3qt (Mainstays — 라면 · 블록국 물) · 밥은 코펠로","뒤집개 · 집게 (Mainstays)","종이접시 · 종이그릇 (Dixie) · 일회용 포크 · 나이프","수세미 (Scotch-Brite) · 주방세제 (Dawn 작은 것)"]],
-  ["델리 코너 (따뜻한 진열장 — 맨 마지막에)",["로티서리 치킨 1 — Freshness Guaranteed Traditional (레몬페퍼 말고 기본맛 · 10/3 + 10/5 점심)","델리 사이드 1 — 맥앤치즈 또는 감자 웨지 등 매장에 있는 것 (치킨 옆 따뜻한 코너, 10/3)"]],
+  ["델리 코너 (따뜻한 진열장 — 맨 마지막에)",["로티서리 치킨 1 — Freshness Guaranteed Traditional (레몬페퍼 말고 기본맛 · 10/3 + 10/5 점심)","~델리 사이드 1 — 맥앤치즈 또는 감자 웨지 등 매장에 있는 것 (치킨 옆 따뜻한 코너, 10/3)"]],
   ["정육 코너",["립아이 2장 — Ribeye Steak, Choice Angus, 2 per tray (10/4)","카르네 아사다 — Marketside 또는 매장 자체 양념 \"Carne Asada\" 제일 작은 팩 (10/5, 남으면 10/6 아침)","SPAM Singles 2개 (통조림 코너, 10/4, 실온)","완전 조리 베이컨 2팩 — Hormel Black Label Fully Cooked (베이컨 코너 근처 실온 진열, 10/5 · 10/7 · 뜯은 뒤 냉장)"]],
-  ["채소 코너",["할라피뇨 2~3개 · 양파 1~2개 (낱개 · yellow onion)","깐 마늘 작은 봉지 — Peeled Garlic (냉장 채소 진열)","코울슬로 믹스 작은 봉지 — Fresh Express Coleslaw Kit 또는 Marketside Tri-Color Coleslaw (10/4 패티 · 10/5 타코)","바나나 · 귤 (10/10까지 다 먹기)","타코 토핑: 라임 2개 · 고수(Cilantro) 1묶음 · 아보카도 1개 (살짝 말랑한 것)"]],
+  ["채소 코너",["~할라피뇨 2~3개 · 양파 1~2개 (낱개 · yellow onion)","~깐 마늘 작은 봉지 — Peeled Garlic (냉장 채소 진열)","코울슬로 믹스 작은 봉지 — Fresh Express Coleslaw Kit 또는 Marketside Tri-Color Coleslaw (10/4 패티 · 10/5 타코)","~바나나 · 귤 (10/10까지 다 먹기)","~타코 토핑: 라임 2개 · 고수(Cilantro) 1묶음 · 아보카도 1개 (살짝 말랑한 것)"]],
   ["빵 코너",["Texas Toast 식빵 1 — Great Value 또는 Nature's Own Texas Toast (빵 코너 — 냉동 갈릭 토스트 아님, 10/4 · 10/5 · 10/7 · 10/8 = 16장 꼭 맞음)","토르티야 — Mission Soft Taco Flour 10장 (편함) 또는 Mission Yellow Corn (정통, 부서지기 쉬움) (타코)"]],
-  ["양념 · 파스타 코너",["<b>Calrose 중립종 쌀 5lb</b> — Nishiki · Botan · Kokuho Rose 중 있는 것 (쌀 코너 · 한국 쌀과 가장 비슷 · $8~10 · 10/4 아침부터 5끼)","파스타면 2봉 — Barilla Spaghetti 또는 Linguine 1lb (10/4 · 10/8 · 10/9 각 반 봉지)","Rao's Homemade Marinara 24oz 1병 (10/4 반 · 10/8 반 — 뜯고 냉장, 차 바꿀 때 보냉백) · 없으면 Prego Traditional","버터 — Land O Lakes Salted 4 sticks 1상자 (기름 대신 전부 버터로: 달걀 · 토스트 · 스테이크 마무리 · 롤)","소금 · 후추 — McCormick 또는 Great Value Salt & Pepper Shaker 2-pack (뿌리개 세트, $2~3 · 향신료 진열대 아래쪽)","쯔란(커민) — McCormick Ground Cumin 작은 통 ($3, 10/7 양갈비에 소금과 섞어 양꼬치집 맛)","살사 작은 병 — Pace Chunky Salsa Medium 또는 Herdez Salsa Casera (실온)","사워크림 작은 통 — Daisy Sour Cream 8oz (냉장 코너, 타코)","파마산 가루 작은 통 — Kraft Grated Parmesan (선택)"]],
+  ["양념 · 파스타 코너",["<b>Calrose 중립종 쌀 5lb</b> — Nishiki · Botan · Kokuho Rose 중 있는 것 (쌀 코너 · 한국 쌀과 가장 비슷 · $8~10 · 10/4 아침부터 5끼)","파스타면 2봉 — Barilla Spaghetti 또는 Linguine 1lb (10/4 · 10/8 · 10/9 각 반 봉지)","Rao's Homemade Marinara 24oz 1병 (10/4 반 · 10/8 반 — 뜯고 냉장, 차 바꿀 때 보냉백) · 없으면 Prego Traditional","버터 — Land O Lakes Salted 4 sticks 1상자 (기름 대신 전부 버터로: 달걀 · 토스트 · 스테이크 마무리 · 롤)","소금 · 후추 — McCormick 또는 Great Value Salt & Pepper Shaker 2-pack (뿌리개 세트, $2~3 · 향신료 진열대 아래쪽)","~쯔란(커민) — McCormick Ground Cumin 작은 통 ($3, 10/7 양갈비에 소금과 섞어 양꼬치집 맛)","살사 작은 병 — Pace Chunky Salsa Medium 또는 Herdez Salsa Casera (실온)","~사워크림 작은 통 — Daisy Sour Cream 8oz (냉장 코너, 타코)","~파마산 가루 작은 통 — Kraft Grated Parmesan"]],
   ["냉장 코너 (치즈 · 햄 · 달걀)",["American 치즈 제일 작은 팩 — Kraft Singles (10/4 · 10/8 · 10/9)","Tillamook Pepper Jack 슬라이스 (10/5 · 10/7)","허니햄 작은 팩 — Hillshire Farm 또는 Oscar Mayer Honey Ham (10/4 · 10/7, 뜯고 3일 안에)","페퍼로니 작은 봉지 — Hormel Pepperoni (실온, 남으면 트레일 간식)","달걀 12개 — Great Value Large Eggs (10/4 패티 4 · 10/5 후라이 4 · 10/8 스크램블 4)"]],
-  ["간식 (스포츠 · 스낵 코너 — 교정 중이라 견과류 · 딱딱한 것 피하기)",["에너지 젤 · 츄 — GU Energy Gel, Clif Bloks, Honey Stinger Chews (스포츠 코너 또는 약국 옆)","부드러운 바 — Clif Bar, Nature's Bakery Fig Bar, Nutri-Grain, Rice Krispies Treats","과일 파우치 — GoGo squeeZ 애플소스","스트링 치즈 — Frigo Cheese Heads · 부드러운 육포 — Jack Link's Tender Bites","물 — 갤런 2~3개 (Great Value Purified)"]],
-  ["소모품 · 술",["키친타월 (Bounty) · 호일 (Reynolds) · 쓰레기봉투 (Hefty 작은 것)","얼음 1봉 (계산대 근처 아이스박스)","이소가스 (스크류식 캔) — Coleman Performance Butane/Propane 7.75oz 2~3개 (스포츠 · 캠핑 코너, $6~8) · 없으면 MSR IsoPro / Jetboil 캔 · 저녁 7번 굽기 기준 2~3캔","술 — 맥주 · 와인 · 소주 다 팜 (캘리포니아). 진로 소주는 아시안 코너나 주류 코너"]]
+  ["간식 (스포츠 · 스낵 코너 — 교정 중이라 견과류 · 딱딱한 것 피하기)",["에너지 젤 · 츄 — GU Energy Gel, Clif Bloks, Honey Stinger Chews (스포츠 코너 또는 약국 옆)","부드러운 바 — Clif Bar, Nature's Bakery Fig Bar, Nutri-Grain, Rice Krispies Treats","~과일 파우치 — GoGo squeeZ 애플소스","~스트링 치즈 — Frigo Cheese Heads · 부드러운 육포 — Jack Link's Tender Bites","물 — 갤런 2~3개 (Great Value Purified)"]],
+  ["소모품 · 술",["키친타월 (Bounty) · 호일 (Reynolds) · 쓰레기봉투 (Hefty 작은 것)","얼음 1봉 (계산대 근처 아이스박스)","이소가스 (스크류식 캔) — Coleman Performance Butane/Propane 7.75oz 2~3개 (스포츠 · 캠핑 코너, $6~8) · 없으면 MSR IsoPro / Jetboil 캔 · 저녁 7번 굽기 기준 2~3캔","~술 — 맥주 · 와인 · 소주 다 팜 (캘리포니아). 진로 소주는 아시안 코너나 주류 코너"]]
  ]},
  {id:"g2", day:"d1006", at:"13:30", title:"② 10/6 Walmart 라스베가스", when:"10/6 13:30~14:30 · 10/6 저녁 ~ 10/10 점심 (4일치, 밴 냉장고 약 85L — 음료는 최소로)", groups:[
-  ["정육 코너",["삼겹살 — Pork Belly, Boneless Sliced (\"for Burnt Ends\" 두툼 슬라이스) 약 1.3lb 1팩 (10/6)","양갈비 — Marketside Lamb Loin Chop 4개 약 1~1.2lb ($11.47/lb, 10/7 · 냉장 하루)","아스파라거스 1단 · 양송이(Baby Bella) 작은 팩 (채소 코너 · 10/7 곁들임)","립아이 2장 — Ribeye Steak, Choice Angus, 2 per tray (10/8 — 냉장 2일, 유통기한 확인)","다진 소고기 — Ground Beef 80/20 1lb (10/9 — 유통기한 10/9 이후인 것, 아니면 10/7 페이지에서)","완전 조리 베이컨 1팩 — Hormel Black Label Fully Cooked (10/8 아침 · 클럽 · 10/10)"]],
-  ["채소 코너",["상추 1 — Romaine Hearts 3개들이 또는 Green Leaf (10/6 삼겹살 · 10/7 양갈비 쌈 · 10/8 클럽)","할라피뇨 2~3개 · 양파 1~2개 · 깐 마늘 작은 봉지 (10/10까지 다 먹기)","토마토 1 (10/8)","과일 (10/10까지 다 먹을 만큼)"]],
-  ["빵 · 양념 코너",["King's Hawaiian Original Sweet Rolls 12개들이 2봉 (10/7 아침 6 · 10/8 아침 6 · 10/9 점심 슬라이더 6 · 10/10 아침 6 — 실온)","병 파스타 소스 작은 것 — Rao's Marinara 15.5oz 또는 Prego Traditional 14oz (10/9 미트소스)","Texas Toast가 모자라면 작은 식빵","와인 1병 — 10/7 양갈비용 (Josh Cellars Cabernet · Apothic Red $10~15 · 주류 코너)"]],
+  ["정육 코너",["삼겹살 — Pork Belly, Boneless Sliced (\"for Burnt Ends\" 두툼 슬라이스) 약 1.3lb 1팩 (10/6)","양갈비 — Marketside Lamb Loin Chop 4개 약 1~1.2lb ($11.47/lb, 10/7 · 냉장 하루)","~아스파라거스 1단 · 양송이(Baby Bella) 작은 팩 (채소 코너 · 10/7 곁들임)","립아이 2장 — Ribeye Steak, Choice Angus, 2 per tray (10/8 — 냉장 2일, 유통기한 확인)","다진 소고기 — Ground Beef 80/20 1lb (10/9 — 유통기한 10/9 이후인 것, 아니면 10/7 페이지에서)","완전 조리 베이컨 1팩 — Hormel Black Label Fully Cooked (10/8 아침 · 클럽 · 10/10)"]],
+  ["채소 코너",["상추 1 — Romaine Hearts 3개들이 또는 Green Leaf (10/6 삼겹살 · 10/7 양갈비 쌈 · 10/8 클럽)","~할라피뇨 2~3개 · 양파 1~2개 · 깐 마늘 작은 봉지 (10/10까지 다 먹기)","~토마토 1 (10/8)","~과일 (10/10까지 다 먹을 만큼)"]],
+  ["빵 · 양념 코너",["King's Hawaiian Original Sweet Rolls 12개들이 2봉 (10/7 아침 6 · 10/8 아침 6 · 10/9 점심 슬라이더 6 · 10/10 아침 6 — 실온)","병 파스타 소스 작은 것 — Rao's Marinara 15.5oz 또는 Prego Traditional 14oz (10/9 미트소스)","~Texas Toast가 모자라면 작은 식빵","~와인 1병 — 10/7 양갈비용 (Josh Cellars Cabernet · Apothic Red $10~15 · 주류 코너)"]],
   ["냉장 코너",["껍질 깐 삶은 달걀 — Great Value Hard-Boiled Eggs 6개 또는 Eggland's Best (10/7 · 10/10 — 유통기한 10/10 이후인 것)","<b>풀드포크 — Lloyd's Seasoned Shredded Pork in Original BBQ Sauce 16oz</b> (냉장 코너 정육 옆 · $8~9 · 10/8 아침 절반 + 10/9 점심 절반)","스모크 터키 — Hillshire Farm 또는 Oscar Mayer Smoked Turkey Breast 작은 팩 (10/8 클럽만)"]],
-  ["기타",["술 — 10/6 유타 밤 · 10/7 페이지 밤 분량만 (유타 마트는 5% 맥주만). 10/8 이후 분량은 나바호 구역 통과 뒤 투사얀에서","얼음 (차 바꾼 뒤 냉장고 식힐 때)","블록국이 입국 때 폐기됐으면: 즉석 국 대체품 — 아시안 코너 미소 스프 (Kikkoman Instant Miso) · 없으면 Campbell's 캔 스프"]]
+  ["기타",["~술 — 10/6 유타 밤 · 10/7 페이지 밤 분량만 (유타 마트는 5% 맥주만). 10/8 이후 분량은 나바호 구역 통과 뒤 투사얀에서","얼음 (차 바꾼 뒤 냉장고 식힐 때)","블록국이 입국 때 폐기됐으면: 즉석 국 대체품 — 아시안 코너 미소 스프 (Kikkoman Instant Miso) · 없으면 Campbell's 캔 스프"]]
  ]},
  {id:"g3", day:"d1007", at:"18:30", title:"③ 10/7 Walmart 페이지 (선택)", when:"10/7 18:30 · 1017 W Haul Rd · 06:00~23:00 · 라스베가스에서 못 산 것 · 얼음만", groups:[
   ["필요할 때만",["라스베가스 월마트에 없던 것 (삶은 달걀 · 하와이안 롤 등) · 10/9 다진 소고기를 더 신선하게 사고 싶으면 여기서","얼음","과일 · 물 보충"]]
@@ -594,8 +596,8 @@ const RECIPES = [
 document.getElementById("recipes").innerHTML = RECIPES.map(r => `<details><summary>${r[0]}<small>${r[1]}</small></summary><ol>${r[2].map(x => `<li>${x}</li>`).join("")}</ol></details>`).join("");
 // 장보기 목록: ⓪은 식단 섹션에, ①~③은 장보는 날 일정 카드의 해당 줄 아래에
 const shopHtml = (g, open) => `<details${open?' open':''}><summary>${g.title}<small>${g.when}</small></summary>${g.groups.map((gr, gi) =>
-  `<h4>${gr[0]}</h4><ul>${gr[1].map((it, ii) => { const id = `${g.id}-${gi}-${ii}`;
-    return `<li class="${saved[id]?'done':''}"><input type="checkbox" class="chk" id="${id}" ${saved[id]?'checked':''}><label for="${id}">${it}</label></li>`; }).join("")}</ul>`).join("")}</details>`;
+  `<h4>${gr[0]}</h4><ul>${gr[1].map((it, ii) => ({ it, ii, opt: it.startsWith("~") })).sort((x, y) => x.opt - y.opt).map(({ it, ii, opt }) => { const id = `${g.id}-${gi}-${ii}`; const txt = opt ? it.slice(1) : it;
+    return `<li class="${saved[id]?'done':''}${opt?' opt':''}"><input type="checkbox" class="chk" id="${id}" ${saved[id]?'checked':''}><label for="${id}">${opt?'<span class="tag opt">선택</span> ':''}${txt}</label></li>`; }).join("")}</ul>`).join("")}</details>`;
 document.getElementById("shop").innerHTML = SHOP.filter(g => !g.day).map(g => shopHtml(g)).join("") +
   `<div class="shopjump">장보기 목록은 장보는 날 일정 카드에 있어요 · ${SHOP.filter(g => g.day).map(g => `<a href="#${g.day}">${g.title}</a>`).join(" · ")}</div>`;
 const shopAt = (day, t) => SHOP.filter(g => g.day === day && g.at === t);
