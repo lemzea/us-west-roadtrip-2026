@@ -96,8 +96,8 @@ table.meals td b{color:var(--ink);font-weight:600}
 .shopjump{font-size:.84rem;color:var(--muted);align-self:center}
 .recipes ol{margin:6px 0 0;padding-left:22px;font-size:.86rem;display:flex;flex-direction:column;gap:4px}
 .recipes li{display:list-item;grid-template-columns:none;line-height:1.5}
-.tl .docs{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
-.tl .docs a{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;text-decoration:none;color:var(--ink);background:var(--juniper-soft);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.tl .docs{margin:6px 0 4px;display:flex;flex-wrap:wrap;gap:6px}
+.tl .docs a{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;text-decoration:none;color:var(--ink);background:var(--amber-soft);border:1px solid var(--amber);border-radius:999px;padding:4px 11px}
 .tl .docs a:hover{border-color:var(--juniper)}
 .dayctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.82rem;color:var(--muted)}
 .dayctl button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
@@ -826,7 +826,7 @@ window.TRIP_ATTACH_DOCS = (items) => {
   }
   items.forEach(it => (it.at || []).forEach(([day, t]) => {
     const li = document.querySelector(`.tl li[data-day="${day}"][data-t="${t}"]`); if (!li) { console.warn("[trip] doc row not found", day, t, it.label); return; }
-    let box = li.querySelector(".docs"); if (!box) { box = document.createElement("div"); box.className = "docs"; li.querySelector(".c").appendChild(box); }
+    let box = li.querySelector(".docs"); if (!box) { box = document.createElement("div"); box.className = "docs"; const pEl = li.querySelector(".c .p"); pEl ? pEl.insertAdjacentElement("afterend", box) : li.querySelector(".c").appendChild(box); }
     const a = document.createElement("a"); a.textContent = "📄 " + it.label; a.href = it.href || "#";
     if (it.href) { a.target = "_blank"; a.rel = "noopener"; } else a.addEventListener("click", e => { e.preventDefault(); it.open(); });
     box.appendChild(a);
