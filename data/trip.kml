@@ -3917,46 +3917,6 @@
         <styleUrl>#icon-seq2-6-11-000000-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-6-12-000000-nodesc-normal">
-      <IconStyle>
-        <color>ff000000</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-107.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="icon-seq2-6-12-000000-nodesc-highlight">
-      <IconStyle>
-        <color>ff000000</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-107.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-seq2-6-12-000000-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-seq2-6-12-000000-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-seq2-6-12-000000-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
     <Style id="icon-seq2-6-2-000000-nodesc-normal">
       <IconStyle>
         <color>ff000000</color>
@@ -5187,29 +5147,29 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>Cabrillo National Monument Visitor Center</name>
+        <name>선셋 클리프스 자연공원</name>
         <styleUrl>#icon-seq2-6-4-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -117.2395098,32.6748487,0
+            -117.2551679,32.715915,0
           </coordinates>
         </Point>
       </Placemark>
       <Placemark>
-        <name>포인트 로마 타이드 풀즈</name>
+        <name>코로나도 섬</name>
         <styleUrl>#icon-seq2-6-5-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -117.2452555,32.6687607,0
+            -117.1783208,32.6809697,0
           </coordinates>
         </Point>
       </Placemark>
       <Placemark>
-        <name>선셋 클리프스 자연공원</name>
+        <name><![CDATA[Phil's BBQ]]></name>
         <styleUrl>#icon-seq2-6-6-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -117.2551679,32.715915,0
+            -117.0810226,33.0241702,0
           </coordinates>
         </Point>
       </Placemark>
@@ -5223,11 +5183,11 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name><![CDATA[Phil's BBQ]]></name>
+        <name>Quality Inn Temecula Valley Wine Country</name>
         <styleUrl>#icon-seq2-6-8-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -117.2158625,32.7548759,0
+            -117.1649165,33.5234018,0
           </coordinates>
         </Point>
       </Placemark>
@@ -5241,17 +5201,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>Quality Inn Temecula Valley Wine Country</name>
-        <styleUrl>#icon-seq2-6-10-000000-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -117.1649165,33.5234018,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>온타리오 밀스</name>
-        <styleUrl>#icon-seq2-6-11-000000-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-10-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.551993,34.0729843,0
@@ -5260,7 +5211,7 @@
       </Placemark>
       <Placemark>
         <name>Hollywood Inn Suites Hotel</name>
-        <styleUrl>#icon-seq2-6-12-000000-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-11-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -118.2930949,33.9161455,0
