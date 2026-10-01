@@ -3917,6 +3917,326 @@
         <styleUrl>#icon-seq2-6-11-000000-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
+    <Style id="icon-seq2-6-12-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-107.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-12-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-107.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-12-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-12-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-12-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-13-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-108.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-13-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-108.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-13-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-13-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-13-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-14-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-109.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-14-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-109.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-14-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-14-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-14-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-15-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-110.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-15-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-110.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-15-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-15-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-15-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-16-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-111.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-16-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-111.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-16-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-16-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-16-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-17-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-112.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-17-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-112.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-17-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-17-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-17-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-18-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-113.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-18-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-113.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-18-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-18-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-18-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-19-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-114.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-19-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-114.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-19-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-19-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-19-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
     <Style id="icon-seq2-6-2-000000-nodesc-normal">
       <IconStyle>
         <color>ff000000</color>
@@ -5215,6 +5535,78 @@
         <Point>
           <coordinates>
             -118.2930949,33.9161455,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>오베이션 할리우드</name>
+        <styleUrl>#icon-seq2-6-12-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.3399992,34.1023194,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lake Hollywood Park</name>
+        <styleUrl>#icon-seq2-6-13-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.3261053,34.1269448,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rodeo Drive Walk Of Style</name>
+        <styleUrl>#icon-seq2-6-14-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.4017765,34.068157,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Urban Light</name>
+        <styleUrl>#icon-seq2-6-15-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.3592373,34.0630235,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>더 오리지널 파머스 마켓</name>
+        <styleUrl>#icon-seq2-6-16-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.3603699,34.0720115,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>그리피스 천문대</name>
+        <styleUrl>#icon-seq2-6-17-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.3003935,34.1184341,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>인앤아웃 버거 (다른거 먹어도됨)</name>
+        <styleUrl>#icon-seq2-6-18-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.3967839,33.9537066,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hollywood Inn Suites Hotel</name>
+        <styleUrl>#icon-seq2-6-19-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.2926818,33.9161099,0
           </coordinates>
         </Point>
       </Placemark>
