@@ -8,8 +8,8 @@
     const u8 = new Uint8Array(buf);
     return crypto.subtle.decrypt({ name: "AES-GCM", iv: u8.slice(0, 12) }, key, u8.slice(12));
   };
-  const fetchDec = async (name) => {
-    const r = await fetch("docs/" + name, { cache: "force-cache" });
+  const fetchDec = async (name, fresh) => {
+    const r = await fetch("docs/" + name + (fresh ? "?t=" + Date.now() : ""), { cache: fresh ? "no-store" : "default" });
     if (!r.ok) throw new Error("HTTP " + r.status);
     return decrypt(await r.arrayBuffer());
   };
@@ -29,7 +29,7 @@
     if (!keyStr) { lock(); note("서류·바우처: Firestore private/bookings 문서에 dockey 필드가 없어요 — 키를 넣으면 일정 안에 📄가 보여요."); return; }
     try {
       key = await crypto.subtle.importKey("raw", b64u(keyStr), "AES-GCM", false, ["decrypt"]);
-      const items = JSON.parse(new TextDecoder().decode(await fetchDec("manifest.bin")));
+      const items = JSON.parse(new TextDecoder().decode(await fetchDec("manifest.bin", true)));
       window.TRIP_ATTACH_DOCS?.(items.map(m => ({ at: m.at, label: m.t, href: m.link, open: () => openDoc(m) })));
       note(`서류·바우처 ${items.length}개 — 일정 항목 아래 📄 버튼, 또는 위 '📄 서류'에서 모아보기.`);
     } catch (e) {
