@@ -4197,46 +4197,6 @@
         <styleUrl>#icon-seq2-6-18-000000-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-6-19-000000-nodesc-normal">
-      <IconStyle>
-        <color>ff000000</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-114.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="icon-seq2-6-19-000000-nodesc-highlight">
-      <IconStyle>
-        <color>ff000000</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-114.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-seq2-6-19-000000-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-seq2-6-19-000000-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-seq2-6-19-000000-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
     <Style id="icon-seq2-6-2-000000-nodesc-normal">
       <IconStyle>
         <color>ff000000</color>
@@ -5575,17 +5535,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>더 오리지널 파머스 마켓</name>
-        <styleUrl>#icon-seq2-6-16-000000-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -118.3603699,34.0720115,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>그리피스 천문대</name>
-        <styleUrl>#icon-seq2-6-17-000000-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-16-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -118.3003935,34.1184341,0
@@ -5594,7 +5545,7 @@
       </Placemark>
       <Placemark>
         <name>인앤아웃 버거 (다른거 먹어도됨)</name>
-        <styleUrl>#icon-seq2-6-18-000000-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-17-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -118.3967839,33.9537066,0
@@ -5603,7 +5554,7 @@
       </Placemark>
       <Placemark>
         <name>Hollywood Inn Suites Hotel</name>
-        <styleUrl>#icon-seq2-6-19-000000-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-18-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -118.2926818,33.9161099,0
