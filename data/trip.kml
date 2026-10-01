@@ -39,48 +39,6 @@
         <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-1899-0288D1-nodesc-normal">
-      <IconStyle>
-        <color>ffd18802</color>
-        <scale>1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="icon-1899-0288D1-nodesc-highlight">
-      <IconStyle>
-        <color>ffd18802</color>
-        <scale>1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-1899-0288D1-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-1899-0288D1-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
     <Style id="icon-seq2-0-0-0288D1-nodesc-normal">
       <IconStyle>
         <color>ffd18802</color>
@@ -1817,7 +1775,87 @@
         <styleUrl>#icon-seq2-2-15-673AB7-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-2-2-673AB7-normal">
+    <Style id="icon-seq2-2-16-673AB7-nodesc-normal">
+      <IconStyle>
+        <color>ffb73a67</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-53.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-2-16-673AB7-nodesc-highlight">
+      <IconStyle>
+        <color>ffb73a67</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-53.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-2-16-673AB7-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-2-16-673AB7-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-2-16-673AB7-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-2-17-673AB7-nodesc-normal">
+      <IconStyle>
+        <color>ffb73a67</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-54.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-2-17-673AB7-nodesc-highlight">
+      <IconStyle>
+        <color>ffb73a67</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-54.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-2-17-673AB7-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-2-17-673AB7-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-2-17-673AB7-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-2-2-673AB7-nodesc-normal">
       <IconStyle>
         <color>ffb73a67</color>
         <scale>1</scale>
@@ -1828,8 +1866,11 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-2-2-673AB7-highlight">
+    <Style id="icon-seq2-2-2-673AB7-nodesc-highlight">
       <IconStyle>
         <color>ffb73a67</color>
         <scale>1</scale>
@@ -1840,15 +1881,18 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-2-2-673AB7">
+    <StyleMap id="icon-seq2-2-2-673AB7-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-2-2-673AB7-normal</styleUrl>
+        <styleUrl>#icon-seq2-2-2-673AB7-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-2-2-673AB7-highlight</styleUrl>
+        <styleUrl>#icon-seq2-2-2-673AB7-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="icon-seq2-2-3-673AB7-nodesc-normal">
@@ -1891,7 +1935,7 @@
         <styleUrl>#icon-seq2-2-3-673AB7-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-2-4-673AB7-nodesc-normal">
+    <Style id="icon-seq2-2-4-673AB7-normal">
       <IconStyle>
         <color>ffb73a67</color>
         <scale>1</scale>
@@ -1902,11 +1946,8 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-2-4-673AB7-nodesc-highlight">
+    <Style id="icon-seq2-2-4-673AB7-highlight">
       <IconStyle>
         <color>ffb73a67</color>
         <scale>1</scale>
@@ -1917,18 +1958,15 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-2-4-673AB7-nodesc">
+    <StyleMap id="icon-seq2-2-4-673AB7">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-2-4-673AB7-nodesc-normal</styleUrl>
+        <styleUrl>#icon-seq2-2-4-673AB7-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-2-4-673AB7-nodesc-highlight</styleUrl>
+        <styleUrl>#icon-seq2-2-4-673AB7-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="icon-seq2-2-5-673AB7-nodesc-normal">
@@ -2136,7 +2174,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-53.png</href>
+          <href>images/icon-55.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2151,7 +2189,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-53.png</href>
+          <href>images/icon-55.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2176,7 +2214,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-54.png</href>
+          <href>images/icon-56.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2191,7 +2229,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-54.png</href>
+          <href>images/icon-56.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2216,7 +2254,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-63.png</href>
+          <href>images/icon-65.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2231,7 +2269,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-63.png</href>
+          <href>images/icon-65.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2256,7 +2294,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-64.png</href>
+          <href>images/icon-66.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2271,7 +2309,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-64.png</href>
+          <href>images/icon-66.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2296,7 +2334,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-55.png</href>
+          <href>images/icon-57.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2311,7 +2349,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-55.png</href>
+          <href>images/icon-57.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2336,7 +2374,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-56.png</href>
+          <href>images/icon-58.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2351,7 +2389,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-56.png</href>
+          <href>images/icon-58.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2376,7 +2414,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-57.png</href>
+          <href>images/icon-59.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2391,7 +2429,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-57.png</href>
+          <href>images/icon-59.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2416,7 +2454,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-58.png</href>
+          <href>images/icon-60.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2431,7 +2469,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-58.png</href>
+          <href>images/icon-60.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2456,7 +2494,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-59.png</href>
+          <href>images/icon-61.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2471,7 +2509,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-59.png</href>
+          <href>images/icon-61.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2496,7 +2534,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-60.png</href>
+          <href>images/icon-62.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2511,7 +2549,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-60.png</href>
+          <href>images/icon-62.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2536,7 +2574,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-61.png</href>
+          <href>images/icon-63.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2551,7 +2589,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-61.png</href>
+          <href>images/icon-63.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2576,7 +2614,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-62.png</href>
+          <href>images/icon-64.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2591,7 +2629,7 @@
         <color>ff5252ff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-62.png</href>
+          <href>images/icon-64.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2616,7 +2654,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-65.png</href>
+          <href>images/icon-67.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2631,7 +2669,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-65.png</href>
+          <href>images/icon-67.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2656,7 +2694,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-66.png</href>
+          <href>images/icon-68.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2671,7 +2709,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-66.png</href>
+          <href>images/icon-68.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2696,7 +2734,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-75.png</href>
+          <href>images/icon-77.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2711,7 +2749,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-75.png</href>
+          <href>images/icon-77.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2736,7 +2774,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-76.png</href>
+          <href>images/icon-78.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2751,7 +2789,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-76.png</href>
+          <href>images/icon-78.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2776,7 +2814,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-77.png</href>
+          <href>images/icon-79.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2791,7 +2829,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-77.png</href>
+          <href>images/icon-79.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2816,7 +2854,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-78.png</href>
+          <href>images/icon-80.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2831,7 +2869,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-78.png</href>
+          <href>images/icon-80.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2856,7 +2894,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-79.png</href>
+          <href>images/icon-81.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2871,7 +2909,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-79.png</href>
+          <href>images/icon-81.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2896,7 +2934,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-80.png</href>
+          <href>images/icon-82.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2911,7 +2949,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-80.png</href>
+          <href>images/icon-82.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2936,7 +2974,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-81.png</href>
+          <href>images/icon-83.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2951,7 +2989,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-81.png</href>
+          <href>images/icon-83.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2976,7 +3014,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-82.png</href>
+          <href>images/icon-84.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -2991,7 +3029,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-82.png</href>
+          <href>images/icon-84.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3016,7 +3054,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-83.png</href>
+          <href>images/icon-85.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3031,7 +3069,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-83.png</href>
+          <href>images/icon-85.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3056,7 +3094,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-84.png</href>
+          <href>images/icon-86.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3071,7 +3109,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-84.png</href>
+          <href>images/icon-86.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3096,7 +3134,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-67.png</href>
+          <href>images/icon-69.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3111,7 +3149,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-67.png</href>
+          <href>images/icon-69.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3136,7 +3174,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-85.png</href>
+          <href>images/icon-87.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3151,7 +3189,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-85.png</href>
+          <href>images/icon-87.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3176,7 +3214,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-68.png</href>
+          <href>images/icon-70.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3191,7 +3229,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-68.png</href>
+          <href>images/icon-70.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3216,7 +3254,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-69.png</href>
+          <href>images/icon-71.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3228,7 +3266,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-69.png</href>
+          <href>images/icon-71.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3250,7 +3288,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-70.png</href>
+          <href>images/icon-72.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3265,7 +3303,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-70.png</href>
+          <href>images/icon-72.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3290,7 +3328,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-71.png</href>
+          <href>images/icon-73.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3302,7 +3340,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-71.png</href>
+          <href>images/icon-73.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3324,7 +3362,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-72.png</href>
+          <href>images/icon-74.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3339,7 +3377,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-72.png</href>
+          <href>images/icon-74.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3364,7 +3402,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-73.png</href>
+          <href>images/icon-75.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3379,7 +3417,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-73.png</href>
+          <href>images/icon-75.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3404,7 +3442,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-74.png</href>
+          <href>images/icon-76.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3419,7 +3457,7 @@
         <color>ff00eaff</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-74.png</href>
+          <href>images/icon-76.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3444,7 +3482,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-86.png</href>
+          <href>images/icon-88.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3459,7 +3497,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-86.png</href>
+          <href>images/icon-88.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3484,7 +3522,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-87.png</href>
+          <href>images/icon-89.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3499,7 +3537,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-87.png</href>
+          <href>images/icon-89.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3524,7 +3562,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-88.png</href>
+          <href>images/icon-90.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3539,7 +3577,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-88.png</href>
+          <href>images/icon-90.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3564,7 +3602,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-89.png</href>
+          <href>images/icon-91.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3579,7 +3617,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-89.png</href>
+          <href>images/icon-91.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3604,7 +3642,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-90.png</href>
+          <href>images/icon-92.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3619,7 +3657,7 @@
         <color>ff485579</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-90.png</href>
+          <href>images/icon-92.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -3637,6 +3675,606 @@
       <Pair>
         <key>highlight</key>
         <styleUrl>#icon-seq2-5-4-795548-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-5-5-795548-nodesc-normal">
+      <IconStyle>
+        <color>ff485579</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-93.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-5-5-795548-nodesc-highlight">
+      <IconStyle>
+        <color>ff485579</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-93.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-5-5-795548-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-5-5-795548-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-5-5-795548-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-5-6-795548-nodesc-normal">
+      <IconStyle>
+        <color>ff485579</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-94.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-5-6-795548-nodesc-highlight">
+      <IconStyle>
+        <color>ff485579</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-94.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-5-6-795548-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-5-6-795548-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-5-6-795548-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-0-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-95.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-0-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-95.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-0-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-0-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-0-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-1-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-96.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-1-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-96.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-1-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-1-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-1-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-10-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-105.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-10-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-105.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-10-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-10-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-10-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-11-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-106.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-11-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-106.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-11-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-11-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-11-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-12-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-107.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-12-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-107.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-12-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-12-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-12-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-2-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-97.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-2-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-97.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-2-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-2-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-2-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-3-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-98.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-3-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-98.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-3-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-3-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-3-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-4-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-99.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-4-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-99.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-4-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-4-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-4-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-5-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-100.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-5-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-100.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-5-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-5-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-5-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-6-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-101.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-6-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-101.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-6-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-6-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-6-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-7-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-102.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-7-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-102.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-7-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-7-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-7-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-8-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-103.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-8-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-103.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-8-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-8-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-8-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-9-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-104.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-9-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-104.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-9-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-9-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-9-000000-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Folder>
@@ -3976,8 +4614,26 @@
     <Folder>
       <name>2구간 (라스베가스 ~ 자이언캐년) - 26.10.06 ~ 26.10.07</name>
       <Placemark>
-        <name><![CDATA[Indie Campers Las Vegas - RV & Campervan Rentals (픽업)]]></name>
+        <name>SB Boulder at 3650 Boulder Hwy</name>
         <styleUrl>#icon-seq2-2-0-673AB7-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -115.096002,36.140569,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>SB Boulder after Sunset</name>
+        <styleUrl>#icon-seq2-2-1-673AB7-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -115.011283,36.065282,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Indie Campers Las Vegas - RV & Campervan Rentals (픽업)]]></name>
+        <styleUrl>#icon-seq2-2-2-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -115.019006,36.0657828,0
@@ -3986,7 +4642,7 @@
       </Placemark>
       <Placemark>
         <name>Walmart</name>
-        <styleUrl>#icon-seq2-2-1-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-3-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -115.2450786,36.2147756,0
@@ -3996,7 +4652,7 @@
       <Placemark>
         <name>Virgin River Canyon</name>
         <description>지나가다가 들려도 되고 그냥 가도 되고</description>
-        <styleUrl>#icon-seq2-2-2-673AB7</styleUrl>
+        <styleUrl>#icon-seq2-2-4-673AB7</styleUrl>
         <Point>
           <coordinates>
             -113.8055236,36.9466401,0
@@ -4005,7 +4661,7 @@
       </Placemark>
       <Placemark>
         <name>노지 캠핑 1박 (인터넷 o)</name>
-        <styleUrl>#icon-seq2-2-3-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-5-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -113.2505142,37.2157045,0
@@ -4014,7 +4670,7 @@
       </Placemark>
       <Placemark>
         <name>10달러 덤프스테이션 (선택)</name>
-        <styleUrl>#icon-seq2-2-4-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-6-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -113.271275,37.210011,0
@@ -4023,7 +4679,7 @@
       </Placemark>
       <Placemark>
         <name>자이언 캐년 비지터 센터</name>
-        <styleUrl>#icon-seq2-2-5-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-7-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.9869847,37.2000925,0
@@ -4032,7 +4688,7 @@
       </Placemark>
       <Placemark>
         <name>셔틀 탑승</name>
-        <styleUrl>#icon-seq2-2-6-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-8-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.986872,37.200681,0
@@ -4041,7 +4697,7 @@
       </Placemark>
       <Placemark>
         <name>Grotto Down-Canyon (하차, 6번)</name>
-        <styleUrl>#icon-seq2-2-7-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-9-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.95105,37.259156,0
@@ -4050,7 +4706,7 @@
       </Placemark>
       <Placemark>
         <name>엔젤스 랜딩 트레일헤드</name>
-        <styleUrl>#icon-seq2-2-8-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-10-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.9512609,37.2592428,0
@@ -4059,7 +4715,7 @@
       </Placemark>
       <Placemark>
         <name>앤젤스 랜딩</name>
-        <styleUrl>#icon-seq2-2-9-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-11-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.9468989,37.2690326,0
@@ -4068,7 +4724,7 @@
       </Placemark>
       <Placemark>
         <name>셔틀 탑승</name>
-        <styleUrl>#icon-seq2-2-10-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-12-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.9509618,37.2591692,0
@@ -4077,7 +4733,7 @@
       </Placemark>
       <Placemark>
         <name>템플 오브 시나와바 (하차, 9번)</name>
-        <styleUrl>#icon-seq2-2-11-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-13-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.947996,37.2847038,0
@@ -4086,7 +4742,7 @@
       </Placemark>
       <Placemark>
         <name>Riverside Walk Trailhead</name>
-        <styleUrl>#icon-seq2-2-12-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-14-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.947721,37.2852144,0
@@ -4095,7 +4751,7 @@
       </Placemark>
       <Placemark>
         <name>셔틀 탑승</name>
-        <styleUrl>#icon-seq2-2-13-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-15-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -112.947547,37.285214,0
@@ -4104,7 +4760,7 @@
       </Placemark>
       <Placemark>
         <name>Horseshoe Bend 일몰 (18시)</name>
-        <styleUrl>#icon-seq2-2-14-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-16-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -111.5028016,36.876343,0
@@ -4113,7 +4769,7 @@
       </Placemark>
       <Placemark>
         <name>노지 캠핑 2박</name>
-        <styleUrl>#icon-seq2-2-15-673AB7-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-2-17-673AB7-nodesc</styleUrl>
         <Point>
           <coordinates>
             -111.4778,36.93522,0
@@ -4473,12 +5129,30 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>Thrifty Car Rental - Mesa Gateway Ap</name>
+        <styleUrl>#icon-seq2-5-5-795548-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -111.6691125,33.3070304,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rodeway Inn Yuma Downtown</name>
+        <styleUrl>#icon-seq2-5-6-795548-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.6249325,32.7206127,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>3구간 (피닉스 ~ LA) - 26.10.10 ~ 26.10.13</name>
       <Placemark>
         <name>Rodeway Inn Yuma Downtown</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-0-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -114.6249325,32.7206127,0
@@ -4487,7 +5161,7 @@
       </Placemark>
       <Placemark>
         <name>샌디에고 무료 주차 (차박 가능)</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-1-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2369014,32.8456669,0
@@ -4496,7 +5170,7 @@
       </Placemark>
       <Placemark>
         <name>토리파인스 무료주차</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-2-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2600587,32.9307701,0
@@ -4505,7 +5179,7 @@
       </Placemark>
       <Placemark>
         <name>토리 파인스 보호지역</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-3-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2590751,32.9259973,0
@@ -4514,7 +5188,7 @@
       </Placemark>
       <Placemark>
         <name>Cabrillo National Monument Visitor Center</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-4-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2395098,32.6748487,0
@@ -4523,7 +5197,7 @@
       </Placemark>
       <Placemark>
         <name>포인트 로마 타이드 풀즈</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-5-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2452555,32.6687607,0
@@ -4532,7 +5206,7 @@
       </Placemark>
       <Placemark>
         <name>선셋 클리프스 자연공원</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-6-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2551679,32.715915,0
@@ -4541,7 +5215,7 @@
       </Placemark>
       <Placemark>
         <name>더 타코 스탠드</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-7-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.1586319,32.717623,0
@@ -4550,7 +5224,7 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[Phil's BBQ]]></name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-8-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.2158625,32.7548759,0
@@ -4559,10 +5233,37 @@
       </Placemark>
       <Placemark>
         <name>Quality Inn Temecula Valley Wine Country</name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-6-9-000000-nodesc</styleUrl>
         <Point>
           <coordinates>
             -117.1649165,33.5234018,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Quality Inn Temecula Valley Wine Country</name>
+        <styleUrl>#icon-seq2-6-10-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -117.1649165,33.5234018,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>온타리오 밀스</name>
+        <styleUrl>#icon-seq2-6-11-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -117.551993,34.0729843,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hollywood Inn Suites Hotel</name>
+        <styleUrl>#icon-seq2-6-12-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.2930949,33.9161455,0
           </coordinates>
         </Point>
       </Placemark>

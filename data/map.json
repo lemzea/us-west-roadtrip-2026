@@ -230,6 +230,18 @@
    "name": "2구간 (라스베가스 ~ 자이언캐년) - 26.10.06 ~ 26.10.07",
    "places": [
     {
+     "n": "SB Boulder at 3650 Boulder Hwy",
+     "lat": 36.140569,
+     "lng": -115.096002,
+     "d": ""
+    },
+    {
+     "n": "SB Boulder after Sunset",
+     "lat": 36.065282,
+     "lng": -115.011283,
+     "d": ""
+    },
+    {
      "n": "Indie Campers Las Vegas - RV & Campervan Rentals (픽업)",
      "lat": 36.065783,
      "lng": -115.019006,
@@ -567,6 +579,18 @@
      "lat": 33.415918,
      "lng": -111.608454,
      "d": ""
+    },
+    {
+     "n": "Thrifty Car Rental - Mesa Gateway Ap",
+     "lat": 33.30703,
+     "lng": -111.669112,
+     "d": ""
+    },
+    {
+     "n": "Rodeway Inn Yuma Downtown",
+     "lat": 32.720613,
+     "lng": -114.624932,
+     "d": ""
     }
    ]
   },
@@ -631,6 +655,24 @@
      "n": "Quality Inn Temecula Valley Wine Country",
      "lat": 33.523402,
      "lng": -117.164917,
+     "d": ""
+    },
+    {
+     "n": "Quality Inn Temecula Valley Wine Country",
+     "lat": 33.523402,
+     "lng": -117.164917,
+     "d": ""
+    },
+    {
+     "n": "온타리오 밀스",
+     "lat": 34.072984,
+     "lng": -117.551993,
+     "d": ""
+    },
+    {
+     "n": "Hollywood Inn Suites Hotel",
+     "lat": 33.916145,
+     "lng": -118.293095,
      "d": ""
     }
    ]
