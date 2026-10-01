@@ -57,7 +57,7 @@ if (T && bar && !window.claude) {
   const renderSignedOut = () => {
     bar.hidden = false;
     bar.innerHTML = `<button type="button" class="primary" id="signin">Google로 로그인</button>
-      <span>로그인하면 체크·메모가 둘이 같이 저장돼요.</span>`;
+      <span>로그인하면 체크·메모가 둘이 같이 저장되고, 일정 안에 바우처·서류(📄)가 보여요.</span>`;
     document.getElementById("signin").addEventListener("click", async () => {
       try { await signInWithPopup(auth, new GoogleAuthProvider()); }
       catch (e) {

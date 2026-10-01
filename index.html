@@ -86,7 +86,19 @@ table.meals td b{color:var(--ink);font-weight:600}
 .shopin{display:block;margin-top:8px}
 .shopin details{background:var(--amber-soft);border-color:transparent}
 .shopjump{font-size:.84rem;color:var(--muted);align-self:center}
-.recipes ol{margin:6px 0 0;padding-left:18px;font-size:.86rem;display:flex;flex-direction:column;gap:3px}
+.recipes ol{margin:6px 0 0;padding-left:22px;font-size:.86rem;display:flex;flex-direction:column;gap:4px}
+.recipes li{display:list-item;grid-template-columns:none;line-height:1.5}
+.tl .docs{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+.tl .docs a{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;text-decoration:none;color:var(--ink);background:var(--juniper-soft);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.tl .docs a:hover{border-color:var(--juniper)}
+.dayctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.82rem;color:var(--muted)}
+.dayctl button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
+.dayhead .top{cursor:pointer;user-select:none}
+.dayhead .top .caret{margin-left:auto;font-size:.8rem;color:var(--muted);transition:transform .15s}
+.day.collapsed .dayhead{border-bottom:0;padding-bottom:14px}
+.day.collapsed .dayhead .chips,.day.collapsed .dayhead .meta,.day.collapsed .dayhead .dayroute,.day.collapsed .tl,.day.collapsed .others,.day.collapsed .dayfoot{display:none}
+.day.collapsed .dayhead .top .caret{transform:rotate(-90deg)}
+.day.past .dayhead .date{color:var(--muted)}
 .recipes .ing{font-size:.82rem;color:var(--muted);margin-top:4px}
 .shopjump a{font-weight:600}
 .checks .day{font-family:var(--f-mono);font-weight:600;font-size:.8rem;margin-right:4px}
@@ -217,6 +229,7 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     <p class="note" style="margin:0">장보기는 ① 10/3 모데스토, ② 10/6 라스베가스(10/10까지 4일치) 두 번이고, ③ 10/7 페이지는 못 산 게 있을 때만. 목록은 그날 일정 카드의 장보기 줄 아래에 있고, 매장 코너 순서로 정리했어요. 브랜드명은 "이걸 찾으면 된다"는 기준이지, 없으면 옆에 있는 비슷한 걸로 사면 돼요. Great Value · Marketside · Freshness Guaranteed는 월마트 자체 브랜드예요 (제일 싸고 어디나 있음). 체크는 로그인하면 둘이 같이 보여요. 간식: 트레일 걷는 날(10/7 자이언, 10/9 림 트레일)은 에너지 젤·부드러운 바·바나나를 배낭에 (교정 중이라 견과류 제외).</p>
   </section>
 
+  <div class="dayctl" id="dayctl"><span id="dayctl-msg">날짜를 누르면 접고 펼 수 있어요.</span><span style="flex:1"></span><button type="button" id="fold-past">지난 날 접기</button><button type="button" id="fold-all">모두 접기</button><button type="button" id="unfold-all">모두 펼치기</button></div>
 
   <section aria-labelledby="map-h" style="display:flex;flex-direction:column;gap:10px">
     <h2 id="map-h">지도</h2>
@@ -230,15 +243,6 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     <div class="docview-bar"><strong id="docview-t"></strong><span style="flex:1"></span><a id="docview-open" href="#" target="_blank" rel="noopener">새 탭</a><button type="button" id="docview-x" aria-label="닫기">닫기 ✕</button></div>
     <div id="docview-body" class="docview-body"></div>
   </div>
-
-  <section id="docsec" aria-labelledby="docs-h" style="display:flex;flex-direction:column;gap:10px" hidden>
-    <h2 id="docs-h">서류 · 바우처</h2>
-    <p class="note" style="margin:0">로그인한 사람만 보여요. 누르면 이 페이지 안에서 바로 열려요 — 카운터에서 보여줄 때 사용. 파일은 암호화돼 있어서 로그인 없이는 열 수 없어요.</p>
-    <div class="tablebox"><table class="ledger">
-      <thead><tr><th>쓰는 날</th><th>서류</th><th>어디서</th></tr></thead>
-      <tbody id="doclist"></tbody>
-    </table></div>
-  </section>
   <footer class="foot">
     <div>시간대: 캘리포니아·네바다 PDT(UTC−7) · 유타 MDT(UTC−6) · 애리조나 MST(UTC−7, 서머타임 없음 — 10월엔 PDT와 같은 시각) · 나바호 자치구는 MDT.</div>
     <div>일출·일몰은 각 장소 좌표로 계산한 값(±2분). 조수는 NOAA San Diego(9410170) 예보.</div>
@@ -526,7 +530,7 @@ const MEALS = [
  ["10/10 토","<b>미국식 (차에서)</b> — 하와이안 롤 + 잼 · 삶은 달걀 · 베이컨 · 커피","<b>라면</b> — 벨록 주차장에서 이른 점심 (10:30, 성당 안 갈 때). 성당에 가면 차에서 간식 → 반납 후 늦은 점심","유마 외식","라면 냄비는 먹고 바로 씻기. 반납 전 냉장고 비우고 끄기. 과일은 오늘 다 먹기 (10/11 캘리포니아 농산물 검사소). 렌터카로는 바 · 젤 같은 포장 간식만."],
  ["10/11 일","숙소 조식 없음 → 차에서 바 · 과일 · 커피, 또는 I-8 가는 길 주유소 (유마 서쪽 Fortuna Rd 출구 등)","The Taco Stand (라호야)","Phil's BBQ (Rancho Bernardo)",""],
  ["10/12 월","Quality Inn 무료 조식 (06:00~09:00, 07:30쯤)","Ontario Mills (몰 안)","Third Street Promenade (산타모니카)",""],
- ["10/13 화","LAX 공항에서 (06:45 출발)","기내","기내",""]
+ ["10/13 화","LAX 공항에서 (06:00 출발)","기내","기내",""]
 ];
 // 장보기 목록: 체크하면 둘이 같이 봄. 미국 포장이 커서 '제일 작은 포장'으로
 const SHOP = [
@@ -640,7 +644,7 @@ const tagFor = f => f==="opt"?'<span class="tag opt">선택</span>':f==="walk"?'
 document.getElementById("days").innerHTML = DAYS.map(d => `
 <article class="day" id="${d.id}"><div class="daycard">
   <div class="dayhead">
-    <div class="top"><span class="date">${d.date} ${d.wd}</span><span class="seg${segCls(d.seg)}">${segName(d.seg)}</span></div>
+    <div class="top" data-toggle="${d.id}" role="button" tabindex="0" aria-expanded="true"><span class="date">${d.date} ${d.wd}</span><span class="seg${segCls(d.seg)}">${segName(d.seg)}</span><span class="caret" aria-hidden="true">▼</span></div>
     <h3 class="route">${d.route}</h3>
     <div class="chips">${d.chips.map(c=>`<span class="chip${c[2]?' key':''}">${c[0]}<b>${c[1]}</b></span>`).join("")}</div>
     ${(r => r ? `<a class="dayroute" href="${r}" target="_blank" rel="noopener">이날 운전 경로 전체 보기 (Google 지도) ↗</a>` : "")(dayRouteUrl(PLACES[d.id] || []))}
@@ -657,7 +661,7 @@ document.getElementById("days").innerHTML = DAYS.map(d => `
     const ps = placesAt(d.id, r[0]);
     const title = ps.length ? plink(ps[0], `${r[1]}<span class="pin" aria-hidden="true">↗</span>`, "plink") + ps.slice(1).map(p => plink(p, p.n + " ↗", "plink2")).join("") : r[1];
     const shops = shopAt(d.id, r[0]).map(g => `<div class="shop shopin">${shopHtml(g)}</div>`).join("");
-    return `<li><div class="t${key?' key':''}">${r[0]}</div><div class="c"><div class="p">${title}${key?'':tagFor(flag)}</div>${r[2]?`<div class="n">${r[2]}</div>`:""}${shops}</div></li>`;}).join("")}</ol>
+    return `<li data-day="${d.id}" data-t="${r[0]}"><div class="t${key?' key':''}">${r[0]}</div><div class="c"><div class="p">${title}${key?'':tagFor(flag)}</div>${r[2]?`<div class="n">${r[2]}</div>`:""}${shops}</div></li>`;}).join("")}</ol>
   ${othersHtml(d)}
   <div class="dayfoot">
     <div class="cost">비용 · ${d.cost}</div>
@@ -758,6 +762,42 @@ function dropRemote(){
   document.querySelectorAll(".doclink").forEach(a => a.addEventListener("click", e => { e.preventDefault(); open(a.dataset.doc, a.dataset.kind, a.dataset.title); }));
   window.TRIP_DOCVIEW = { open };
 })();
+// 일자 카드 접기/펴기 — 지난 날은 자동으로 접힘 (현지 시간 기준), 수동 상태는 이 기기에 저장
+(() => {
+  const KEY = "uswest-fold"; let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+  const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} };
+  const cards = [...document.querySelectorAll("article.day")];
+  const set = (card, collapsed) => { card.classList.toggle("collapsed", collapsed); card.querySelector(".top").setAttribute("aria-expanded", String(!collapsed)); };
+  // 오늘(미국 서부 기준) 이전 날짜인지
+  const laToday = () => { try { return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()); } catch (e) { return new Date().toISOString().slice(0, 10); } };
+  const isPast = card => { const m = card.id.match(/^d(\d\d)(\d\d)$/); return m ? ("2026-" + m[1] + "-" + m[2]) < laToday() : false; };
+  cards.forEach(card => {
+    const past = isPast(card); card.classList.toggle("past", past);
+    set(card, card.id in saved ? !!saved[card.id] : past);
+    card.querySelector(".top").addEventListener("click", e => { if (e.target.closest("a")) return; const c = !card.classList.contains("collapsed"); set(card, c); saved[card.id] = c; persist(); });
+    card.querySelector(".top").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.currentTarget.click(); } });
+  });
+  const all = v => { cards.forEach(c => { set(c, v); saved[c.id] = v; }); persist(); };
+  document.getElementById("fold-all")?.addEventListener("click", () => all(true));
+  document.getElementById("unfold-all")?.addEventListener("click", () => all(false));
+  document.getElementById("fold-past")?.addEventListener("click", () => { cards.forEach(c => { const p = isPast(c); set(c, p); saved[c.id] = p; }); persist(); });
+  const pastN = cards.filter(isPast).length;
+  const msg = document.getElementById("dayctl-msg"); if (msg && pastN) msg.textContent = `지난 ${pastN}일은 접어두었어요. 날짜를 누르면 펼쳐져요.`;
+  // 날짜 바에서 이동하면 그 날은 펼치기
+  document.querySelectorAll('.datebar a[href^="#d"]').forEach(a => a.addEventListener("click", () => { const c = document.getElementById(a.getAttribute("href").slice(1)); if (c) { set(c, false); saved[c.id] = false; persist(); } }));
+})();
+// 서류 링크를 타임라인 행에 붙이기 — items: [{day, t, label, open:()=>void|href}]
+window.TRIP_ATTACH_DOCS = (items) => {
+  document.querySelectorAll(".tl .docs").forEach(el => el.remove());
+  items.forEach(it => (it.at || []).forEach(([day, t]) => {
+    const li = document.querySelector(`.tl li[data-day="${day}"][data-t="${t}"]`); if (!li) { console.warn("[trip] doc row not found", day, t, it.label); return; }
+    let box = li.querySelector(".docs"); if (!box) { box = document.createElement("div"); box.className = "docs"; li.querySelector(".c").appendChild(box); }
+    const a = document.createElement("a"); a.textContent = "📄 " + it.label; a.href = it.href || "#";
+    if (it.href) { a.target = "_blank"; a.rel = "noopener"; } else a.addEventListener("click", e => { e.preventDefault(); it.open(); });
+    box.appendChild(a);
+  }));
+};
 window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRemote, places: PLACES, days: DAYS.map(d => ({id: d.id, date: d.date, wd: d.wd, seg: d.seg})), navUrl};
 
 // claude.ai 링크로 열었을 때: 페이지 공유 저장소
