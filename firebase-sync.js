@@ -29,11 +29,12 @@ if (T && bar && !window.claude) {
 
   // 예약번호: 공개 페이지에는 없고, 허용된 계정으로 로그인하면 Firestore private/bookings 에서 불러옴
   const secrets = document.querySelectorAll(".secret[data-secret]");
-  const hideSecrets = () => secrets.forEach(el => { el.textContent = "로그인하면 보임"; el.classList.remove("shown"); });
+  const hideSecrets = () => { secrets.forEach(el => { el.textContent = "로그인하면 보임"; el.classList.remove("shown"); }); window.TRIP_DOCS?.lock(); };
   const showSecrets = async () => {
     try {
       const snap = await getDoc(doc(fs, "private", "bookings"));
       const data = snap.exists() ? snap.data() : {};
+      window.TRIP_DOCS?.unlock(typeof data.dockey === "string" ? data.dockey : "");
       secrets.forEach(el => {
         const v = data[el.dataset.secret];
         if (typeof v === "string" && v) { el.textContent = v; el.classList.add("shown"); }

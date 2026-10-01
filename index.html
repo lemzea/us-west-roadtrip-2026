@@ -63,6 +63,8 @@ table.ledger{min-width:720px}
 .docview{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
 .docview[hidden]{display:none}
 .docview-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+.docview-bar strong{font-size:.95rem;line-height:1.3;min-width:0}
+.docview-bar a,.docview-bar button{white-space:nowrap;flex:0 0 auto}
 .docview-bar button{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:inherit;cursor:pointer}
 .docview-body{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;align-items:center;gap:12px;-webkit-overflow-scrolling:touch}
 .docview-body canvas,.docview-body img{max-width:100%;box-shadow:0 2px 12px rgba(0,0,0,.25);background:#fff}
@@ -224,6 +226,19 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
   </section>
   <section id="days" style="display:flex;flex-direction:column;gap:20px" aria-label="일자별 상세"></section>
 
+  <div id="docview" class="docview" hidden role="dialog" aria-modal="true" aria-labelledby="docview-t">
+    <div class="docview-bar"><strong id="docview-t"></strong><span style="flex:1"></span><a id="docview-open" href="#" target="_blank" rel="noopener">새 탭</a><button type="button" id="docview-x" aria-label="닫기">닫기 ✕</button></div>
+    <div id="docview-body" class="docview-body"></div>
+  </div>
+
+  <section id="docsec" aria-labelledby="docs-h" style="display:flex;flex-direction:column;gap:10px" hidden>
+    <h2 id="docs-h">서류 · 바우처</h2>
+    <p class="note" style="margin:0">로그인한 사람만 보여요. 누르면 이 페이지 안에서 바로 열려요 — 카운터에서 보여줄 때 사용. 파일은 암호화돼 있어서 로그인 없이는 열 수 없어요.</p>
+    <div class="tablebox"><table class="ledger">
+      <thead><tr><th>쓰는 날</th><th>서류</th><th>어디서</th></tr></thead>
+      <tbody id="doclist"></tbody>
+    </table></div>
+  </section>
   <footer class="foot">
     <div>시간대: 캘리포니아·네바다 PDT(UTC−7) · 유타 MDT(UTC−6) · 애리조나 MST(UTC−7, 서머타임 없음 — 10월엔 PDT와 같은 시각) · 나바호 자치구는 MDT.</div>
     <div>일출·일몰은 각 장소 좌표로 계산한 값(±2분). 조수는 NOAA San Diego(9410170) 예보.</div>
@@ -704,6 +719,45 @@ function dropRemote(){
   allChecks().forEach(i => applyCheck(i.id, !!saved[i.id]));
   document.querySelectorAll(".memo textarea").forEach(t => t.value = memosLocal[t.dataset.day] || "");
 }
+// 서류 뷰어 — PDF는 pdf.js로 페이지 안에서 렌더 (비공개 아티팩트: /_blob 링크 · 공개 페이지: docs.js가 복호화해서 호출)
+(() => {
+  const dv = document.getElementById("docview"); if (!dv) return;
+  const body = document.getElementById("docview-body"), title = document.getElementById("docview-t"), openA = document.getElementById("docview-open");
+  let pdfjsP = null;
+  const loadPdfjs = () => pdfjsP || (pdfjsP = new Promise((res, rej) => {
+    const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+    sc.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(window.pdfjsLib); };
+    sc.onerror = () => rej(new Error("pdf.js load failed"));
+    document.head.appendChild(sc);
+  }));
+  const close = () => { dv.hidden = true; body.innerHTML = ""; document.body.style.overflow = ""; };
+  document.getElementById("docview-x").addEventListener("click", close);
+  dv.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  const open = async (url, kind, label, data) => {
+    title.textContent = label; openA.href = url; body.innerHTML = '<p class="note">불러오는 중…</p>';
+    dv.hidden = false; document.body.style.overflow = "hidden"; dv.focus?.();
+    try {
+      if (kind === "img") { body.innerHTML = ""; const im = new Image(); im.src = url; im.alt = label; body.appendChild(im); return; }
+      const pdfjs = await loadPdfjs();
+      const pdf = await pdfjs.getDocument(data ? { data } : url).promise;
+      body.innerHTML = "";
+      const width = Math.min(body.clientWidth - 24, 900), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const vp0 = page.getViewport({ scale: 1 }), scale = width / vp0.width, vp = page.getViewport({ scale: scale * dpr });
+        const c = document.createElement("canvas"); c.width = vp.width; c.height = vp.height; c.style.width = width + "px";
+        body.appendChild(c);
+        await page.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
+      }
+    } catch (e) {
+      body.innerHTML = '<p class="note">뷰어를 못 불러왔어요 — 아래 내장 뷰어로 보이지 않으면 오른쪽 위 "새 탭"으로 열어주세요. (' + (e && e.message || e) + ')</p>';
+      const fr = document.createElement("iframe"); fr.src = url; fr.title = label; fr.style.cssText = "width:100%;flex:1;min-height:70vh;border:0;background:#fff"; body.appendChild(fr);
+    }
+  };
+  document.querySelectorAll(".doclink").forEach(a => a.addEventListener("click", e => { e.preventDefault(); open(a.dataset.doc, a.dataset.kind, a.dataset.title); }));
+  window.TRIP_DOCVIEW = { open };
+})();
 window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRemote, places: PLACES, days: DAYS.map(d => ({id: d.id, date: d.date, wd: d.wd, seg: d.seg})), navUrl};
 
 // claude.ai 링크로 열었을 때: 페이지 공유 저장소
@@ -733,6 +787,7 @@ window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRem
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script src="map.js"></script>
+<script src="docs.js"></script>
 <script type="module" src="firebase-sync.js"></script>
 </body>
 </html>
