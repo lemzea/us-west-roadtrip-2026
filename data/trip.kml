@@ -5361,11 +5361,11 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>반납 장소 (15시)</name>
+        <name>Indie Campers Phoenix - 반납 15시</name>
         <styleUrl>#icon-seq2-5-4-795548-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -111.6084542,33.4159179,0
+            -112.0169576,33.4500919,0
           </coordinates>
         </Point>
       </Placemark>
