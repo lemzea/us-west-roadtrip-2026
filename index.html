@@ -208,6 +208,7 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
 .rvsub button[data-rv="ic"][aria-selected="true"]{border-color:var(--amber);background:var(--amber-soft)}
 .rvpane{display:flex;flex-direction:column;gap:12px}
 .rvpane[hidden]{display:none}
+[data-subpane][hidden]{display:none !important}
 .rvkeys{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
 .rvkeys div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.86rem}
 .rvkeys b{display:block;margin-bottom:2px}
@@ -286,8 +287,12 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
   </section>
   </div>
   <div class="tabpanel" data-panel="food" hidden>
-  <section aria-labelledby="meal-h" style="display:flex;flex-direction:column;gap:10px">
-    <h2 id="meal-h">식단 · 장보기</h2>
+  <div class="rvsub" role="tablist" aria-label="식단 · 장보기 선택" data-sub="food">
+    <button type="button" role="tab" data-sub-tab="meal" aria-selected="true">🍳 식단 · 레시피</button>
+    <button type="button" role="tab" data-sub-tab="shop" aria-selected="false">🛒 장보기 목록</button>
+  </div>
+  <section aria-labelledby="meal-h" data-subpane="meal" style="display:flex;flex-direction:column;gap:10px">
+    <h2 id="meal-h">식단 · 레시피</h2>
     <p class="note" style="margin:0">아침은 한식(코펠 냄비밥 · 블록국 · 곱창김 · 김치 + 스팸 · 베이컨 · 달걀 · 참치 중 하나둘) 4번과 미국식(하와이안 롤 · 잼 · 달걀 · 베이컨 · 커피) 3번을 섞고, 한식 아침 전날 밤엔 쌀 1.5컵을 코펠에 불려두고 자고, 장보기 목록에서 <b>선택</b> 표시는 곁들임·데코라 바쁘면 건너뛰어도 식사가 안 흔들리는 것(각 코너 끝에 모아둠), 점심은 고기 많은 샌드위치를 날마다 다르게, 저녁은 로티서리 치킨 · 스테이크 · 타코 · 삼겹살 · 양갈비 · 파스타를 돌려요. 고기 굽기는 노지 밖 스토브(집에서 가져감)에서, 먹는 건 차 안에서. 가져갈 수량은 식단에서 역산했어요 (2인 × 끼니): 햇반 10, 블록국 10, 참치 4, 라면 10, 곱창김, 김치, 쌈장, 딸기잼, 커피, 이삭 소스. 스테이크는 파스타와 먹어요. 스테이크는 립아이(= 꽃등심). 밴 냉장고는 12V 컴프레서식이라 외부전원 없이도 차갑지만 약 85L라 <b>제일 작은 포장</b>으로.</p>
     <div class="tablebox"><table class="meals">
       <thead><tr><th>날짜</th><th>아침</th><th>점심</th><th>저녁</th><th>준비 · 메모</th></tr></thead>
@@ -295,6 +300,9 @@ td.d{font-family:var(--f-mono);font-weight:600;white-space:nowrap}
     </table></div>
     <h3 style="font-size:.95rem;margin-top:6px">만드는 법 (누르면 펼쳐요)</h3>
     <div id="recipes" class="shop recipes"></div>
+  </section>
+  <section aria-labelledby="shop-h" data-subpane="shop" hidden style="display:flex;flex-direction:column;gap:10px">
+    <h2 id="shop-h">장보기</h2>
     <div id="shop" class="shop"></div>
     <p class="note" style="margin:0">장보기는 ① 10/3 모데스토, ② 10/6 라스베가스(10/10까지 4일치) 두 번이고, ③ 10/7 페이지는 못 산 게 있을 때만. 목록은 그날 일정 카드의 장보기 줄 아래에 있고, 매장 코너 순서로 정리했어요. 브랜드명은 "이걸 찾으면 된다"는 기준이지, 없으면 옆에 있는 비슷한 걸로 사면 돼요. Great Value · Marketside · Freshness Guaranteed는 월마트 자체 브랜드예요 (제일 싸고 어디나 있음). 체크는 로그인하면 둘이 같이 보여요. 간식: 트레일 걷는 날(10/7 자이언, 10/9 림 트레일)은 에너지 젤·부드러운 바·바나나를 배낭에 (교정 중이라 견과류 제외).</p>
   </section>
@@ -1318,10 +1326,18 @@ window.TRIP = {applyCheck, applyMemo, setStatus, setReadOnly, useRemote, dropRem
     const id = a.getAttribute("href").slice(1); if (!id) return;
     const el = document.getElementById(id); const p = el && el.closest(".tabpanel");
     if (p && p.hidden) show(p.dataset.panel, true);
+    const sp = el && el.closest("[data-subpane]"); if (sp && sp.hidden) { const n = sp.dataset.subpane; document.querySelector(`[data-sub-tab="${n}"]`)?.click(); }
   }, true);
   let init = "plan"; try { init = localStorage.getItem(KEY) || "plan"; } catch (e) {}
   const h = location.hash.slice(1); const hp = h && document.getElementById(h)?.closest(".tabpanel");
   show(hp ? hp.dataset.panel : init, false);
+  // 식단 탭 안쪽 탭 (식단 / 장보기)
+  const fb = [...document.querySelectorAll('[data-sub="food"] [data-sub-tab]')];
+  const fp = [...document.querySelectorAll('[data-subpane]')];
+  const fShow = (n, save) => { fb.forEach(b => b.setAttribute("aria-selected", String(b.dataset.subTab === n))); fp.forEach(p => p.hidden = p.dataset.subpane !== n); if (save) { try { localStorage.setItem(KEY + "-food", n); } catch (e) {} } };
+  fb.forEach(b => b.addEventListener("click", () => fShow(b.dataset.subTab, true)));
+  let fInit = "meal"; try { fInit = localStorage.getItem(KEY + "-food") || "meal"; } catch (e) {}
+  fShow(fInit, false);
   // 차량 사용법 안쪽 탭
   const rvb = [...document.querySelectorAll('.rvsub [data-rv]')];
   const rvp = [...document.querySelectorAll('.rvpane')];
