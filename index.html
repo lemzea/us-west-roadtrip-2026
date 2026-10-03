@@ -1035,23 +1035,27 @@ const RECIPES = [
 ];
 document.getElementById("recipes").innerHTML = RECIPES.map(r => `<details><summary>${r[0]}<small>${r[1]}</small></summary><ol>${r[2].map(x => `<li>${x}</li>`).join("")}</ol></details>`).join("");
 // 장보기 목록: ⓪은 식단 섹션에, ①~③은 장보는 날 일정 카드의 해당 줄 아래에
-const shopHtml = (g, open) => `<details${open?' open':''}><summary>${g.title}<small>${g.when}</small></summary>${g.groups.map((gr, gi) =>
-  `<h4>${gr[0]}</h4><ul>${gr[1].map((it, ii) => ({ it, ii, opt: it.startsWith("~") })).sort((x, y) => x.opt - y.opt).map(({ it, ii, opt }) => { const id = `${g.id}-${gi}-${ii}`; const txt = opt ? it.slice(1) : it;
-    return `<li class="${saved[id]?'done':''}${opt?' opt':''}"><input type="checkbox" class="chk" id="${id}" ${saved[id]?'checked':''}><label for="${id}">${opt?'<span class="tag opt">선택</span> ':''}${txt}</label></li>`; }).join("")}</ul>`).join("")}</details>`;
-document.getElementById("shop").innerHTML = SHOP.filter(g => !g.day).map(g => shopHtml(g)).join("") +
-  `<div class="shopjump">장보기 목록은 장보는 날 일정 카드에 있어요 · ${SHOP.filter(g => g.day).map(g => `<a href="#${g.day}">${g.title}</a>`).join(" · ")}</div>`;
+// 같은 목록이 식단 탭과 일정 카드 두 곳에 나오므로, 체크 상태는 data-id(논리 id)로 묶고 DOM id는 자리마다 다르게
+let shopSeq = 0;
+const shopHtml = (g, open) => { const inst = ++shopSeq; return `<details${open?' open':''}><summary>${g.title}<small>${g.when}</small></summary>${g.groups.map((gr, gi) =>
+  `<h4>${gr[0]}</h4><ul>${gr[1].map((it, ii) => ({ it, ii, opt: it.startsWith("~") })).sort((x, y) => x.opt - y.opt).map(({ it, ii, opt }) => { const id = `${g.id}-${gi}-${ii}`; const dom = `${id}-i${inst}`; const txt = opt ? it.slice(1) : it;
+    return `<li class="${saved[id]?'done':''}${opt?' opt':''}"><input type="checkbox" class="chk" id="${dom}" data-id="${id}" ${saved[id]?'checked':''}><label for="${dom}">${opt?'<span class="tag opt">선택</span> ':''}${txt}</label></li>`; }).join("")}</ul>`).join("")}</details>`; };
+const dayLabelOf = id => { const d = DAYS.find(x => x.id === id); return d ? `${d.date} ${d.wd}` : ""; };
+document.getElementById("shop").innerHTML = SHOP.map(g => shopHtml(g, !g.day)).join("") +
+  `<div class="shopjump">장보는 날 일정 카드에도 같은 목록이 있고, 어디서 체크해도 같이 표시돼요 · ${SHOP.filter(g => g.day).map(g => `<a href="#${g.day}">${dayLabelOf(g.day)}</a>`).join(" · ")}</div>`;
 const shopAt = (day, t) => SHOP.filter(g => g.day === day && g.at === t);
 const allChecks = () => [...document.querySelectorAll("input.chk")];
 // 공유 저장소 어댑터: claude.ai(db) 또는 GitHub Pages(Firebase)가 연결하면 채워짐
 let remote = null;   // {setCheck(id, done), setMemo(day, text)}
 let readOnly = false;
 function applyCheck(id, done){
-  const box = document.getElementById(id); if (!box) return;
-  box.checked = !!done; box.closest("li").classList.toggle("done", !!done);
+  const boxes = [...document.querySelectorAll(`input.chk[data-id="${id}"]`)]; const one = document.getElementById(id); if (one) boxes.push(one);
+  if (!boxes.length) return;
+  boxes.forEach(box => { box.checked = !!done; box.closest("li").classList.toggle("done", !!done); });
 }
 document.addEventListener("change", async e => {
   if (!e.target.classList || !e.target.classList.contains("chk")) return;
-  const id = e.target.id, done = e.target.checked;
+  const id = e.target.dataset.id || e.target.id, done = e.target.checked;
   applyCheck(id, done);
   if (remote && !readOnly) {
     try { await remote.setCheck(id, done); }
@@ -1157,13 +1161,13 @@ function useRemote(r){
   remote = r; readOnly = false;
   document.querySelectorAll("input.chk, .memo textarea").forEach(el => el.disabled = false);
   // 이 기기 저장값 대신 공유 값을 보여줌
-  allChecks().forEach(i => applyCheck(i.id, false));
+  allChecks().forEach(i => applyCheck(i.dataset.id || i.id, false));
   document.querySelectorAll(".memo textarea").forEach(t => { if (document.activeElement !== t) t.value = ""; });
 }
 function dropRemote(){
   remote = null; readOnly = false;
   document.querySelectorAll("input.chk, .memo textarea").forEach(el => el.disabled = false);
-  allChecks().forEach(i => applyCheck(i.id, !!saved[i.id]));
+  allChecks().forEach(i => { const k = i.dataset.id || i.id; applyCheck(k, !!saved[k]); });
   document.querySelectorAll(".memo textarea").forEach(t => t.value = memosLocal[t.dataset.day] || "");
 }
 // 서류 뷰어 — PDF는 pdf.js로 페이지 안에서 렌더 (비공개 아티팩트: /_blob 링크 · 공개 페이지: docs.js가 복호화해서 호출)
